@@ -1,0 +1,37 @@
+Campos del formulario:
+
+imagen
+nombre
+apellido
+fecha nacimiento
+Localidad
+Teléfono
+Email
+Sitio web
+
+
+---
+Estudios: Repeable
+Título
+descripcion
+Centro
+fecha inicio
+fecha fin
+certificado
+
+
+TRabajo: repeatable
+puesto
+descripcion
+empresa
+fecha inicio
+fecha fin
+
+
+---
+skills: repeatble
+skill
+%
+
+
+

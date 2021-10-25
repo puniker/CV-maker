@@ -1,0 +1,21 @@
+.page-header{
+    border-bottom: 1px solid lightgrey;
+    min-height: 80px;
+}
+.page-header .main-menu ul{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: center;
+
+}
+.page-header .main-menu ul li a{
+     padding: 10px 20px;
+     color: whitesmoke;
+     text-decoration: none;
+}
+.page-header .main-menu ul li a:hover,
+.page-header .main-menu ul li a.active{
+    background-color: lightblue;
+    color: black;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "cv-maker",
+  "version": "0.0.0",
+  "autor": "Iker Sastre",
+  "scripts": {
+    "api_start": "node api/index.js",
+    "api_dev": "nodemon api/index.js",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "17.0.0",
+    "react-dom": "17.0.0",
+    "react-router-dom": "^5.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^1.0.0",
+    "nodemon": "^2.0.14",
+    "vite": "^2.6.4"
+  }
+}
