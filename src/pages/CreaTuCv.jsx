@@ -1,23 +1,37 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Imput } from '../components/formulario'
 
+
 const data = {
-    "nombre"   : "Iker",
-    "apellido" : "Sastre",
-    "telefono" : "680983974",
-    "email"    : "iker.sastre97@gmail.com",
+    //"nombre"   : "Iker",
+    //"apellido" : "Sastre",
+    //"telefono" : "680983974",
+    //"email"    : "iker.sastre97@gmail.com",
 }
+const endpoint = 'http://localhost:3080/get-data'
 
 class CreaTuCv extends React.Component {
     
     constructor (props) {
         super(props);
-        this.state = data 
+
+        this.state = {} 
+
+        axios.get(endpoint)
+        .then( (res) => {
+            this.setState( res.data )
+        })
+        .catch( ( error ) => {
+            console.log( error )
+        })
+        .then( () => {
+            // code ...
+        })
         
     }
 
     onChange(field, value) {
-        // parent class change handler is always called with field name and value
         this.setState( {[field]: value} );
     }
 
@@ -27,11 +41,12 @@ class CreaTuCv extends React.Component {
     }
 
     render() {
+
         return (
             <>
                 <h1>Crea tu cv</h1>
                 <span>{this.state.nombre} {this.state.apellido}</span>
-                <form action="" onSubmit={this.onSubmit} >
+                <form action="" onSubmit={this.onSubmit.bind(this)} >
                     <Imput 
                         type="text" 
                         id="nombre"
