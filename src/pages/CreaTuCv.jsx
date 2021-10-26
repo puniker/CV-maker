@@ -9,7 +9,7 @@ const data = {
     //"telefono" : "680983974",
     //"email"    : "iker.sastre97@gmail.com",
 }
-const endpoint = 'http://localhost:3080/get-data'
+const endpoint = 'http://localhost:3080/cv-data/1'
 
 class CreaTuCv extends React.Component {
     
@@ -20,7 +20,7 @@ class CreaTuCv extends React.Component {
 
         axios.get(endpoint)
         .then( (res) => {
-            this.setState( res.data )
+            this.setState( res.data.data )
         })
         .catch( ( error ) => {
             console.log( error )

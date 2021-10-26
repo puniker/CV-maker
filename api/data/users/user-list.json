@@ -1,0 +1,16 @@
+{
+    "users":[
+        {
+            "userId" : "0",
+            "username": "puniker",
+            "nombre" : "Iker",
+            "apellido" : "Sastre"
+        },
+        {
+            "userId" : "1",
+            "username": "sonia_agorreta",
+            "nombre" : "Sonia",
+            "apellido" : "Agorreta"
+        }
+    ]
+}
