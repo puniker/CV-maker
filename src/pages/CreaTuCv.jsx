@@ -2,14 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Imput } from '../components/formulario'
 
-
-const data = {
-    //"nombre"   : "Iker",
-    //"apellido" : "Sastre",
-    //"telefono" : "680983974",
-    //"email"    : "iker.sastre97@gmail.com",
-}
-const endpoint = 'http://localhost:3080/cv-data/1'
+const endpoint = 'http://localhost:3080/cv-data'
 
 class CreaTuCv extends React.Component {
     
@@ -18,7 +11,11 @@ class CreaTuCv extends React.Component {
 
         this.state = {} 
 
-        axios.get(endpoint)
+        axios.get(endpoint, {
+            params:{
+                userID: props.userID
+            }
+        })
         .then( (res) => {
             this.setState( res.data.data )
         })
@@ -79,7 +76,15 @@ class CreaTuCv extends React.Component {
                         value={this.state.email}
                         onChange={this.onChange.bind(this)}
                     />
-                    <button type="submit">Enviar</button>
+                    <Imput 
+                        type="date" 
+                        id="fecha_nacimiento"
+                        name="fecha_nacimiento"
+                        label="Fecha nacimiento"
+                        value={this.state.fecha_nacimiento}
+                        onChange={this.onChange.bind(this)}
+                    />
+                    <button type="submit">Guardar datos</button>
                 </form>
             </>
         )

@@ -2,15 +2,27 @@
     "users":[
         {
             "userId" : "0",
-            "username": "puniker",
-            "nombre" : "Iker",
-            "apellido" : "Sastre"
+            "username": "admin",
+            "password": "admin",
+            "nombre" : "Super",
+            "apellido" : "Admin",
+            "status" : 1
         },
         {
             "userId" : "1",
+            "username": "puniker",
+            "password": "admin",
+            "nombre" : "Iker",
+            "apellido" : "Sastre",
+            "status" : 1
+        },
+        {
+            "userId" : "2",
             "username": "sonia_agorreta",
+            "password": "admin",
             "nombre" : "Sonia",
-            "apellido" : "Agorreta"
+            "apellido" : "Agorreta",
+            "status" : 1
         }
     ]
 }

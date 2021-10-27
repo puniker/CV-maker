@@ -2,6 +2,14 @@
   "data" : [
     {
       "uuid"     : "0",
+      "nombre"   : "Admin",
+      "apellido" : "Super Admin",
+      "telefono" : "600000000",
+      "email"    : "admin@admin.com",
+      "fecha_nacimiento" : "01/01/1970"
+    },
+    {
+      "uuid"     : "1",
       "nombre"   : "Iker",
       "apellido" : "Sastre Antón",
       "telefono" : "680983974",
@@ -9,7 +17,7 @@
       "fecha_nacimiento" : "08/08/1997"
     },
     {
-      "uuid"     : "1",
+      "uuid"     : "2",
       "nombre"   : "Sonia",
       "apellido" : "Agorreta Alonso",
       "telefono" : "680983974",
