@@ -34,7 +34,23 @@ class CreaTuCv extends React.Component {
 
     onSubmit( evt ) {
         evt.preventDefault()
-        console.log('formulario enviado')
+        console.log(this.state.nombre)
+        axios.post('http://localhost:3080/update', null,{ params: {
+            uuid: this.props.userID,
+            nombre: this.state.nombre,
+            apellido: this.state.apellido,
+            telefono: this.state.telefono,
+            email: this.state.email
+        }})
+        .then( ( res ) => {
+            console.log( res )
+            console.log('formulario enviado')
+        })
+        .catch( ( err ) => {
+            console.log( err )
+        })
+
+
     }
 
     render() {
