@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import Header from './components/header/index.jsx'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Home from './pages/Home'
-import CreaTuCv from './pages/CreaTuCv'
-import Login from './pages/Login'
+import Pages from './pages'
 
 function App() {
 
@@ -27,13 +25,13 @@ function App() {
         <BrowserRouter>
           <Header />
          <Switch>
-           <Route exact path="/crea-tu-cv">
-             <CreaTuCv userID={userId} />
+           <Route path="/crea-tu-cv">
+             <Pages.CreaTuCv userID={userId} />
            </Route>
-           <Route exact path="/plantillas">
-             <h1>plantillas</h1>
+           <Route path="/plantillas">
+             <Pages.Plantillas userID={userId} />
            </Route>
-           <Route component={Home}></Route>
+           <Route component={Pages.Home}></Route>
          </Switch>
         </BrowserRouter>
   
@@ -42,7 +40,7 @@ function App() {
   } else {
     return (
       <div className="App">
-        <Login setIsLogged={setIsLogged} setUserId={setUserId} />
+        <Pages.Login setIsLogged={setIsLogged} setUserId={setUserId} />
       </div>
     )
   }
