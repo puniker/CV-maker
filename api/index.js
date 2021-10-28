@@ -1,8 +1,11 @@
 const express = require('express')
 const cors = require('cors')
+const fs = require('fs')
 const CvIkerData = require ('./data/cv/iker-sastre.json')
 const CvData = require ('./data/cv/cv-data.json')
 const UserData = require ('./data/users/user-list.json')
+const Router = require('./router')
+
 const app = express()
 
 app.use(cors())
@@ -15,36 +18,7 @@ app.get('/get-data', function(req, res) {
   res.json( CvIkerData )
 })
 
-app.get('/login', (req, res) => {
-  //console.log( req.query )
-  var data = UserData.users,
-      username = req.query.username,
-      password = req.query.password,
-      response = {
-        "access" : false
-      }
-
-  data.map( u => {
-    if( u.username == username) {
-
-      if( u.password == password ) {
-        response.access = true
-        response.userData = u
-        res.json( response )
-
-      } else {
-        response.error = 'Contraseña incorrecta.'
-      }
-
-    } else {
-      response.error = 'Usuario no registrado.'
-    }
-
-  })
-  res.json( response )
-
-
-})
+app.use(Router.user)
 
 app.get('/cv-data', (req, res) => {
   var userID = req.query.userID
@@ -57,5 +31,25 @@ app.get('/cv-data', (req, res) => {
   })
 
 })
+
+app.post('/update', (req, res) => {
+
+  var data = CvData ,
+      uuid = req.query.uuid,
+      nombre = req.query.nombre
+
+  var x = data.data.findIndex( item => item.uuid == uuid )
+  data.data[x].nombre = nombre
+  console.log( data.data[x] )
+  
+  //fs.writeFile('/home/iker/dev/cv-maker/api/data/cv/cv-data.json', JSON.stringify(data), err => {
+  //  console.log( err )
+  //})
+  res.json('Se ha actualizado')
+  
+
+})
+
+
 console.log('API levantada en el puerto 3080')
 app.listen(3080)
