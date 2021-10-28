@@ -1,37 +1,26 @@
 
 import React from 'react'
 
-class Imput extends React.Component {
+function Imput ( props ) {
 
-    constructor ( props ) {
-        super( props )
+    const Change = ( evt ) => {
+        const value = evt.target.value
+        const name = evt.target.name
+        props.onChange(name, value)
     }
-    onFieldChange(event) {
-        const fieldName = event.target.name;
-        const fieldValue = event.target.value;
-        this.props.onChange(fieldName, fieldValue);
-    }
+    return (
+        <div>
+            <label htmlFor={props.fieldId}>{props.label}</label>
+            <input 
+                id={props.fieldId} 
+                type={props.type}
+                name={props.name}
+                placeholder={props.placeholder}
+                value={props.value}
+                onChange={Change}
+            ></input>
+        </div>
+    )
 
-    onDateChange(dateValue) {
-        this.props.onChange('dateCommenced', dateValue);
-    }
-
-    render ( ) {
-
-        return(
-            <div>
-                <label htmlFor={this.props.fieldId}>{this.props.label}</label>
-                <input 
-                    id={this.props.fieldId} 
-                    type={this.props.type}
-                    name={this.props.name}
-                    placeholder={this.props.placeholder}
-                    value={this.props.value}
-                    onChange={this.onFieldChange.bind(this)}
-                ></input>
-            </div>
-        )
-
-    }
 }
 export default Imput
