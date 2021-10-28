@@ -9,6 +9,9 @@
     justify-content: center;
 
 }
+.page-header .main-menu ul li{
+    display: flex;
+}
 .page-header .main-menu ul li a{
      padding: 10px 20px;
      color: whitesmoke;
