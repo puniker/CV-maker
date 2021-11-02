@@ -19,19 +19,21 @@ app.get('/cv-data', (req, res) => {
   
 })
 
-app.post('/update', (req, res) => {
+app.get('/update', (req, res) => {
 
   console.log(req.query)
   var file = JSON.parse ( fs.readFileSync( readFile ) ),
-      uuid = 1
+      uuid = req.query.uuid
 
   const indexData = file.findIndex( (element) => element.uuid == uuid )
 
   allFields.forEach(element => {
-    console.log( element )
-    file[indexData][element] = req.query[element]
+    //console.log( element )
+    //if ( req.query[element] ) {
+      file[indexData][element] = req.query[element]
+    //}
   })
-
+console.log( file )
   fs.writeFileSync( readFile, JSON.stringify(file) )
   res.json('updated')
 

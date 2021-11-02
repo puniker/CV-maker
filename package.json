@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "autor": "Iker Sastre",
   "scripts": {
+    "killport": "npx kill-port 3080",
     "api_start": "node api/index.js",
     "api_dev": "nodemon api/index.js",
     "dev": "vite",
@@ -21,5 +22,8 @@
     "@vitejs/plugin-react": "^1.0.0",
     "nodemon": "^2.0.14",
     "vite": "^2.6.4"
+  },
+  "nodemonConfig": {
+    "ignore": ["api/data/cv/*.json"]
   }
 }
