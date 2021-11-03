@@ -1,24 +1,16 @@
-
 import React from 'react'
+import { useForm } from "react-hook-form";
 
-function Imput ( props ) {
+function Imput ( {type, label, name, register, required, defaultValue} ) {
 
-    const Change = ( evt ) => {
-        const value = evt.target.value
-        const name = evt.target.name
-        props.onChange(value)
-    }
     return (
         <div>
-            <label htmlFor={props.fieldId}>{props.label}</label>
+            <label>{label}</label>
             <input 
-                id={props.fieldId} 
-                type={props.type}
-                name={props.name}
-                placeholder={props.placeholder}
-                value={props.value}
-                onChange={Change}
-            ></input>
+                type={type}
+                {...register(name, { required })} 
+                defaultValue={defaultValue} 
+            />
         </div>
     )
 
