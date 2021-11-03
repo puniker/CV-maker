@@ -4,7 +4,6 @@ import { Imput } from '../components/formulario'
 function plantillas ()  {
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    //const { register, handleSubmit } = useForm();
 
     const onSubmit = ( evt ) => {
         evt.preventDefault

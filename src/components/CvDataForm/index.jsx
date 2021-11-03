@@ -1,25 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Imput } from '../formulario'
+import { useForm } from "react-hook-form"
 
 const get_endpoint = 'http://localhost:3080/cv-data'
 const post_endpoint = 'http://localhost:3080/update'
 
-
-
-const useField = ( {type, val} ) => {
-    //console.log( val )
-    const [value, setValue] = useState( val )
-    const onChange = value => {
-        setValue(value)
-    }
-
-    return{
-        type,
-        value,
-        onChange
-    }
-}
 
 
 function CvDataForm ( props ) {
@@ -45,17 +31,17 @@ function CvDataForm ( props ) {
     }, [])
     
     const onSubmit = ( evt ) => {
-        evt.preventDefault()
-        console.log( nombre.value)
-        console.log( apellido.value)
-        // Send a GET request
+        evt.preventDefault
+        console.log( 'data', data )
+        console.log( evt )
+
         axios.get(post_endpoint, {
             params: {
-                uuid: props.userID,
-                nombre: nombre.value,
-                apellido: apellido.value,
-                telefono: telefono.value,
-                email: email.value
+                uuid: 1,
+                nombre: evt.nombre,
+                apellido: evt.apellido,
+                telefono: evt.telefono,
+                email: evt.email
             }
         })
         .then(function (response) {
@@ -67,48 +53,44 @@ function CvDataForm ( props ) {
         .then(function () {
             // always executed    code ...
         })
-        
     }
     
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
-    const nombre = useField({type: 'text', val: data.nombre })
-    const apellido = useField({type: 'text', val: data.apellido })
-    const telefono = useField({type: 'text', val: data.telefono })
-    const email = useField({type: 'text', val: data.email })
 
     return (
         <>
-            <form action="" onSubmit={onSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)} >
+
                 <Imput 
-                    id="nombre"
-                    name="nombre"
-                    label="Tu nombre"
-                    { ... nombre }
+                    type='text'
+                    register={register}
+                    label="Introduce tu nombre"  
+                    name='nombre'
+                    defaultValue={data.nombre}
                 />
                 <Imput 
-                    id="apellido"
-                    name="apellido"
-                    label="Apellido"
-                    { ... apellido }
+                    type='text'
+                    register={register}
+                    label="Introduce tu apellido"  
+                    name='apellido'
+                    defaultValue={data.apellido}
                 />
                 <Imput 
-                    id="telefono"
-                    name="telefono"
-                    label="Número de teléfono"
-                    { ... telefono }
+                    type='text'
+                    register={register}
+                    label="Introduce tu telef"  
+                    name='telefono'
+                    defaultValue={data.telefono}
                 />
                 <Imput 
-                    id="email"
-                    name="email"
-                    label="Email"
-                    { ... email }
+                    type='text'
+                    register={register}
+                    label="Introduce tu email"  
+                    name='email'
+                    defaultValue={data.email}
                 />
-                <Imput 
-                    type="date" 
-                    id="fecha_nacimiento"
-                    name="fecha_nacimiento"
-                    label="Fecha nacimiento"
-                />
+
                 <button type="submit">Guardar datos</button>
             </form>
         </>
