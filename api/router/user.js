@@ -11,26 +11,17 @@ app.get('/login', function (request, res) {
             "access" : false
         }
 
-    UserData.users.map( u => {
-        if( u.username == username) {
-
-        if( u.password == password ) {
-            response.access = true
-            response.userData = u
-            //res.json( response )
-            return res.json( response )
-
-        } else {
-            response.error = 'Contraseña incorrecta.'
+    const result = UserData.users.find( user => user.username == username )
+    if ( typeof result !== 'undefined' ) {
+        console.log( result )
+        response = {
+            "access" : true,
+            "userData" : result
         }
-
-        } else {
-        response.error = 'Usuario no registrado.'
-        }
-
-    })
-    //res.json( response )
-
+    } else {
+        console.log('Usuario no encontrado')
+        response.error = 'Usuario no encontrado'
+    }
 
     return res.json( response )
     
