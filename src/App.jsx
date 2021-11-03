@@ -5,31 +5,24 @@ import Pages from './pages'
 
 function App() {
 
-  
+  var session = {'logged_in': false }
   if ( localStorage.getItem('session') ) {
-    var x = JSON.parse( localStorage.getItem('session') )
-    var c_status = x.logged_in,
-        c_user = x.userID
-  } else {
-    var c_status = '',
-        c_user = ''
+    var session = JSON.parse( localStorage.getItem('session') )
   }
+  
+  const [isLogged, setIsLogged] = useState( session.logged_in )
 
-  const [isLogged, setIsLogged] = useState( c_status )
-  const [userId, setUserId ] = useState( c_user )
-
-
-  if ( isLogged == true ) {
+  if ( isLogged ) {
     return (
       <div className="App">
         <BrowserRouter>
           <Header />
          <Switch>
            <Route path="/crea-tu-cv">
-             <Pages.CreaTuCv userID={userId} />
+             <Pages.CreaTuCv />
            </Route>
            <Route path="/plantillas">
-             <Pages.Plantillas userID={userId} />
+             <Pages.Plantillas />
            </Route>
            <Route component={Pages.Home}></Route>
          </Switch>
@@ -40,7 +33,7 @@ function App() {
   } else {
     return (
       <div className="App">
-        <Pages.Login setIsLogged={setIsLogged} setUserId={setUserId} />
+        <Pages.Login setIsLogged={setIsLogged} />
       </div>
     )
   }

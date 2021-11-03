@@ -1,7 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 
-export default ( {setIsLogged, setUserId} ) => {
+export default ( {setIsLogged} ) => {
 
     const endpoint = 'http://localhost:3080/login'
     const [username, setUsername] = useState('puniker')
@@ -20,15 +20,16 @@ export default ( {setIsLogged, setUserId} ) => {
           .then(function (response) {
             //console.log(response);
             var loginResponse = response.data
-            //console.log(loginResponse)
+            console.log(loginResponse)
             if( loginResponse.access == true ) {
                 console.log('Acceso permitido. Bienvenido a la App.')
-                setIsLogged(true)
-                setUserId(loginResponse.userData.userId)
-                localStorage.setItem('session', JSON.stringify( {"logged_in" : true, "userID":loginResponse.userData.userId} ) )
+                setLoginError(loginResponse.error)
+                setIsLogged( true )
+                window.localStorage.setItem('session', JSON.stringify( {"logged_in" : true, "user":loginResponse.userData} ) )
             } else {
                 console.log('Error de acceso a la App.')
                 setLoginError(loginResponse.error)
+                setIsLogged( false )
                 localStorage.setItem('session', JSON.stringify( {"logged_in" : false} ) )
             }
 
