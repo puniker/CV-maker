@@ -7,11 +7,11 @@ const post_endpoint = 'http://localhost:3080/update'
 
 
 
-const useField = ( {type} ) => {
-    const [value, setValue] = useState('')
-
-    const onChange = event => {
-        setValue(event.target.value)
+const useField = ( {type, val} ) => {
+    //console.log( val )
+    const [value, setValue] = useState( val )
+    const onChange = value => {
+        setValue(value)
     }
 
     return{
@@ -23,11 +23,12 @@ const useField = ( {type} ) => {
 
 
 function CvDataForm ( props ) {
-
+    
     const [data, setData] = useState('')
-
+    
+    
     useEffect( () => {
-        console.log( '9ker')
+        
         axios.get( get_endpoint, {
             params: {
                 userID: 1
@@ -38,26 +39,23 @@ function CvDataForm ( props ) {
             setData( response.data.data )
         })
         .catch(function (error) {
-          console.log(error);
+            console.log(error);
         })
-
+        
     }, [])
-
-    const onChange = (name, value) => {
-        setData({[name]:value})
-    }
     
     const onSubmit = ( evt ) => {
         evt.preventDefault()
-        console.log( data )
+        console.log( nombre.value)
+        console.log( apellido.value)
         // Send a GET request
         axios.get(post_endpoint, {
             params: {
                 uuid: props.userID,
-                nombre: data.nombre,
-                apellido: data.apellido,
-                telefono: data.telefono,
-                email: data.email
+                nombre: nombre.value,
+                apellido: apellido.value,
+                telefono: telefono.value,
+                email: email.value
             }
         })
         .then(function (response) {
@@ -67,53 +65,49 @@ function CvDataForm ( props ) {
             console.log(error);
         })
         .then(function () {
-        // always executed    code ...
+            // always executed    code ...
         })
-
+        
     }
+    
+    
+    const nombre = useField({type: 'text', val: data.nombre })
+    const apellido = useField({type: 'text', val: data.apellido })
+    const telefono = useField({type: 'text', val: data.telefono })
+    const email = useField({type: 'text', val: data.email })
 
     return (
         <>
             <form action="" onSubmit={onSubmit}>
                 <Imput 
-                    type="text" 
                     id="nombre"
                     name="nombre"
                     label="Tu nombre"
-                    value={data.nombre}
-                    onChange={onChange}
+                    { ... nombre }
                 />
                 <Imput 
-                    type="text" 
                     id="apellido"
                     name="apellido"
                     label="Apellido"
-                    value={data.apellido}
-                    onChange={onChange}
+                    { ... apellido }
                 />
                 <Imput 
-                    type="text" 
                     id="telefono"
                     name="telefono"
                     label="Número de teléfono"
-                    value={data.telefono}
-                    onChange={onChange}
+                    { ... telefono }
                 />
                 <Imput 
-                    type="email" 
                     id="email"
                     name="email"
                     label="Email"
-                    value={data.email}
-                    onChange={onChange}
+                    { ... email }
                 />
                 <Imput 
                     type="date" 
                     id="fecha_nacimiento"
                     name="fecha_nacimiento"
                     label="Fecha nacimiento"
-                    value={data.fecha_nacimiento}
-                    onChange={onChange}
                 />
                 <button type="submit">Guardar datos</button>
             </form>

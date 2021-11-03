@@ -6,7 +6,7 @@ function Imput ( props ) {
     const Change = ( evt ) => {
         const value = evt.target.value
         const name = evt.target.name
-        props.onChange(name, value)
+        props.onChange(value)
     }
     return (
         <div>
