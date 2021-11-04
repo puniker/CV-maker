@@ -22,7 +22,6 @@ function CvDataForm ( props ) {
             }
         })
         .then( (response) => {
-            console.log( response.data.data )
             setData( response.data.data )
         })
         .catch(function (error) {
@@ -33,7 +32,6 @@ function CvDataForm ( props ) {
     
     const onSubmit = ( evt ) => {
         evt.preventDefault
-        console.log( 'data', data )
         console.log( evt )
 
         axios.get(post_endpoint, {
