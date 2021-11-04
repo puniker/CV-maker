@@ -11,9 +11,10 @@ const post_endpoint = 'http://localhost:3080/update'
 
 function CvForm ( props ) {
     
-    const [data, setData] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
-     
+
     useEffect( () => {
         
         axios.get( get_endpoint, {
@@ -23,6 +24,7 @@ function CvForm ( props ) {
         })
         .then( (response) => {
             setData( response.data.data )
+            setIsLoading(false)
         })
         .catch(function (error) {
             console.log(error);
@@ -59,6 +61,10 @@ function CvForm ( props ) {
     
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
+    if ( isLoading ) {
+        return <Alert key="loading-data" variant="primary" show="true">Cargando tus datos...</Alert>
+    }
+
     return (
         <>
         <Container>
