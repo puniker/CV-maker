@@ -6,7 +6,18 @@ const allFields = [
   'nombre',
   'apellido',
   'telefono',
-  'email'
+  'email',
+  'fecha_nacimiento',
+  'direccion',
+  'lugar_nacimiento',
+  'c_postal',
+  'ciudad_pueblo',
+  'genero',
+  'nacionalidad',
+  'estado_civil',
+  'sitio_web',
+  'linkedin',
+  'twitter'
 ]
 
 const readFile = '/home/iker/dev/cv-maker/api/data/cv/cv-data.json'

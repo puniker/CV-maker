@@ -42,7 +42,18 @@ function CvForm ( props ) {
                 nombre: evt.nombre,
                 apellido: evt.apellido,
                 telefono: evt.telefono,
-                email: evt.email
+                email: evt.email,
+                fecha_nacimiento: evt.fecha_nacimiento,
+                direccion: evt.direccion,
+                lugar_nacimiento: evt.lugar_nacimiento,
+                c_postal: evt.c_postal,
+                ciudad_pueblo: evt.ciudad_pueblo,
+                genero: evt.genero,
+                nacionalidad: evt.nacionalidad,
+                estado_civil: evt.estado_civil,
+                sitio_web: evt.sitio_web,
+                linkedin: evt.linkedin,
+                twitter: evt.twitter 
             }
         })
         .then(function (response) {
@@ -81,7 +92,6 @@ function CvForm ( props ) {
                                 label="Nombre"  
                                 name='nombre'
                                 defaultValue={ data.nombre }
-                                required
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
@@ -91,22 +101,11 @@ function CvForm ( props ) {
                                 label="Apellidos"
                                 name='apellido'
                                 defaultValue={data.apellido}
-                                required
                             />
                         </Form.Group>
                     </Row>
 
                     <Row className='mb-3'>
-                        <Form.Group as={Col}>
-                            <Imput 
-                                type='text'
-                                register={register}
-                                label="Teléfono"  
-                                name='telefono'
-                                defaultValue={data.telefono}
-                                required
-                            />
-                        </Form.Group>
                         <Form.Group as={Col} >
                             <Imput 
                                 type='text'
@@ -114,10 +113,128 @@ function CvForm ( props ) {
                                 label="Email de contacto"  
                                 name='email'
                                 defaultValue={data.email}
-                                required
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col}>
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Teléfono"  
+                                name='telefono'
+                                defaultValue={data.telefono}
                             />
                         </Form.Group>
                     </Row>
+                    <Row className='mb-3'>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Direccion"  
+                                name='direccion'
+                                defaultValue={data.direccion}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='date'
+                                register={register}
+                                label="Fecha de nacimiento"  
+                                name='fecha_nacimiento'
+                                defaultValue={data.fecha_nacimiento}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Lugar de nacimiento"  
+                                name='lugar_nacimiento'
+                                defaultValue={data.lugar_nacimiento}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='number'
+                                register={register}
+                                label="Código postal"  
+                                name='c_postal'
+                                defaultValue={data.c_postal}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Ciudad/Pueblo"  
+                                name='ciudad_pueblo'
+                                defaultValue={data.ciudad_pueblo}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Género"  
+                                name='genero'
+                                defaultValue={data.genero}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Nacionalidad"  
+                                name='nacionalidad'
+                                defaultValue={data.nacionalidad}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Estado civil"  
+                                name='estado_civil'
+                                defaultValue={data.estado_civil}
+                            />
+                        </Form.Group>
+                    </Row>
+                    <Row className='mb-3'>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Sitio Web"  
+                                name='sitio_web'
+                                defaultValue={data.sitio_web}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="LinkedIn"  
+                                name='linkedin'
+                                defaultValue={data.linkedin}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Twitter"  
+                                name='twitter'
+                                defaultValue={data.twitter}
+                            />
+                        </Form.Group>
+                    </Row>
+
 
                 </section>
                 <section className="form-estudios"></section>
