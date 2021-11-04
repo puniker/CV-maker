@@ -1,9 +1,14 @@
 import './style.css'
 import {NavLink, Link} from 'react-router-dom'
 import {Navbar, Container} from 'react-bootstrap';
-
+import {Redirect} from 'react-router'
 export default () => {
     
+    const log_out = () => {
+        localStorage.removeItem('session')
+        location.reload()
+    }
+
     var classes = 'page-header'
     return (
         <Navbar bg="dark" variant="dark" expand="md" className={classes}>
@@ -20,6 +25,9 @@ export default () => {
                         </ul>
                     </div>
                 </Navbar.Collapse>
+                <Navbar.Text>
+                    <button onClick={log_out}>Cerrar sesión</button>
+                </Navbar.Text>
             </Container>
         </Navbar>
     )

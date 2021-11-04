@@ -74,7 +74,8 @@ function CvDataForm ( props ) {
                                 register={register}
                                 label="Nombre"  
                                 name='nombre'
-                                defaultValue={data.nombre}
+                                defaultValue={ data.nombre }
+                                required
                                 />
                         </Form.Group>
                         <Form.Group as={Col} >
@@ -84,6 +85,7 @@ function CvDataForm ( props ) {
                                 label="Apellidos"
                                 name='apellido'
                                 defaultValue={data.apellido}
+                                required
                                 />
                         </Form.Group>
                     </Row>
@@ -96,6 +98,7 @@ function CvDataForm ( props ) {
                                 label="Teléfono"  
                                 name='telefono'
                                 defaultValue={data.telefono}
+                                required
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
@@ -105,6 +108,7 @@ function CvDataForm ( props ) {
                                 label="Email de contacto"  
                                 name='email'
                                 defaultValue={data.email}
+                                required
                             />
                         </Form.Group>
                     </Row>

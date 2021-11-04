@@ -1,5 +1,8 @@
 import { useState } from "react"
 import axios from "axios"
+import { Imput } from '../components/formulario'
+import { useForm } from "react-hook-form"
+import {Form, Col, Row, Button, Container, Alert} from 'react-bootstrap';
 
 export default ( {setIsLogged} ) => {
 
@@ -7,14 +10,15 @@ export default ( {setIsLogged} ) => {
     const [username, setUsername] = useState('puniker')
     const [password, setPassword] = useState('admin')
     const [loginError, setLoginError] = useState()
+    const [showMsg, setShowMsg] = useState(false)
 
     const submit = ( evt ) =>{
-        evt.preventDefault()
+        evt.preventDefault
 
         axios.get(endpoint, {
             params: {
-              username: username,
-              password: password
+              username: evt.username,
+              password: evt.password
             }
           })
           .then(function (response) {
@@ -31,6 +35,8 @@ export default ( {setIsLogged} ) => {
                 setLoginError(loginResponse.error)
                 setIsLogged( false )
                 localStorage.setItem('session', JSON.stringify( {"logged_in" : false} ) )
+                setShowMsg(true)
+                setTimeout(()=>{ setShowMsg(false) }, 3000)
             }
 
           })
@@ -42,14 +48,38 @@ export default ( {setIsLogged} ) => {
           });  
     }
 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     return (
         <>
             <h1>Login Page</h1>
-            <form>
-                <input type="text" name="username" value={username} placeholder="usuario" onChange={ (e)=>setUsername(e.target.value) } />
-                <input type="password" name="password" value={password} placeholder="contraseña" onChange={ (e)=>setPassword(e.target.value) } />
-                <span>{loginError}</span>
-                <button onClick={submit}>Log in</button>
+            <form onSubmit={handleSubmit(submit)} >
+              <Row className='mb-3'>
+                <Form.Group as={Col}>
+                    <Imput 
+                        type='text'
+                        register={register}
+                        label="Nombre de usuario"  
+                        name='username'
+                        defaultValue={ username }
+                        required
+                      />
+                </Form.Group>
+                <Form.Group as={Col}>
+                    <Imput 
+                        type='text'
+                        register={register}
+                        label="Constraseña"  
+                        name='password'
+                        defaultValue={ password }
+                        required
+                      />
+                </Form.Group>
+              </Row>
+              <button >Log in</button>
+              <Alert key="error-msg" variant="danger" show={showMsg}>
+                  {loginError}
+              </Alert>
             </form>
         </>
     )
