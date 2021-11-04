@@ -178,8 +178,7 @@ function CvForm ( props ) {
                     </Row>
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <FormElements.Input 
-                                type='text'
+                            <FormElements.Select
                                 register={register}
                                 label="Género"  
                                 name='genero'
