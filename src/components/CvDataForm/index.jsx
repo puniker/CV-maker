@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Imput } from '../formulario'
 import { useForm } from "react-hook-form"
+import {Form, Col, Row, Button, Container, Alert} from 'react-bootstrap';
 
 const get_endpoint = 'http://localhost:3080/cv-data'
 const post_endpoint = 'http://localhost:3080/update'
@@ -11,8 +12,8 @@ const post_endpoint = 'http://localhost:3080/update'
 function CvDataForm ( props ) {
     
     const [data, setData] = useState('')
-    
-    
+    const [showMsg, setShowMsg] = useState(false)
+     
     useEffect( () => {
         
         axios.get( get_endpoint, {
@@ -46,6 +47,9 @@ function CvDataForm ( props ) {
         })
         .then(function (response) {
             console.log(response);
+            setData(evt)
+            setShowMsg(true)
+            setTimeout(()=>{ setShowMsg(false) }, 3000)
         })
         .catch(function (error) {
             console.log(error);
@@ -57,42 +61,66 @@ function CvDataForm ( props ) {
     
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
-
     return (
         <>
+        <Container>
+            <Alert key="success-msg" variant="success" show={showMsg}>
+                Se han guardado tus datos.
+            </Alert>
             <form onSubmit={handleSubmit(onSubmit)} >
+                <section className="form-general">
+                    <Row className='mb-3'>
+                        <Form.Group as={Col}>
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Nombre"  
+                                name='nombre'
+                                defaultValue={data.nombre}
+                                />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Apellidos"
+                                name='apellido'
+                                defaultValue={data.apellido}
+                                />
+                        </Form.Group>
+                    </Row>
 
-                <Imput 
-                    type='text'
-                    register={register}
-                    label="Introduce tu nombre"  
-                    name='nombre'
-                    defaultValue={data.nombre}
-                />
-                <Imput 
-                    type='text'
-                    register={register}
-                    label="Introduce tu apellido"  
-                    name='apellido'
-                    defaultValue={data.apellido}
-                />
-                <Imput 
-                    type='text'
-                    register={register}
-                    label="Introduce tu telef"  
-                    name='telefono'
-                    defaultValue={data.telefono}
-                />
-                <Imput 
-                    type='text'
-                    register={register}
-                    label="Introduce tu email"  
-                    name='email'
-                    defaultValue={data.email}
-                />
+                    <Row className='mb-3'>
+                        <Form.Group as={Col}>
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Teléfono"  
+                                name='telefono'
+                                defaultValue={data.telefono}
+                            />
+                        </Form.Group>
+                        <Form.Group as={Col} >
+                            <Imput 
+                                type='text'
+                                register={register}
+                                label="Email de contacto"  
+                                name='email'
+                                defaultValue={data.email}
+                            />
+                        </Form.Group>
+                    </Row>
 
-                <button type="submit">Guardar datos</button>
+                </section>
+                <section className="form-estudios"></section>
+                <section className="form-experiencia"></section>
+                <section className="form-idiomas"></section>
+                <section className="form-puntos-fuertes"></section>
+                <section className="form-proyectos"></section>
+
+                <Button variant="primary" type="submit">Guardar datos</Button>
             </form>
+        </Container>
         </>
     )
 }
