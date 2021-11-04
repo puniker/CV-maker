@@ -53,34 +53,39 @@ export default ( {setIsLogged} ) => {
     return (
         <>
             <h1>Login Page</h1>
-            <form onSubmit={handleSubmit(submit)} >
-              <Row className='mb-3'>
-                <Form.Group as={Col}>
-                    <Imput 
-                        type='text'
-                        register={register}
-                        label="Nombre de usuario"  
-                        name='username'
-                        defaultValue={ username }
-                        required
-                      />
-                </Form.Group>
-                <Form.Group as={Col}>
-                    <Imput 
-                        type='text'
-                        register={register}
-                        label="Constraseña"  
-                        name='password'
-                        defaultValue={ password }
-                        required
-                      />
-                </Form.Group>
-              </Row>
-              <button >Log in</button>
-              <Alert key="error-msg" variant="danger" show={showMsg}>
-                  {loginError}
-              </Alert>
-            </form>
+            <Container>
+
+              <form onSubmit={handleSubmit(submit)} >
+                <Row className='mb-3'>
+                  <Form.Group as={Col}>
+                      <Imput 
+                          type='text'
+                          register={register}
+                          label="Nombre de usuario"  
+                          name='username'
+                          defaultValue={ username }
+                          required
+                        />
+                  </Form.Group>
+                </Row>
+                <Row>
+                  <Form.Group as={Col}>
+                      <Imput 
+                          type='text'
+                          register={register}
+                          label="Constraseña"  
+                          name='password'
+                          defaultValue={ password }
+                          required
+                        />
+                  </Form.Group>
+                </Row>
+                <button >Log in</button>
+                <Alert key="error-msg" variant="danger" show={showMsg}>
+                    {loginError}
+                </Alert>
+              </form>
+            </Container>
         </>
     )
 }
