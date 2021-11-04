@@ -1,12 +1,12 @@
 import React from 'react'
-import CvDataForm from '../components/CvDataForm'
+import CvForm from '../components/CvForm'
 
 function CreaTuCv ( props ) {
 
     return (
         <>
             <h1>Introduce tus datos</h1>
-            <CvDataForm />
+            <CvForm />
         </>
     )
 }

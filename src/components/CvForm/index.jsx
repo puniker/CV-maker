@@ -9,7 +9,7 @@ const post_endpoint = 'http://localhost:3080/update'
 
 
 
-function CvDataForm ( props ) {
+function CvForm ( props ) {
     
     const [data, setData] = useState('')
     const [showMsg, setShowMsg] = useState(false)
@@ -75,7 +75,6 @@ function CvDataForm ( props ) {
                                 label="Nombre"  
                                 name='nombre'
                                 defaultValue={ data.nombre }
-                                required
                                 />
                         </Form.Group>
                         <Form.Group as={Col} >
@@ -85,7 +84,6 @@ function CvDataForm ( props ) {
                                 label="Apellidos"
                                 name='apellido'
                                 defaultValue={data.apellido}
-                                required
                                 />
                         </Form.Group>
                     </Row>
@@ -98,7 +96,6 @@ function CvDataForm ( props ) {
                                 label="Teléfono"  
                                 name='telefono'
                                 defaultValue={data.telefono}
-                                required
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
@@ -108,7 +105,6 @@ function CvDataForm ( props ) {
                                 label="Email de contacto"  
                                 name='email'
                                 defaultValue={data.email}
-                                required
                             />
                         </Form.Group>
                     </Row>
@@ -127,4 +123,4 @@ function CvDataForm ( props ) {
     )
 }
 
-export default CvDataForm
+export default CvForm
