@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import { Imput } from '../components/formulario'
+import FormElements from '../components/FormElements'
 import { useForm } from "react-hook-form"
 import {Form, Col, Row, Button, Container, Alert} from 'react-bootstrap';
 
@@ -58,7 +58,7 @@ export default ( {setIsLogged} ) => {
               <form onSubmit={handleSubmit(submit)} >
                 <Row className='mb-3'>
                   <Form.Group as={Col}>
-                      <Imput 
+                      <FormElements.Input 
                           type='text'
                           register={register}
                           label="Nombre de usuario"  
@@ -70,7 +70,7 @@ export default ( {setIsLogged} ) => {
                 </Row>
                 <Row>
                   <Form.Group as={Col}>
-                      <Imput 
+                      <FormElements.Input 
                           type='text'
                           register={register}
                           label="Constraseña"  

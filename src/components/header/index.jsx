@@ -26,7 +26,7 @@ export default () => {
                     </div>
                 </Navbar.Collapse>
                 <Navbar.Text>
-                    <button onClick={log_out}>Cerrar sesión</button>
+                    <button className="btn btn-warning" onClick={log_out}>Cerrar sesión</button>
                 </Navbar.Text>
             </Container>
         </Navbar>

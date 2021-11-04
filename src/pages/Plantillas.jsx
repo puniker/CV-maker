@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-import { Imput } from '../components/formulario'
+import FormElements from '../components/FormElements'
 
 function plantillas ()  {
 
@@ -14,13 +14,13 @@ function plantillas ()  {
         <>
             <h1>Todas las plantillas</h1>
             <form onSubmit={handleSubmit(onSubmit)} >
-                <Imput 
+                <FormElements.Input 
                     type='text'
                     register={register}
                     label="Introduce tu nombre"  
                     name='nombre'
                 />
-                <Imput 
+                <FormElements.Input  
                     type='text'
                     register={register}
                     label="apellido"  

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Imput } from '../formulario'
+import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
 import {Form, Col, Row, Button, Container, Alert} from 'react-bootstrap';
 
@@ -86,7 +86,7 @@ function CvForm ( props ) {
                 <section className="form-general">
                     <Row className='mb-3'>
                         <Form.Group as={Col}>
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Nombre"  
@@ -95,7 +95,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Apellidos"
@@ -107,7 +107,7 @@ function CvForm ( props ) {
 
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Email de contacto"  
@@ -116,7 +116,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col}>
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Teléfono"  
@@ -127,7 +127,7 @@ function CvForm ( props ) {
                     </Row>
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Direccion"  
@@ -138,7 +138,7 @@ function CvForm ( props ) {
                     </Row>
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='date'
                                 register={register}
                                 label="Fecha de nacimiento"  
@@ -147,7 +147,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Lugar de nacimiento"  
@@ -158,7 +158,7 @@ function CvForm ( props ) {
                     </Row>
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='number'
                                 register={register}
                                 label="Código postal"  
@@ -167,7 +167,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Ciudad/Pueblo"  
@@ -178,7 +178,7 @@ function CvForm ( props ) {
                     </Row>
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Género"  
@@ -187,7 +187,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Nacionalidad"  
@@ -196,7 +196,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Estado civil"  
@@ -207,7 +207,7 @@ function CvForm ( props ) {
                     </Row>
                     <Row className='mb-3'>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Sitio Web"  
@@ -216,7 +216,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="LinkedIn"  
@@ -225,7 +225,7 @@ function CvForm ( props ) {
                             />
                         </Form.Group>
                         <Form.Group as={Col} >
-                            <Imput 
+                            <FormElements.Input 
                                 type='text'
                                 register={register}
                                 label="Twitter"  

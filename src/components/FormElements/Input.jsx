@@ -1,9 +1,8 @@
 import React from 'react'
-import { useForm } from "react-hook-form";
 import {Form} from 'react-bootstrap'
 
-function Imput ( {type, label, name, register, required, defaultValue, description} ) {
-
+export default ( {type, label, name, register, required, defaultValue, description} ) => {
+    
     return (
         <div>
             <Form.Label>{label}</Form.Label>
@@ -18,4 +17,3 @@ function Imput ( {type, label, name, register, required, defaultValue, descripti
     )
 
 }
-export default Imput
