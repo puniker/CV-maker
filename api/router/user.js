@@ -11,12 +11,17 @@ app.get('/login', function (request, res) {
             "access" : false
         }
 
-    const result = UserData.users.find( user => user.username == username )
-    if ( typeof result !== 'undefined' ) {
-        console.log( result )
-        response = {
-            "access" : true,
-            "userData" : result
+    const result = UserData.users.findIndex( user => user.username == username )
+    if ( typeof result !== 'undefined' && result >= 0 ) {
+        if ( UserData.users[result].password == password ) {
+            console.log( result )
+            response = {
+                "access" : true,
+                "userData" : result
+            }
+        } else {
+            console.log('Contraseña incorrecta')
+            response.error = 'Contraseña incorrecta'
         }
     } else {
         console.log('Usuario no encontrado')
