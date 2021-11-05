@@ -183,6 +183,7 @@ function CvForm ( props ) {
                                 label="Género"  
                                 name='genero'
                                 defaultValue={data.genero}
+                                options={['Masculino', 'Femenino']}
                             />
                         </Form.Group>
                         <Form.Group as={Col} >

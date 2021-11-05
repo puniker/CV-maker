@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap'
 
-export default ({label, name, register, required, defaultValue, description}) => {
+export default ({label, name, register, required, defaultValue, options, description}) => {
 
     return (
         <div>
@@ -9,8 +9,13 @@ export default ({label, name, register, required, defaultValue, description}) =>
             <Form.Select aria-label="Default select example" 
                 {...register(name, { required })}
             >
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
+                {options.map( e => {
+                    if ( e == defaultValue ) {
+                        return <option value={e} selected>{e}</option>
+                    } else {
+                        return <option value={e}>{e}</option>
+                    }
+                } )}
             </Form.Select>
             <Form.Text className="text-muted">
                 {description}
