@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import FormElements from '../components/FormElements'
 import { useForm } from "react-hook-form"
-import {Form, Col, Row, Button, Container, Alert} from 'react-bootstrap';
+import {FloatingLabel, Form, Col, Row, Button, Container, Alert} from 'react-bootstrap';
 
 export default ( {setIsLogged} ) => {
 
@@ -58,26 +58,26 @@ export default ( {setIsLogged} ) => {
               <form onSubmit={handleSubmit(submit)} >
                 <Row className='mb-3'>
                   <Form.Group as={Col}>
-                      <FormElements.Input 
-                          type='text'
-                          register={register}
-                          label="Nombre de usuario"  
-                          name='username'
-                          defaultValue={ username }
-                          required
-                        />
+
+                    <FloatingLabel controlId="floatingInput" label="Nombre de usuario" className="mb-3" >
+                      <Form.Control 
+                        type="text"
+                        placeholder="Nombre de usuario"
+                        {...register('username')} 
+                      />
+                    </FloatingLabel>
+
                   </Form.Group>
                 </Row>
                 <Row>
                   <Form.Group as={Col}>
-                      <FormElements.Input 
-                          type='text'
-                          register={register}
-                          label="Constraseña"  
-                          name='password'
-                          defaultValue={ password }
-                          required
-                        />
+                        <FloatingLabel controlId="floatingInput" label="Contraseña" className="mb-3" >
+                          <Form.Control 
+                            type="text"
+                            placeholder="Contraseña"
+                            {...register('password')} 
+                          />
+                        </FloatingLabel>
                   </Form.Group>
                 </Row>
                 <button >Log in</button>
