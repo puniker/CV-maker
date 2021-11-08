@@ -24,7 +24,7 @@ function App() {
            <Route path="/plantillas">
              <Pages.Plantillas />
            </Route>
-           <Route component={Pages.Home}></Route>
+           <Route path="/" component={Pages.Home}></Route>
          </Switch>
         </BrowserRouter>
   

@@ -1,6 +1,7 @@
 import React from 'react'
 import {Accordion, Container} from 'react-bootstrap';
 import SectionGeneral from './SectionGeneral'
+import SectionEstudios from './SectionEstudios'
 
 function CvForm ( props ) {
     
@@ -9,7 +10,7 @@ function CvForm ( props ) {
         <>
         <Container>           
             
-            <Accordion defaultActiveKey="0">
+            <Accordion /*defaultActiveKey="0"*/>
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Formulario general</Accordion.Header>
                     <Accordion.Body>
@@ -19,7 +20,7 @@ function CvForm ( props ) {
                 <Accordion.Item eventKey="1">
                     <Accordion.Header>Datos academicos</Accordion.Header>
                     <Accordion.Body>
-                        <h3>Formulario de datos academicos</h3>
+                        <SectionEstudios />
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
