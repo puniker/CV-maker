@@ -26,7 +26,7 @@ app.get('/render-plantilla', (req, res) => {
     const template_id = req.query.template_id
     
     const template = file.find( (element) => element.id == template_id )
-    console.log( template )
+    //console.log( template )
     const twigPath = path.resolve(`api/templates/${template.twig}`)
     
     getData(user_id, ( cvdata ) => {
@@ -34,11 +34,10 @@ app.get('/render-plantilla', (req, res) => {
         twig.renderFile(
             twigPath, 
             {
-                message:"Hola mundo",
                 data: cvdata
             }, 
             (err, html) => {
-                console.log( html )
+                //console.log( html )
                 res.json( {"html": html} ) 
             } 
             )
