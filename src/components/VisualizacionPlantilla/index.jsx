@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router"
 import axios from 'axios'
 import {Alert} from 'react-bootstrap'
+import styled from 'styled-components'
+
 const plantillas_endpoint = 'http://localhost:3080/render-plantilla'
 
+const CvContainer = styled.article`
+    max-width: 1000px;
+    margin: auto;
+`
+
 function VisualizacionPlantilla ( {id} ) {
+
 
     const [template, setTemplate] = useState()
     const [isLoading, setIsLoading] = useState(true)
@@ -34,9 +41,9 @@ function VisualizacionPlantilla ( {id} ) {
     }
     
     return (
-        <article className="cv-content" data-react-cv={id}>
+        <CvContainer className="cv-content" data-react-cv={id}>
             <div dangerouslySetInnerHTML={{ __html: template }} />
-        </article>
+        </CvContainer>
     )
 
 }
