@@ -10,7 +10,7 @@ function CvForm ( props ) {
         <>
         <Container>           
             
-            <Accordion /*defaultActiveKey="0"*/>
+            <Accordion defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Formulario general</Accordion.Header>
                     <Accordion.Body>

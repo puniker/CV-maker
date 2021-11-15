@@ -10,3 +10,15 @@ body {
   color: #fff;
 }
 
+:root {
+  --cv-maker-blue : #09f;
+}
+
+.p_button{
+  background-color: var(--cv-maker-blue);
+  border: none;
+  padding: 5px 15px;
+  border-radius: 4px;
+  color: white;
+  font-size: 15px;
+}
