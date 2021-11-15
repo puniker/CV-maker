@@ -30,6 +30,11 @@ app.get('/cv-data', (req, res) => {
     res.json ( {"data": data.find((element) => element.uuid == userID) } ) 
   
 })
+app.get('/cv-estudios', (req, res) => {
+  var userID = req.query.userID
+  
+  res.json( CvFileData.find( (element) => element.uuid == userID ).estudios )
+})
 
 app.get('/update', (req, res) => {
 
