@@ -14,7 +14,6 @@ export default () => {
         
         axios.get('http://localhost:3080/plantillas')
         .then( ( response ) => {
-            console.log( response.data )
             setTemplates( response.data )
             setIsLoading(false)
         })
@@ -35,7 +34,7 @@ export default () => {
                 {
                     templates.map( (template) => {
                         return(
-                            <Card>
+                            <Card key={Math.random()}>
                                 <Card.Img variant="top" src={template.screenshot} />
                                 <Card.Body>
                                     <Card.Title>{template.name}</Card.Title>

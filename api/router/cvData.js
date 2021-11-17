@@ -32,8 +32,8 @@ app.get('/cv-data', (req, res) => {
 })
 app.get('/cv-estudios', (req, res) => {
   var userID = req.query.userID
-  
-  res.json( CvFileData.find( (element) => element.uuid == userID ).estudios )
+  const user_data = CvFileData.find( (element) => element.uuid == userID )
+  res.json( user_data.estudios )
 })
 
 app.get('/update', (req, res) => {

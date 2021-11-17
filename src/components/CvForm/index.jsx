@@ -2,6 +2,7 @@ import React from 'react'
 import {Accordion, Container} from 'react-bootstrap';
 import SectionGeneral from './SectionGeneral'
 import SectionEstudios from './SectionEstudios'
+import Prueba from './Prueba'
 
 function CvForm ( props ) {
     
@@ -9,7 +10,7 @@ function CvForm ( props ) {
     return (
         <>
         <Container>           
-            
+        <Prueba />
             <Accordion defaultActiveKey="1">
                 <Accordion.Item eventKey="0">
                     <Accordion.Header>Formulario general</Accordion.Header>

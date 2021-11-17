@@ -19,12 +19,22 @@
         "twitter":"@ikersastre8",
         "estudios": [
             {
-                "centro": "colegio b",
-                "ciudad": "basauri",
+                "id": 0,
+                "centro": "ceinmark",
+                "ciudad": "bilbao",
                 "titulo": "desarrollo de aps",
                 "fecha_inicio": "01-01-2001",
                 "fecha_fin": "01-01-2001",
                 "descripcion": "Aprendí a hacer apps"
+            },
+            {
+                "id": 1,
+                "centro": "colegio basauri",
+                "ciudad": "basauri",
+                "titulo": "bachi",
+                "fecha_inicio": "01-01-2001",
+                "fecha_fin": "01-01-2001",
+                "descripcion": "no aprendí mucho"
             }
         ]
     },
