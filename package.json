@@ -1,40 +1,21 @@
 {
   "name": "cv-maker",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "autor": "Iker Sastre",
+  "workspaces": [
+    "api",
+    "app"
+  ],
+  "engines": {
+    "npm": "7.9.0"
+  },
   "scripts": {
     "killport": "npx kill-port 3080",
-    "api_start": "node api/index.js",
-    "api_dev": "nodemon api/index.js",
-    "dev": "vite",
-    "build": "vite build",
-    "serve": "vite preview"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.6.0",
-    "@emotion/styled": "^11.6.0",
-    "@material-ui/core": "^4.12.3",
-    "@mui/material": "^5.1.1",
-    "axios": "^0.24.0",
-    "bootstrap": "^5.1.3",
-    "cors": "^2.8.5",
-    "express": "4.17.1",
-    "react": "17.0.0",
-    "react-bootstrap": "2.0.1",
-    "react-dom": "17.0.0",
-    "react-hook-form": "7.18.1",
-    "react-router-dom": "5.3.0",
-    "styled-components": "^5.3.3",
-    "twig": "1.15.4"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.0",
-    "nodemon": "^2.0.14",
-    "vite": "^2.6.4"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "api/data/cv/*.json"
-    ]
+    "start:api": "npm start --workspace=api",
+    "start": "npm start --workspace=api",
+    "dev": "npm run build --workspace=app && npm run dev --workspace=api",
+    "dev:api": "npm run killport && npm run dev --workspace=api",
+    "dev:app": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
