@@ -5,6 +5,7 @@ const Router = require('./router')
 const app = express()
 
 app.use(cors())
+app.use(express.static('../app/dist'))
 
 app.use(Router.user)
 app.use(Router.cvData)
