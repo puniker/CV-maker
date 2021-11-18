@@ -12,7 +12,7 @@
   "scripts": {
     "killport": "npx kill-port 3080",
     "start:api": "npm start --workspace=api",
-    "start": "npm run app:build && npm start --workspace=api",
+    "start": "npm run build:app && npm start --workspace=api",
     "dev": "npm run build:app && npm run dev --workspace=api",
     "dev:api": "npm run killport && npm run dev --workspace=api",
     "dev:app": "vite",
