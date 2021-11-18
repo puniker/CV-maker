@@ -1,18 +1,18 @@
+import { TextField } from '@mui/material'
 import React from 'react'
-import {Form} from 'react-bootstrap'
+
 
 export default ( {type, label, name, register, required, defaultValue, description} ) => {
     
     return (
         <div>
-            <Form.Label>{label}</Form.Label>
-            <Form.Control 
-                type={type} 
+            <TextField 
+                id="standard-basic" 
+                label={label} 
+                variant="standard" 
+                type="text"
                 {...register(name, { required })} 
-                defaultValue={defaultValue}  />
-            <Form.Text className="text-muted">
-                {description}
-            </Form.Text>
+                defaultValue={defaultValue} />
         </div>
     )
 
