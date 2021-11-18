@@ -1,11 +1,14 @@
+import { Container } from '@mui/material'
 import ListadoPlantillas from '../components/ListadoPlantillas'
 
 function plantillas ()  {
 
     return (
         <>
-            <h1>Todas las plantillas</h1>
-            <ListadoPlantillas />
+            <Container>
+                <h1>Todas las plantillas</h1>
+                <ListadoPlantillas />
+            </Container>
         </>
     )
 }

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
-import {Form, Col, Row, Button, Alert, Badge, Accordion} from 'react-bootstrap'
+import {Form, Col, Row, Alert, Badge, Accordion} from 'react-bootstrap'
+import {IconButton, Button} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import SaveIcon from '@mui/icons-material/Save';
 
 const datos_api = [
     {
@@ -89,7 +92,9 @@ function SectionGeneral ( props ) {
                     <Accordion.Item eventKey={index} key={`academyc_form_${index}`} id={item.id} data-test={index}>
                         <Accordion.Header>
                             <h6>{item.titulo}</h6>
-                            <Badge bg="danger" onClick={() => removeItem(item.id)}>Eliminar elemento</Badge>
+                            <IconButton aria-label="delete" onClick={() => removeItem(item.id)}>
+                                <DeleteIcon />
+                            </IconButton>
                         </Accordion.Header>
                         <Accordion.Body>
                             <div key={`academyc_form_${index}`} id={item.id}>
@@ -161,10 +166,10 @@ function SectionGeneral ( props ) {
                 ))}
                 </Accordion>
 
-                <Badge bg="primary" onClick={addItem} >Añadir elemento</Badge>
+                <Button color="secondary" onClick={addItem}>Añadir elemento</Button>
                 <br />
                 <br />
-                <Button variant="primary" type="submit">Guardar datos</Button>
+                <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
             </form>
 
 

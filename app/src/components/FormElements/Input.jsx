@@ -5,7 +5,7 @@ import React from 'react'
 export default ( {type, label, name, register, required, defaultValue, description} ) => {
     
     return (
-        <div>
+        <>
             <TextField 
                 id="standard-basic" 
                 label={label} 
@@ -13,7 +13,7 @@ export default ( {type, label, name, register, required, defaultValue, descripti
                 type="text"
                 {...register(name, { required })} 
                 defaultValue={defaultValue} />
-        </div>
+        </>
     )
 
 }

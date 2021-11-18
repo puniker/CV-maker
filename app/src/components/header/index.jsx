@@ -2,6 +2,8 @@ import './style.css'
 import {NavLink, Link} from 'react-router-dom'
 import {Navbar, Container} from 'react-bootstrap';
 import {Redirect} from 'react-router'
+import LogoutIcon from '@mui/icons-material/Logout';
+
 export default () => {
     
     const log_out = () => {
@@ -25,7 +27,7 @@ export default () => {
                     </div>
                 </Navbar.Collapse>
                 <Navbar.Text>
-                    <button className="btn btn-warning" onClick={log_out}>Cerrar sesión</button>
+                    <button className="btn btn-warning" onClick={log_out}>Cerrar sesión <LogoutIcon /></button>
                 </Navbar.Text>
             </Container>
         </Navbar>

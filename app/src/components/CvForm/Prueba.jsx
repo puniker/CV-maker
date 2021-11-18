@@ -29,19 +29,6 @@ export default () => {
     return (
         <>
         <Button variant="contained">Hello World</Button>
-        <div className="">contacos</div>
-        <form action="">
-            { fields.map(item => (
-                <div key={item.id} key={item.id}>
-                    <input type="text" 
-                    name="firstName"
-                    label="First Name" />
-                    <span onClick={()=>removeField(item.id)}>Quitar campo</span>
-                </div>
-            ))}
-            <button type="submit"></button>
-        </form>
-        <button onClick={addItem}>Añadir elemento</button>
         </>
     )
 

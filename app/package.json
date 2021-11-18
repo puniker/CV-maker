@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@material-ui/core": "^4.12.3",
+    "@mui/icons-material": "^5.1.1",
     "@mui/material": "^5.1.1",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",

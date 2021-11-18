@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from 'axios'
-import {Alert} from 'react-bootstrap'
+import { Alert } from "@mui/material"
 import styled from 'styled-components'
 
 const plantillas_endpoint = 'http://localhost:3080/render-plantilla'
@@ -37,7 +37,7 @@ function VisualizacionPlantilla ( {id} ) {
 
 
     if ( isLoading ) {
-        return <Alert key="loading-data" variant="primary" show="true">Cargando tu plantilla...</Alert>
+        return <Alert key="loading-data" severity="info">Cargando tu plantilla...</Alert>
     }
     
     return (

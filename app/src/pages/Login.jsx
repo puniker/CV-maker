@@ -1,8 +1,9 @@
 import { useState } from "react"
 import axios from "axios"
 import { useForm } from "react-hook-form"
-import {FloatingLabel, Form, Col, Row, Container, Alert} from 'react-bootstrap'
 import styled from "styled-components"
+import {Grid, TextField, Button, Container, Alert} from '@mui/material'
+import {Send} from '@mui/icons-material';
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -18,6 +19,7 @@ export default ( {setIsLogged} ) => {
     const [showMsg, setShowMsg] = useState(false)
 
     const submit = ( evt ) =>{
+      console.log( evt )
         evt.preventDefault
         setIsLoading( true )
 
@@ -61,34 +63,34 @@ export default ( {setIsLogged} ) => {
             <Container>
               <FormWrapper>
                 <form onSubmit={handleSubmit(submit)} >
-                  <Row className='mb-3'>
-                    <Form.Group as={Col}>
-
-                      <FloatingLabel controlId="floatingInput" label="Nombre de usuario" className="mb-3" >
-                        <Form.Control 
+                  <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                      <TextField 
                           type="text"
-                          placeholder="Nombre de usuario"
+                          label="Nombre de usuario"
+                          variant="outlined"
                           {...register('username')} 
                         />
-                      </FloatingLabel>
-
-                    </Form.Group>
-                  </Row>
-                  <Row>
-                    <Form.Group as={Col}>
-                          <FloatingLabel controlId="floatingInput" label="Contraseña" className="mb-3" >
-                            <Form.Control 
-                              type="text"
-                              placeholder="Contraseña"
-                              {...register('password')} 
-                            />
-                          </FloatingLabel>
-                    </Form.Group>
-                  </Row>
-                  <button className="p_button">Acceder</button>
-                  <Alert key="error-msg" variant="danger" show={showMsg}>
-                      {loginError}
-                  </Alert>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextField 
+                        type="password"
+                        label="Contraseña"
+                        variant="outlined"
+                        {...register('password')} 
+                      />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Button type="submit" variant="contained" >
+                        Acceder
+                        <Send />
+                      </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                      { ( showMsg ) ? <Alert key="error-msg" severity="error" show={showMsg}>{loginError}</Alert> : '' }
+                    </Grid>
+                  </Grid>
+                  
                 </form>
               </FormWrapper>
             </Container>

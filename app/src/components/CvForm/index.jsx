@@ -1,32 +1,73 @@
-import React from 'react'
-import {Accordion, Container} from 'react-bootstrap';
+import React, { useState } from 'react'
 import SectionGeneral from './SectionGeneral'
 import SectionEstudios from './SectionEstudios'
 import Prueba from './Prueba'
+import { Box, Container, Tabs, Tab, Typography} from '@mui/material'
+import PropTypes from 'prop-types';
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+  
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`,
+    };
+  }
 
 function CvForm ( props ) {
     
+    const [value, setValue] = useState()
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    }
 
     return (
         <>
-        <Container>           
-        <Prueba />
-            <Accordion defaultActiveKey="1">
-                <Accordion.Item eventKey="0">
-                    <Accordion.Header>Formulario general</Accordion.Header>
-                    <Accordion.Body>
-                        <SectionGeneral />
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="1">
-                    <Accordion.Header>Datos academicos</Accordion.Header>
-                    <Accordion.Body>
-                        <SectionEstudios />
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
+            
+            <Box sx={{ width: '100%' }}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                  <Tab label="Datos generales" {...a11yProps(0)} />
+                  <Tab label="Experiencia" {...a11yProps(1)} />
+                  <Tab label="Tercer elemento" {...a11yProps(2)} />
+                  </Tabs>
+              </Box>
+              <TabPanel value={value} index={0}>
+                      <SectionGeneral />
+              </TabPanel>
+              <TabPanel value={value} index={1}>
+                      <SectionEstudios />
+              </TabPanel>
+              <TabPanel value={value} index={2}>
+                  Item Three
+              </TabPanel>
+            </Box>
 
-        </Container>
         </>
     )
 }

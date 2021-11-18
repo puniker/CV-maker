@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
-import {Form, Col, Row, Button, Alert} from 'react-bootstrap'
+import {Grid, Alert, Button} from '@mui/material'
+import SaveIcon from '@mui/icons-material/Save';
 
 const get_endpoint = 'http://localhost:3080/cv-data'
 const post_endpoint = 'http://localhost:3080/update'
@@ -72,40 +73,37 @@ function SectionGeneral ( props ) {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
     if ( isLoading ) {
-        return <Alert key="loading-data" variant="primary" show="true">Cargando tus datos...</Alert>
+        return <Alert key="loading-data" severity="info" >Cargando tus datos...</Alert>
     }
 
     return (
         <>
-            <Alert key="success-msg" variant="success" show={showMsg}>
-                Se han guardado tus datos.
-            </Alert>
+            { (showMsg) ? <Alert key="success-msg" severity="success" > Se han guardado tus datos. </Alert> : ''}
 
             <form onSubmit={handleSubmit(onSubmit)} >
                 <section className="form-general">
-                    <Row className='mb-3'>
-                        <Form.Group as={Col}>
-                            <FormElements.Input 
-                                type='text'
-                                register={register}
-                                label="Nombre"  
-                                name='nombre'
-                                defaultValue={ data.nombre }
-                            />
-                        </Form.Group>
-                        <Form.Group as={Col} >
-                            <FormElements.Input 
-                                type='text'
-                                register={register}
-                                label="Apellidos"
-                                name='apellido'
-                                defaultValue={data.apellido}
-                            />
-                        </Form.Group>
-                    </Row>
-
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} >
+                    <Grid container spacing={2} >
+                        <Grid item xs={6}>
+                                <FormElements.Input 
+                                    type='text'
+                                    register={register}
+                                    label="Nombre"  
+                                    name='nombre'
+                                    defaultValue={ data.nombre }
+                                />
+                        </Grid>
+                        <Grid item xs={6}>
+                                <FormElements.Input 
+                                    type='text'
+                                    register={register}
+                                    label="Apellidos"
+                                    name='apellido'
+                                    defaultValue={data.apellido}
+                                />
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -113,8 +111,8 @@ function SectionGeneral ( props ) {
                                 name='email'
                                 defaultValue={data.email}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col}>
+                        </Grid>
+                        <Grid item xs={6}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -122,10 +120,10 @@ function SectionGeneral ( props ) {
                                 name='telefono'
                                 defaultValue={data.telefono}
                             />
-                        </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} >
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -133,10 +131,12 @@ function SectionGeneral ( props ) {
                                 name='direccion'
                                 defaultValue={data.direccion}
                             />
-                        </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} >
+                        </Grid>
+                    </Grid>
+
+
+                    <Grid container spacing={1}>
+                        <Grid item xs={6}>
                             <FormElements.Input 
                                 type='date'
                                 register={register}
@@ -144,8 +144,8 @@ function SectionGeneral ( props ) {
                                 name='fecha_nacimiento'
                                 defaultValue={data.fecha_nacimiento}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col} >
+                        </Grid>
+                        <Grid item xs={6}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -153,10 +153,11 @@ function SectionGeneral ( props ) {
                                 name='lugar_nacimiento'
                                 defaultValue={data.lugar_nacimiento}
                             />
-                        </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} >
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={1}>
+                        <Grid item xs={6}>
                             <FormElements.Input 
                                 type='number'
                                 register={register}
@@ -164,8 +165,8 @@ function SectionGeneral ( props ) {
                                 name='c_postal'
                                 defaultValue={data.c_postal}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col} >
+                        </Grid>
+                        <Grid item xs={6}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -173,10 +174,11 @@ function SectionGeneral ( props ) {
                                 name='ciudad_pueblo'
                                 defaultValue={data.ciudad_pueblo}
                             />
-                        </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} >
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={1}>
+                        <Grid item xs={4}>
                             <FormElements.Select
                                 register={register}
                                 label="Género"  
@@ -184,8 +186,8 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.genero}
                                 options={['Masculino', 'Femenino']}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col} >
+                        </Grid>
+                        <Grid item xs={4}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -193,8 +195,8 @@ function SectionGeneral ( props ) {
                                 name='nacionalidad'
                                 defaultValue={data.nacionalidad}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col} >
+                        </Grid>
+                        <Grid item xs={4}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -202,10 +204,11 @@ function SectionGeneral ( props ) {
                                 name='estado_civil'
                                 defaultValue={data.estado_civil}
                             />
-                        </Form.Group>
-                    </Row>
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} >
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={1}>
+                        <Grid item xs={4}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -213,8 +216,8 @@ function SectionGeneral ( props ) {
                                 name='sitio_web'
                                 defaultValue={data.sitio_web}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col} >
+                        </Grid>
+                        <Grid item xs={4}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -222,8 +225,8 @@ function SectionGeneral ( props ) {
                                 name='linkedin'
                                 defaultValue={data.linkedin}
                             />
-                        </Form.Group>
-                        <Form.Group as={Col} >
+                        </Grid>
+                        <Grid item xs={4}>
                             <FormElements.Input 
                                 type='text'
                                 register={register}
@@ -231,12 +234,14 @@ function SectionGeneral ( props ) {
                                 name='twitter'
                                 defaultValue={data.twitter}
                             />
-                        </Form.Group>
-                    </Row>
+                        </Grid>
+                    </Grid>
 
+                    <Grid item xs={4}>
+                        <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
+                    </Grid>
 
                 </section>
-                <Button variant="primary" type="submit">Guardar datos</Button>
             </form>
         </>
     )

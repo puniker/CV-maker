@@ -1,7 +1,7 @@
 import axios from "axios"
 import { NavLink } from "react-router-dom"
 import React, { useEffect, useState } from 'react'
-import {Alert, Card, CardGroup, Container} from 'react-bootstrap'
+import { Alert, Grid, Button, Card, CardMedia, CardContent, CardActions, Typography} from '@mui/material'
 
 export default () => {
 
@@ -24,34 +24,47 @@ export default () => {
     }, [])
         
     if ( isLoading ) {
-        return <Alert key="loading-data" variant="primary" show="true">Cargando plantillas...</Alert>
+        return <Alert key="loading-data" severity="info">Cargando plantillas...</Alert>
     }
 
     return (
         <>
-        <Container>
-            <CardGroup>
+            <Grid container spacing={1}>
                 {
                     templates.map( (template) => {
                         return(
-                            <Card key={Math.random()}>
-                                <Card.Img variant="top" src={template.screenshot} />
-                                <Card.Body>
-                                    <Card.Title>{template.name}</Card.Title>
-                                    <Card.Text>
-                                        
+                            <>
+                                <Card sx={{ width: '33%' }}  key={Math.random()}>
+                                    <CardMedia
+                                        component="img"
+                                        height="140"
+                                        image={template.screenshot}
+                                        alt="green iguana"
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                        {template.name}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                        {template.autor}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">Share</Button>
+                                        <Button size="small">Usar plantilla</Button>
                                         <NavLink to={`/plantilla/${template.id}`}>Seleccionar</NavLink>
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted">{template.autor}</small>
-                                </Card.Footer>
-                            </Card>
+                                    </CardActions>
+                                </Card>
+
+                            </>
+
+
+
                         )
                     } )
                 }
-            </CardGroup>
-        </Container>
+            </Grid>
+
         </>
     )
     
