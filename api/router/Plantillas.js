@@ -27,10 +27,10 @@ app.get('/render-plantilla', (req, res) => {
     
     const template = file.find( (element) => element.id == template_id )
     //console.log( template )
-    const twigPath = path.resolve(`api/templates/${template.twig}`)
+    const twigPath = path.resolve(`templates/${template.twig}`)
     
     getData(user_id, ( cvdata ) => {
-        //console.log( cvdata )
+        console.log( cvdata, twigPath )
         twig.renderFile(
             twigPath, 
             {
