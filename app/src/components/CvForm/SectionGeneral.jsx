@@ -34,7 +34,7 @@ function SectionGeneral ( props ) {
     
     const onSubmit = ( evt ) => {
         evt.preventDefault
-        console.log( evt )
+        //console.log( evt )
 
         axios.get(post_endpoint, {
             params: {

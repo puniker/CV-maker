@@ -1,26 +1,29 @@
-import React from 'react'
-import {Form} from 'react-bootstrap'
+import React, { useState } from 'react'
+import {InputLabel, Select, FormControl, MenuItem} from '@mui/material'
 
 export default ({label, name, register, required, defaultValue, options, description}) => {
 
+    //const [value, setValue] = useState( defaultValue )
+
     return (
-        <div>
-            <Form.Label>{label}</Form.Label>
-            <Form.Select aria-label="Default select example" 
-                {...register(name, { required })}
+        <FormControl fullWidth>
+            <InputLabel id={`select-${name}-label`}>{label}</InputLabel>
+            <Select
+            labelId={`select-${name}-label`}
+            label={label}
+            id={`select-${name}`}
+            defaultValue={defaultValue}
+            { ...register(name, {required}) }
             >
-                {options.map( e => {
-                    if ( e == defaultValue ) {
-                        return <option value={e} selected>{e}</option>
-                    } else {
-                        return <option value={e}>{e}</option>
-                    }
-                } )}
-            </Form.Select>
-            <Form.Text className="text-muted">
-                {description}
-            </Form.Text>
-        </div>
+            {options.map( e => {
+                if ( e == defaultValue ) {
+                    return <MenuItem value={e}>{e}</MenuItem>
+                } else {
+                    return <MenuItem value={e}>{e}</MenuItem>
+                }
+            } )}
+            </Select>
+        </FormControl>
     )
 
 }

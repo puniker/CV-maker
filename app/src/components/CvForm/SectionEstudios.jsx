@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
-import {Form, Col, Row, Alert, Badge, Accordion} from 'react-bootstrap'
-import {IconButton, Button} from '@mui/material'
+import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SaveIcon from '@mui/icons-material/Save';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 const datos_api = [
     {
@@ -81,90 +82,94 @@ function SectionGeneral ( props ) {
     }
     return (
         <>
-            <Alert key="success-msg" variant="success" show={showMsg}>
-                Se han guardado tus datos.
-            </Alert>
+            { ( showMsg ) ? <Alert key="error-msg" severity="success" show={showMsg}>Se han guardado tus datos.</Alert> : '' }
             <form className="" onSubmit={handleSubmit(onSubmit)} >
 
-                <Accordion defaultActiveKey="0">
                 { fields.map((item, index) => (
+                
+                    <Accordion>
+                        <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id={`panel${index}a-header`}
+                        >
+                            <Typography>{item.titulo}</Typography>
 
-                    <Accordion.Item eventKey={index} key={`academyc_form_${index}`} id={item.id} data-test={index}>
-                        <Accordion.Header>
-                            <h6>{item.titulo}</h6>
                             <IconButton aria-label="delete" onClick={() => removeItem(item.id)}>
-                                <DeleteIcon />
+                                    <DeleteIcon />
                             </IconButton>
-                        </Accordion.Header>
-                        <Accordion.Body>
-                            <div key={`academyc_form_${index}`} id={item.id}>
-                                <Row className='mb-3'>
-                                    <Form.Group as={Col}>
-                                        <FormElements.Input 
-                                            type='text'
-                                            register={register}
-                                            label="Carrera"  
-                                            name={`${item.id}_titulo`}
-                                            defaultValue={item.titulo}
-                                            />
-                                    </Form.Group>
-                                    <Form.Group as={Col} >
-                                        <FormElements.Input 
-                                            type='text'
-                                            register={register}
-                                            label="Ciudad/Pueblo"
-                                            name={`${item.id}_ciudad_pueblo`}
-                                            defaultValue={item.ciudad}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            
+                        <div key={`academyc_form_${index}`} id={item.id}>
+                            <Grid container spacing={2} >
+                                <Grid item xs={12}>
+                                    <FormElements.Input 
+                                        type='text'
+                                        register={register}
+                                        label="Carrera"  
+                                        name={`${item.id}_titulo`}
+                                        defaultValue={item.titulo}
                                         />
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3'>
-                                    <Form.Group as={Col}>
-                                        <FormElements.Input 
-                                            type='text'
-                                            register={register}
-                                            label="Centro"
-                                            name={`${item.id}_centro`}
-                                            defaultValue={item.centro}
-                                            />
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3'>
-                                    <Form.Group as={Col}>
-                                        <FormElements.Input 
-                                            type='date'
-                                            register={register}
-                                            label="Fecha inicio"
-                                            name={`${item.id}_fecha_inicio`}
-                                            defaultValue={item.fecha_inicio}
-                                            />
-                                    </Form.Group>
-                                    <Form.Group as={Col}>
-                                        <FormElements.Input 
-                                            type='date'
-                                            register={register}
-                                            label="Fecha fin"
-                                            name={`${item.id}_fecha_fin`}
-                                            defaultValue={item.fecha_fin}
-                                        />
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3'>
-                                    <Form.Group as={Col}>
-                                        <FormElements.Input 
-                                            type='textarea'
-                                            register={register}
-                                            label="Descipcion"
-                                            name={`${item.id}_descripcion`}
-                                            defaultValue={item.descripcion}
-                                            />
-                                    </Form.Group>
-                                </Row>
-                            </div>
-                        </Accordion.Body>
-                    </Accordion.Item>
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    <FormElements.Input 
+                                        type='text'
+                                        register={register}
+                                        label="Centro"
+                                        name={`${item.id}_centro`}
+                                        defaultValue={item.centro}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <FormElements.Input 
+                                        type='text'
+                                        register={register}
+                                        label="Ciudad/Pueblo"
+                                        name={`${item.id}_ciudad_pueblo`}
+                                        defaultValue={item.ciudad}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2}>
+                                <Grid item xs={6}>
+                                    <FormElements.Input 
+                                        type='date'
+                                        register={register}
+                                        label="Fecha inicio"
+                                        name={`${item.id}_fecha_inicio`}
+                                        defaultValue={item.fecha_inicio}
+                                    />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <FormElements.Input 
+                                        type='date'
+                                        register={register}
+                                        label="Fecha fin"
+                                        name={`${item.id}_fecha_fin`}
+                                        defaultValue={item.fecha_fin}
+                                    />
+                                </Grid>
+                            </Grid>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12}>
+                                    <FormElements.Input 
+                                        type='textarea'
+                                        register={register}
+                                        label="Descipcion"
+                                        name={`${item.id}_descripcion`}
+                                        defaultValue={item.descripcion}
+                                    />
+                                </Grid>
+                            </Grid>
+                                </div>
+                        </AccordionDetails>
+                    </Accordion>
+                
                 ))}
-                </Accordion>
+
 
                 <Button color="secondary" onClick={addItem}>Añadir elemento</Button>
                 <br />

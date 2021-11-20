@@ -1,8 +1,22 @@
-import './style.css'
-import {NavLink, Link} from 'react-router-dom'
-import {Navbar, Container} from 'react-bootstrap';
-import {Redirect} from 'react-router'
-import LogoutIcon from '@mui/icons-material/Logout';
+import { useState } from 'react'
+import {NavLink} from 'react-router-dom'
+import {AppBar, Box, Toolbar, Typography, IconButton, Switch, FormControlLabel, FormGroup, MenuItem, Menu} from '@mui/material'
+import MenuIcon from '@mui/icons-material/Menu'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+
+
+const StyledNavLink = {
+    color: 'white',
+    textDecoration: 'none',
+    padding: '15px 0px',
+    margin: '0px 20px'
+}
+const StyledNavLinkActive = {
+    color: 'white',
+    textDecoration: 'underline',
+    padding: '15px 0px',
+    margin: '0px 20px'
+}
 
 export default () => {
     
@@ -11,26 +25,103 @@ export default () => {
         location.reload()
     }
 
-    var classes = 'page-header'
+    const [auth, setAuth] = useState(true);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const handleChange = (event) => {
+        setAuth(event.target.checked);
+      };
+    
+      const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+    
+      const handleClose = () => {
+        setAnchorEl(null);
+      };
+
     return (
-        <Navbar bg="dark" variant="dark" expand="md" className={classes}>
-            <Container>
-                <Navbar.Brand href="/">Maker</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <div className="main-menu">
-                        <ul className="page-menu">
-                            <li> <NavLink to="/crea-tu-cv" activeclassname="active">Crea tu CV</NavLink> </li>
-                            <li> <NavLink to="/plantillas" activeclassname="active">Encuentra tu plantilla</NavLink> </li>
-                            <li> <NavLink to="/descarga" activeclassname="active">Descarga tu CV</NavLink> </li>
-                        </ul>
-                    </div>
-                </Navbar.Collapse>
-                <Navbar.Text>
-                    <button className="btn btn-warning" onClick={log_out}>Cerrar sesión <LogoutIcon /></button>
-                </Navbar.Text>
-            </Container>
-        </Navbar>
+    <>
+
+
+    <Box sx={{ flexGrow: 1 }}>
+        
+
+        <AppBar position="static">
+            <Toolbar>
+                <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+                >
+                <MenuIcon />
+                </IconButton>
+                <Typography  sx={{ flexGrow: 1 }}>
+                    CV Maker
+                </Typography>
+
+                <NavLink
+                to="/crea-tu-cv"
+                activeclassname="active"
+                style={StyledNavLink}
+                activeStyle={StyledNavLinkActive} >
+                    Crea tu CV
+                </NavLink>
+                <NavLink
+                to="/plantillas"
+                activeclassname="active"
+                style={StyledNavLink}
+                activeStyle={StyledNavLinkActive} >
+                    Encuentra tu plantilla
+                </NavLink>
+                <NavLink
+                to="/descarga-cv"
+                activeclassname="active"
+                style={StyledNavLink}
+                activeStyle={StyledNavLinkActive} >
+                    Descarga tu CV
+                </NavLink>
+
+                {auth && (
+                <div>
+                    <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                    >
+                    <AccountCircle />
+                    </IconButton>
+                    <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                    }}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                    <MenuItem onClick={log_out}>Cerrar sesión</MenuItem>
+                    </Menu>
+                </div>
+                )}
+            </Toolbar>
+        </AppBar>
+    </Box>
+    </>
+
+
     )
 
 }

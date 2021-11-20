@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { FormControl, TextField } from '@mui/material'
 import React from 'react'
 
 
@@ -6,6 +6,7 @@ export default ( {type, label, name, register, required, defaultValue, descripti
     
     return (
         <>
+        <FormControl fullWidth>
             <TextField 
                 id="standard-basic" 
                 label={label} 
@@ -13,6 +14,7 @@ export default ( {type, label, name, register, required, defaultValue, descripti
                 type="text"
                 {...register(name, { required })} 
                 defaultValue={defaultValue} />
+        </FormControl>
         </>
     )
 

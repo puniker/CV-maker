@@ -51,10 +51,11 @@ function CvForm ( props ) {
             
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                  <Tabs value={value} onChange={handleChange} aria-label="Tablas de contenido">
                   <Tab label="Datos generales" {...a11yProps(0)} />
-                  <Tab label="Experiencia" {...a11yProps(1)} />
-                  <Tab label="Tercer elemento" {...a11yProps(2)} />
+                  <Tab label="Estudios" {...a11yProps(1)} />
+                  <Tab label="Experiencia laboral" {...a11yProps(2)} />
+                  <Tab label="Puntos fuertes" {...a11yProps(3)} />
                   </Tabs>
               </Box>
               <TabPanel value={value} index={0}>
@@ -64,7 +65,10 @@ function CvForm ( props ) {
                       <SectionEstudios />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                  Item Three
+                  Toda mi experiencia laboral
+              </TabPanel>
+              <TabPanel value={value} index={3}>
+                  Son los puntos fuertes del usuario
               </TabPanel>
             </Box>
 
