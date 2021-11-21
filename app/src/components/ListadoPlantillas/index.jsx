@@ -33,33 +33,27 @@ export default () => {
                 {
                     templates.map( (template) => {
                         return(
-                            <>
-                                <Card sx={{ width: '33%' }}  key={Math.random()}>
-                                    <CardMedia
-                                        component="img"
-                                        height="140"
-                                        image={template.screenshot}
-                                        alt="green iguana"
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                        {template.name}
-                                        </Typography>
-                                        <Typography variant="body2" color="text.secondary">
-                                        {template.autor}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small">Share</Button>
-                                        <Button size="small">Usar plantilla</Button>
-                                        <NavLink to={`/plantilla/${template.id}`}>Seleccionar</NavLink>
-                                    </CardActions>
-                                </Card>
-
-                            </>
-
-
-
+                            <Card sx={{ width: '33%' }}  key={`template_card_${Math.random()}`}>
+                                <CardMedia
+                                    component="img"
+                                    height="140"
+                                    image={template.screenshot}
+                                    alt="green iguana"
+                                />
+                                <CardContent>
+                                    <Typography gutterBottom variant="h5" component="div">
+                                    {template.name}
+                                    </Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                    {template.autor}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small">Share</Button>
+                                    <Button size="small">Usar plantilla</Button>
+                                    <NavLink to={`/plantilla/${template.id}`}>Seleccionar</NavLink>
+                                </CardActions>
+                            </Card>
                         )
                     } )
                 }
