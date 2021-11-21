@@ -3,8 +3,6 @@ import {InputLabel, Select, FormControl, MenuItem} from '@mui/material'
 
 export default ({label, name, register, required, defaultValue, options, description}) => {
 
-    //const [value, setValue] = useState( defaultValue )
-
     return (
         <FormControl fullWidth>
             <InputLabel id={`select-${name}-label`}>{label}</InputLabel>

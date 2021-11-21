@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
-import {Grid, Alert, Button} from '@mui/material'
+import {Grid, Alert, Button, Snackbar} from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
 
 const get_endpoint = 'http://localhost:3080/cv-data'
@@ -34,7 +34,7 @@ function SectionGeneral ( props ) {
     
     const onSubmit = ( evt ) => {
         evt.preventDefault
-        //console.log( evt )
+        console.log( evt )
 
         axios.get(post_endpoint, {
             params: {
@@ -70,15 +70,22 @@ function SectionGeneral ( props ) {
         })
     }
     
+    const handleCloseAlert = () => {
+        setShowMsg( false )
+    }
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    
     if ( isLoading ) {
         return <Alert key="loading-data" severity="info" >Cargando tus datos...</Alert>
     }
 
     return (
         <>
-            { (showMsg) ? <Alert key="success-msg" severity="success" > Se han guardado tus datos. </Alert> : ''}
+            <Snackbar open={showMsg} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                    Se han guardado tu datos
+                </Alert>
+            </Snackbar>
 
             <form onSubmit={handleSubmit(onSubmit)} >
                 <section className="form-general">
@@ -101,8 +108,6 @@ function SectionGeneral ( props ) {
                                     defaultValue={data.apellido}
                                 />
                         </Grid>
-                    </Grid>
-                    <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <FormElements.Input 
                                 type='text'
@@ -121,8 +126,6 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.telefono}
                             />
                         </Grid>
-                    </Grid>
-                    <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <FormElements.Input 
                                 type='text'
@@ -132,10 +135,6 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.direccion}
                             />
                         </Grid>
-                    </Grid>
-
-
-                    <Grid container spacing={1}>
                         <Grid item xs={6}>
                             <FormElements.Input 
                                 type='date'
@@ -154,9 +153,7 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.lugar_nacimiento}
                             />
                         </Grid>
-                    </Grid>
-
-                    <Grid container spacing={1}>
+                        
                         <Grid item xs={6}>
                             <FormElements.Input 
                                 type='number'
@@ -175,9 +172,7 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.ciudad_pueblo}
                             />
                         </Grid>
-                    </Grid>
-
-                    <Grid container spacing={1}>
+                        
                         <Grid item xs={4}>
                             <FormElements.Select
                                 register={register}
@@ -205,9 +200,7 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.estado_civil}
                             />
                         </Grid>
-                    </Grid>
-
-                    <Grid container spacing={1}>
+                        
                         <Grid item xs={4}>
                             <FormElements.Input 
                                 type='text'
@@ -235,11 +228,11 @@ function SectionGeneral ( props ) {
                                 defaultValue={data.twitter}
                             />
                         </Grid>
+                        <Grid item xs={12}>
+                            <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
+                        </Grid>
                     </Grid>
 
-                    <Grid item xs={4}>
-                        <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
-                    </Grid>
 
                 </section>
             </form>

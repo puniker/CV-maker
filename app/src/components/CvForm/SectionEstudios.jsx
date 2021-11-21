@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
-import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid} from '@mui/material'
+import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Snackbar} from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SaveIcon from '@mui/icons-material/Save';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -80,9 +80,16 @@ function SectionGeneral ( props ) {
         setFields(values);
 
     }
+    const handleCloseAlert = () => {
+        setShowMsg( false )
+    }
     return (
         <>
-            { ( showMsg ) ? <Alert key="error-msg" severity="success" show={showMsg}>Se han guardado tus datos.</Alert> : '' }
+            <Snackbar open={showMsg} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                    Se han guardado tu datos
+                </Alert>
+            </Snackbar>
             <form className="" onSubmit={handleSubmit(onSubmit)} >
 
                 { fields.map((item, index) => (
@@ -112,8 +119,6 @@ function SectionGeneral ( props ) {
                                         defaultValue={item.titulo}
                                         />
                                 </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                     <FormElements.Input 
                                         type='text'
@@ -132,8 +137,6 @@ function SectionGeneral ( props ) {
                                         defaultValue={item.ciudad}
                                     />
                                 </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                     <FormElements.Input 
                                         type='date'
@@ -152,8 +155,6 @@ function SectionGeneral ( props ) {
                                         defaultValue={item.fecha_fin}
                                     />
                                 </Grid>
-                            </Grid>
-                            <Grid container spacing={2}>
                                 <Grid item xs={12}>
                                     <FormElements.Input 
                                         type='textarea'
@@ -163,6 +164,15 @@ function SectionGeneral ( props ) {
                                         defaultValue={item.descripcion}
                                     />
                                 </Grid>
+
+                                <Grid item xs={12}>
+                                    <FormElements.Checkbox
+                                        name="ocultar_en_cv"
+                                        register={register}
+                                        label="Ocultar en el CV"
+                                        defaultChecked={false}
+                                    />
+                                </Grid>
                             </Grid>
                                 </div>
                         </AccordionDetails>
@@ -170,11 +180,14 @@ function SectionGeneral ( props ) {
                 
                 ))}
 
-
-                <Button color="secondary" onClick={addItem}>Añadir elemento</Button>
-                <br />
-                <br />
-                <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Button color="secondary" onClick={addItem}>Añadir elemento</Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
+                    </Grid>
+                </Grid>
             </form>
 
 

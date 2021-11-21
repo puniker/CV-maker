@@ -2,8 +2,9 @@ import { useState } from "react"
 import axios from "axios"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
-import {Grid, TextField, Button, Container, Alert} from '@mui/material'
+import {Grid, TextField, Button, Container, Alert, FormControl} from '@mui/material'
 import {Send} from '@mui/icons-material';
+import FormElements from "../components/FormElements"
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -65,19 +66,26 @@ export default ( {setIsLogged} ) => {
                 <form onSubmit={handleSubmit(submit)} >
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
-                      <TextField 
-                          type="text"
-                          label="Nombre de usuario"
-                          variant="outlined"
-                          {...register('username')} 
-                        />
+                      <FormElements.Input 
+                          type='text'
+                          register={register}
+                          label="Nombre de usuario"  
+                          name='username'
+                      />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextField 
-                        type="password"
-                        label="Contraseña"
-                        variant="outlined"
-                        {...register('password')} 
+                      <FormElements.Input 
+                          type='password'
+                          register={register}
+                          label="Contraseña"  
+                          name='password'
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormElements.Checkbox
+                        name="mantener_sesion"
+                        label="Mantener sesión iniciada"
+                        register={register}
                       />
                     </Grid>
                     <Grid item xs={4}>
