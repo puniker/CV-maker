@@ -20,6 +20,16 @@ const allFields = [
   'linkedin',
   'twitter'
 ]
+const allFieldsEstudios = [
+  'id',
+  'order',
+  'centro',
+  'ciudad',
+  'titulo',
+  'fecha_inicio',
+  'fecha_fin',
+  'descripcion',
+]
 
 const readFile = '/home/iker/dev/cv-maker/api/data/cv/cv-data.json'
 
@@ -30,10 +40,34 @@ app.get('/cv-data', (req, res) => {
     res.json ( {"data": data.find((element) => element.uuid == userID) } ) 
   
 })
-app.get('/cv-estudios', (req, res) => {
+app.get('/api/cv-estudios', (req, res) => {
   var userID = req.query.userID
   const user_data = CvFileData.find( (element) => element.uuid == userID )
   res.json( user_data.estudios )
+})
+
+app.get('/api/cv-estudios/update', (req, res) => {
+  console.log( req.query )
+  var file = CvFileData,
+      uuid = req.query.uuid,
+      data = req.query.data
+
+  //console.log( JSON.parse(data[0]) )
+  data.forEach( (element, index) => {
+    
+    data[index] = JSON.parse(data[index])
+
+  })
+  console.log( data )
+
+  const indexData = file.findIndex( (element) => element.uuid == uuid )
+
+  file[indexData]['estudios'] = data
+
+  fs.writeFileSync( readFile, JSON.stringify(file) )
+  res.json('updated')
+
+
 })
 
 app.get('/update', (req, res) => {

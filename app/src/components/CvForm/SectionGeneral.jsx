@@ -9,7 +9,7 @@ const get_endpoint = 'http://localhost:3080/cv-data'
 const post_endpoint = 'http://localhost:3080/update'
 
 
-function SectionGeneral ( props ) {
+function SectionGeneral ( {user} ) {
     
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
@@ -19,7 +19,7 @@ function SectionGeneral ( props ) {
         
         axios.get( get_endpoint, {
             params: {
-                userID: 1
+                userID: user
             }
         })
         .then( (response) => {
@@ -38,7 +38,7 @@ function SectionGeneral ( props ) {
 
         axios.get(post_endpoint, {
             params: {
-                uuid: 1,
+                uuid: user,
                 nombre: evt.nombre,
                 apellido: evt.apellido,
                 telefono: evt.telefono,

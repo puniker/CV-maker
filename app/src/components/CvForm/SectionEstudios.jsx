@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
 import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Snackbar, Link} from '@mui/material'
@@ -32,40 +33,74 @@ const datos_api = [
 ]
 
 
-function SectionGeneral ( props ) {
+function SectionGeneral ( {user} ) {
     
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
 
-    const [fields, setFields] = useState( datos_api )
+    const [fields, setFields] = useState(  )
+
+    useEffect( () => {
+        
+        axios.get( 'http://localhost:3080/api/cv-estudios', {
+            params: {
+                userID: user
+            }
+        })
+        .then( (response) => {
+            setFields( response.data )
+            setIsLoading(false)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        
+    }, [])
+
 
     const onSubmit = ( evt ) => {
-        
+        console.log ( evt )
         console.log( fields )
+
+        axios.get('http://localhost:3080/api/cv-estudios/update', {
+            params: {
+                uuid: 1,
+                data: fields
+            }
+        })
+        .then(function (response) {
+            console.log(response, evt);
+            //setData(evt)
+            setShowMsg(true)
+            setTimeout(()=>{ setShowMsg(false) }, 3000)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed    code ...
+        })
         
     }
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     
-    //if ( isLoading ) {
-    //    return <Alert key="loading-data" variant="primary" show="true">Cargando tus datos...</Alert>
-    //}
-
+    
     const academicFields = {
         'titulo'      : [{"key":"0", "type": "text", "label":"Carrera"}],
         'ciudad'      : [{"key":"0", "type": "text", "label":"Ciudad/Pueblo"}],
         'centro'      : [{"key":"0", "type": "text", "label":"Centro"}],
         'descripcion' : [{"key":"0", "type": "text", "label":"Descripcion"}]
     }
-
+    
     const addItem = () => {
-
+        
         const order = fields[fields.length - 1 ].order
-
+        
         setFields([
             ...fields, 
             {
-                "id": `temp_${Math.floor( Math.random() * 10000 )}`,
+                "id": `${Math.floor( Math.random() * 10000 )}`,
                 "order": order + 1,
                 "centro": "",
                 "ciudad": "",
@@ -75,56 +110,60 @@ function SectionGeneral ( props ) {
                 "descripcion": ""
             }
         ])
-
+        
     }
-
+    
     const removeItem = (id) => {
-
+        
         const values  = [...fields];
         values.splice(values.findIndex(value => value.id === id), 1);
         setFields(values);
-
+        
     }
-
+    
     const handleCloseAlert = () => {
         setShowMsg( false )
     }
-
+    
     const upElement = ( id ) => {
-
+        
         const values = [...fields]
-
+        
         const indexData = values.findIndex( (element) => element.id == id )
-
+        
         values[ indexData - 1 ].order = values[ indexData - 1 ].order +1
         values[ indexData ].order = values[ indexData ].order -1
-
+        
         values.sort(function(a, b) {
             if (a.order < b.order) return -1
             if (a.order > b.order) return 1
             return 0
         })
-
+        
         setFields(values)
-
+        
     }
-
+    
     const downElement = ( id ) => {
-
+        
         const values = [...fields]
-
+        
         const indexData = values.findIndex( (element) => element.id == id )
-
+        
         values[ indexData + 1 ].order = values[ indexData + 1 ].order - 1
         values[ indexData ].order = values[ indexData ].order + 1
-
+        
         values.sort(function(a, b) {
             if (a.order < b.order) return -1
             if (a.order > b.order) return 1
             return 0
         })
-
+        
         setFields(values)
+    }
+    
+    if ( isLoading ) {
+        return <Alert key="loading-data" severity="info">Cargando tus datos...</Alert>
     }
 
     return (

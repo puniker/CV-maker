@@ -39,4 +39,44 @@
             }
         ]
     },
-    {"uuid":"2","nombre":"Sonia","apellido":"Agorreta Alonso","telefono":"680983974","email":"sonia.agorreta@gmail.com","fecha_nacimiento":"24/10/1997"}]
+    {
+        "uuid":"2",
+        "nombre":"Sonia",
+        "apellido":"Agorreta Alonso",
+        "telefono":"680983974",
+        "email":"sonia.agorreta@gmail.com",
+        "fecha_nacimiento":"24/10/1997",
+        "direccion":"C/ LEmoa 1ºB",
+        "lugar_nacimiento":"Barakaldo",
+        "c_postal":"00000",
+        "ciudad_pueblo":"lemoa",
+        "genero":"Femenino",
+        "nacionalidad":"Española",
+        "estado_civil":"En pareja",
+        "sitio_web":"",
+        "linkedin":"soniaagorrretaalonso",
+        "twitter":"@sonia_agorreta_24",
+        "estudios":[
+            {
+                "id":0,
+                "order":0,
+                "centro":"sarriko",
+                "ciudad":"bilbao",
+                "titulo":"ADE",
+                "fecha_inicio":"01-01-2001",
+                "fecha_fin":"01-01-2001",
+                "descripcion":"Estudió ADE y era la mas lista de clase"
+            },
+            {
+                "id":1,
+                "order":1,
+                "centro":"colegio lemoa",
+                "ciudad":"lemoa",
+                "titulo":"bachi",
+                "fecha_inicio":"01-01-2001",
+                "fecha_fin":"01-01-2001",
+                "descripcion":"Era mejor de clase"
+            }
+        ]
+    }
+]

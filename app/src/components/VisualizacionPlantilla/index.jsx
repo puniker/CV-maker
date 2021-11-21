@@ -15,13 +15,14 @@ function VisualizacionPlantilla ( {id} ) {
 
     const [template, setTemplate] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const {user} = JSON.parse(window.localStorage.getItem('session'))
 
     useEffect( () => {
         
         axios.get( plantillas_endpoint, {
             params: {
                 template_id: id,
-                user_id: 1
+                user_id: user
             }
         })
         .then( (response) => {

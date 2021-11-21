@@ -41,7 +41,7 @@ function TabPanel(props) {
 function CvForm ( props ) {
     
     const [value, setValue] = useState()
-
+    const {user} = JSON.parse(window.localStorage.getItem('session'))
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
@@ -59,10 +59,10 @@ function CvForm ( props ) {
                   </Tabs>
               </Box>
               <TabPanel value={value} index={0}>
-                      <SectionGeneral />
+                      <SectionGeneral user={user} />
               </TabPanel>
               <TabPanel value={value} index={1}>
-                      <SectionEstudios />
+                      <SectionEstudios user={user} />
               </TabPanel>
               <TabPanel value={value} index={2}>
                   <Prueba />
