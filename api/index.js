@@ -1,11 +1,17 @@
 const express = require('express')
 const cors = require('cors')
 const Router = require('./router')
+const connection = require('./models/connection')
 
 const app = express()
 
 app.use(cors())
 app.use(express.static('../app/dist'))
+
+connection.connect(function(err) {
+    if (err) throw err
+    console.log("Conectado a la bbdd.")
+})
 
 app.use(Router.user)
 app.use(Router.cvData)
