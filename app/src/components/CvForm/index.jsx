@@ -40,7 +40,7 @@ function TabPanel(props) {
 
 function CvForm ( props ) {
     
-    const [value, setValue] = useState()
+    const [value, setValue] = useState(0)
     const {user} = JSON.parse(window.localStorage.getItem('session'))
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -52,17 +52,17 @@ function CvForm ( props ) {
             <Box sx={{ width: '100%' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                   <Tabs value={value} onChange={handleChange} aria-label="Tablas de contenido">
-                  <Tab label="Datos generales" {...a11yProps(0)} />
-                  <Tab label="Estudios" {...a11yProps(1)} />
-                  <Tab label="Experiencia laboral" {...a11yProps(2)} />
-                  <Tab label="Puntos fuertes" {...a11yProps(3)} />
+                    <Tab label="Datos generales" {...a11yProps(0)} />
+                    <Tab label="Estudios" {...a11yProps(1)} />
+                    <Tab label="Experiencia laboral" {...a11yProps(2)} />
+                    <Tab label="Puntos fuertes" {...a11yProps(3)} />
                   </Tabs>
               </Box>
               <TabPanel value={value} index={0}>
-                      <SectionGeneral user={user} />
+                      <SectionGeneral user={user.id} />
               </TabPanel>
               <TabPanel value={value} index={1}>
-                      <SectionEstudios user={user} />
+                      <SectionEstudios user={user.id} />
               </TabPanel>
               <TabPanel value={value} index={2}>
                   <Prueba />

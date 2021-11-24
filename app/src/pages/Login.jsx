@@ -95,7 +95,7 @@ export default ( {setIsLogged} ) => {
                       </Button>
                     </Grid>
                     <Grid item xs={12}>
-                      { ( showMsg ) ? <Alert key="error-msg" severity="error" show={showMsg}>{loginError}</Alert> : '' }
+                      { ( showMsg ) ? <Alert key="error-msg" severity="error" show={showMsg.toString()}>{loginError}</Alert> : '' }
                     </Grid>
                   </Grid>
                   

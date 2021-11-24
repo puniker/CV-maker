@@ -12,7 +12,7 @@ app.get('/api/login', (request, res) => {
             "access" : false
         }
 
-    connection.query(`SELECT * FROM users WHERE username = "${username}" AND password = "${password}"`, (err, results, fields) => {
+    connection.query(`SELECT * FROM cv_users WHERE username = "${username}" AND password = "${password}"`, (err, results, fields) => {
 
         if ( typeof results !== 'undefined' && results.length > 0 ) {
             console.log( 'Acceso permitido. ',results[0] )
