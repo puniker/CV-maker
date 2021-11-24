@@ -4,7 +4,7 @@ import FormElements from '../FormElements'
 import { useForm, useFieldArray } from "react-hook-form"
 import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Snackbar, Link} from '@mui/material'
 import {Delete as DeleteIcon, Save as SaveIcon, ExpandMore as ExpandMoreIcon, KeyboardArrowUp as KeyboardArrowUpIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material'
-
+import { v4 as uuidv4 } from 'uuid';
 
 function SectionGeneral ( {user} ) {
     
@@ -70,13 +70,12 @@ function SectionGeneral ( {user} ) {
     
     const addItem = () => {
         
-        const order = data[ data.length - 1 ].order
-        
+        const order = parseInt(data[ data.length - 1 ].orden)
         setData([
             ...data, 
             {
-                "id": `${Math.floor( Math.random() * 10000 )}`,
-                "order": order + 1,
+                "id": `${uuidv4()}`,
+                "orden": order + 1 ,
                 "centro": "",
                 "ciudad": "",
                 "titulo": "",
@@ -91,9 +90,27 @@ function SectionGeneral ( {user} ) {
     
     const removeItem = (id) => {
         
-        const values  = [...setData];
-        values.splice(values.findIndex(value => value.id === id), 1);
-        setData(values);
+        axios.get('http://localhost:3080/api/cv-estudios/delete', {
+            params: {
+                id: id,
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+            //setData(evt)
+            setFormItemCounter( formItemCounter - 1 )
+            const values  = [...data];
+            values.splice(values.findIndex(value => value.id === id), 1);
+            setData(values);
+            setShowMsg(true)
+            setTimeout(()=>{ setShowMsg(false) }, 3000)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed    code ...
+        })
         
     }
     
@@ -103,16 +120,16 @@ function SectionGeneral ( {user} ) {
     
     const upElement = ( id ) => {
         
-        const values = [...setData]
+        const values = [...data]
         
         const indexData = values.findIndex( (element) => element.id == id )
         
-        values[ indexData - 1 ].order = values[ indexData - 1 ].order +1
-        values[ indexData ].order = values[ indexData ].order -1
+        values[ indexData - 1 ].orden = values[ indexData - 1 ].orden +1
+        values[ indexData ].orden = values[ indexData ].orden -1
         
         values.sort(function(a, b) {
-            if (a.order < b.order) return -1
-            if (a.order > b.order) return 1
+            if (a.orden < b.orden) return -1
+            if (a.orden > b.orden) return 1
             return 0
         })
         
@@ -122,16 +139,16 @@ function SectionGeneral ( {user} ) {
     
     const downElement = ( id ) => {
         
-        const values = [...setData]
+        const values = [...data]
         
         const indexData = values.findIndex( (element) => element.id == id )
         
-        values[ indexData + 1 ].order = values[ indexData + 1 ].order - 1
-        values[ indexData ].order = values[ indexData ].order + 1
+        values[ indexData + 1 ].orden = values[ indexData + 1 ].orden - 1
+        values[ indexData ].orden = values[ indexData ].orden + 1
         
         values.sort(function(a, b) {
-            if (a.order < b.order) return -1
-            if (a.order > b.order) return 1
+            if (a.orden < b.orden) return -1
+            if (a.orden > b.orden) return 1
             return 0
         })
         
@@ -159,8 +176,8 @@ function SectionGeneral ( {user} ) {
                         aria-controls="panel1a-content"
                         id={`panel${i}a-header`}
                         >
-                            <Link onClick={() => upElement(i)}><KeyboardArrowUpIcon /></Link>
-                            <Link onClick={() => downElement(i)}><KeyboardArrowDownIcon /></Link>
+                            <Link onClick={() => upElement(data[i].id)}><KeyboardArrowUpIcon /></Link>
+                            <Link onClick={() => downElement(data[i].id)}><KeyboardArrowDownIcon /></Link>
                             <Typography>{data[i].titulo}</Typography>
 
                         </AccordionSummary>

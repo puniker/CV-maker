@@ -91,21 +91,36 @@ app.get('/cv-estudios/update', (req, res) => {
   console.log( Object.values(parse_data[0]) )
 
   parse_data.forEach(element => {
-    console.log( element )
+
     const sql = `
       INSERT INTO cv_data_estudios (target_id, ${Object.keys(element).toString()}) 
       VALUES (${user_id}, "${Object.values(element).join('","')}")
       ON DUPLICATE KEY 
       UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
     `
-    //console.log( sql )
-    connection.query(sql, (err, result, fields) => {
+    connection.query(sql, (err) => {
       if ( err ) {
         console.log( err )
       } else {
-        console.log('todo ok', result)
+        //res.json('updated')
       }
     })
+  })
+
+})
+
+app.get('/cv-estudios/delete', (req, res) => {
+
+  const row_id = req.query.id
+
+  sql = `DELETE FROM cv_data_estudios WHERE id = "${row_id}"`
+  connection.query(sql, (err) => {
+    if ( err ) {
+      console.log( err )
+    } else {
+      console.log('registro borrado')
+      res.json('updated')
+    }
   })
 
 })
