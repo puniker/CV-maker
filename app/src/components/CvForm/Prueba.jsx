@@ -1,83 +1,161 @@
-import { useState } from 'react';
-import {Button, Link} from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import FormElements from '../FormElements'
+import { useForm, useFieldArray } from "react-hook-form"
+import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Snackbar, Link} from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import SaveIcon from '@mui/icons-material/Save';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
-export default () => {
+const datos_api = [
+    {
+        "id": 0,
+        "order": 0,
+        "centro": "ceinmark",
+        "ciudad": "bilbao",
+        "titulo": "desarrollo de aps",
+        "fecha_inicio": "01-01-2001",
+        "fecha_fin": "01-01-2001",
+        "descripcion": "Aprendí a hacer apps"
+    },
+    {
+        "id": 1,
+        "order": 1,
+        "centro": "colegio basauri",
+        "ciudad": "basauri",
+        "titulo": "bachi",
+        "fecha_inicio": "01-01-2001",
+        "fecha_fin": "01-01-2001",
+        "descripcion": "no aprendí mucho"
+    }
+]
+
+
+function Prueba ( {user = 2} ) {
+    
+    const [isLoading, setIsLoading] = useState(true)
+    const [data, setData] = useState()
+    const [showMsg, setShowMsg] = useState(false)
+    
+    //const [fields, setFields] = useState(  )
+
+    useEffect( () => {
+        
+        axios.get( 'http://localhost:3080/api/cv-estudios', {
+            params: {
+                userID: user
+            }
+        })
+        .then( (response) => {
+            setData( response.data )
+            setIsLoading(false)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        
+    }, [])
+
 
     
-
-    const [inputFields, setInputFields] = useState([
-      { id: 0, order: 0, firstName: '', lastName: '' },
-    ])
-
     const addItem = () => {
         
-        const order = inputFields[inputFields.length - 1 ].order
-        setInputFields([...inputFields, { 'id' : Math.random() , 'order': order + 1 , 'firstName' : '' }])
-
-    }
-    const removeField = (id) => {
+        const order = data[data.length - 1 ].order
         
-        const values  = [...inputFields];
-        console.log( values )
-        values.splice(values.findIndex(value => value.id === id), 1);
-        setInputFields(values);
+        setData([
+            ...data, 
+            {
+                "id": `${Math.floor( Math.random() * 10000 )}`,
+                "order": order + 1,
+                "centro": "",
+                "ciudad": "",
+                "titulo": "",
+                "fecha_inicio": "",
+                "fecha_fin": "",
+                "descripcion": ""
+            }
+        ])
+        
+    }
+    
+    
+    const handleCloseAlert = () => {
+        setShowMsg( false )
+    }
+    
+    
+    //const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { control, register, handleSubmit } = useForm();
+    const { fields, append, prepend, remove, swap, move, insert } = useFieldArray({
+        control, // control props comes from useForm (optional: if you are using FormContext)
+        name: "test", // unique name for your Field Array
+        // keyName: "id", default to "id", you can change the key name
+    })
 
+
+    const [number, setNumber] = useState(2)
+
+    const onSubmit = ( evt ) => {
+
+        console.log ( evt )
     }
 
-    const upElement = ( id ) => {
-        
-        const values = [...inputFields]
-
-        const indexData = values.findIndex( (element) => element.id == id )
-
-        values[ indexData - 1 ].order = values[ indexData - 1 ].order +1
-        values[ indexData ].order = values[ indexData ].order -1
-
-        values.sort(function(a, b) {
-            if (a.order < b.order) return -1
-            if (a.order > b.order) return 1
-            return 0
-        })
-
-        setInputFields(values)
-
+    // return array of ticket indexes for rendering dynamic forms in the template
+    function fieldsNumber() {
+        return [...Array(parseInt(number || 0)).keys()];
     }
-    const downElement = ( id ) => {
-        
-        const values = [...inputFields]
 
-        const indexData = values.findIndex( (element) => element.id == id )
 
-        values[ indexData + 1 ].order = values[ indexData + 1 ].order - 1
-        values[ indexData ].order = values[ indexData ].order + 1
-
-        values.sort(function(a, b) {
-            if (a.order < b.order) return -1
-            if (a.order > b.order) return 1
-            return 0
-        })
-
-        setInputFields(values)
-
+    if ( isLoading ) {
+        return <Alert key="loading-data" severity="info">Cargando tus datos...</Alert>
     }
 
     return (
         <>
-        { inputFields.map( (item, index) => (
-            <section key={item.id} id={`prueba_${index}_`} >
-                <div className="content">
-                    <button onClick={() => upElement(item.id)}>UP</button>
-                    <button onClick={() => downElement(item.id)}>DOWN</button>
-                    <p>Contenido de la pestaña. <br /> id: {item.id} <br /> orden: {item.order}</p>
-                    <Link href="#" color="inherit" onClick={() => removeField(item.id)}>Eliminar elemento</Link>
+            <Snackbar open={showMsg} autoHideDuration={6000} onClose={handleCloseAlert}>
+                <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                    Se han guardado tu datos
+                </Alert>
+            </Snackbar>
+            <form className="" onSubmit={handleSubmit(onSubmit)} >
 
-                </div>
-            </section>
-        ))
-        }
-        <Button variant="contained" onClick={addItem}>Añadir elemento</Button>
+                { fieldsNumber().map((i) => (
+                
+                    <div key={Math.random()}>
+                        <Typography>{data[i].titulo}</Typography>
+                        
+                        <div key={`academyc_form_${i}`} id={data[i].id}>
+                            <Grid container spacing={2} >
+                                <Grid item xs={12}>
+                                    texto
+                                    <input type="text" {...register(`test.${i}.texto`)} />
+                                </Grid>
+                                <Grid item xs={6}>
+                                    desc
+                                    <input type="text" {...register(`test.${i}.desc`)} />
+                                </Grid>
+                            </Grid>
+                            
+                        </div>
+                    </div>
+                
+                ))}
+
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <Button color="secondary" onClick={addItem}>Añadir elemento</Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
+                    </Grid>
+                </Grid>
+            </form>
+
+
         </>
     )
-    
-
 }
+
+export default Prueba

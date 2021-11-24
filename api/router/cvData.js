@@ -1,6 +1,4 @@
-const fs = require('fs')
 const express = require('express')
-const CvFileData = require ('../data/cv/cv-data.json')
 const connection = require ('../models/connection')
 
 const app = express()
@@ -21,18 +19,7 @@ const allFields = [
   'linkedin',
   'twitter'
 ]
-const allFieldsEstudios = [
-  'id',
-  'order',
-  'centro',
-  'lugar',
-  'fecha_inicio',
-  'fecha_fin',
-  'descripcion',
-  'orden',
-]
 
-const readFile = '/home/iker/dev/cv-maker/api/data/cv/cv-data.json'
 
 
 app.get('/cv-data-general', (req, res) => {
@@ -96,7 +83,30 @@ app.get('/cv-estudios', (req, res) => {
 })
 
 app.get('/cv-estudios/update', (req, res) => {
+  const req_data = req.query.data
+  const user_id = req.query.user_id
 
+  const parse_data = req_data.map(element => { return JSON.parse(element) })
+  console.log( parse_data )
+  console.log( Object.values(parse_data[0]) )
+
+  parse_data.forEach(element => {
+    console.log( element )
+    const sql = `
+      INSERT INTO cv_data_estudios (target_id, ${Object.keys(element).toString()}) 
+      VALUES (${user_id}, "${Object.values(element).join('","')}")
+      ON DUPLICATE KEY 
+      UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
+    `
+    //console.log( sql )
+    connection.query(sql, (err, result, fields) => {
+      if ( err ) {
+        console.log( err )
+      } else {
+        console.log('todo ok', result)
+      }
+    })
+  })
 
 })
 
