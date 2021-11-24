@@ -68,8 +68,8 @@ export default () => {
                 <div className="content">
                     <button onClick={() => upElement(item.id)}>UP</button>
                     <button onClick={() => downElement(item.id)}>DOWN</button>
-                    <Link href="#" color="inherit" onClick={() => removeField(item.id)}>Eliminar elemento</Link>
                     <p>Contenido de la pestaña. <br /> id: {item.id} <br /> orden: {item.order}</p>
+                    <Link href="#" color="inherit" onClick={() => removeField(item.id)}>Eliminar elemento</Link>
 
                 </div>
             </section>

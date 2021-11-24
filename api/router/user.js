@@ -4,7 +4,7 @@ const connection = require('../models/connection')
 const app = express()
 
 
-app.get('/api/login', (request, res) => {
+app.get('/login', (request, res) => {
 
     var username = request.query.username,
         password = request.query.password,

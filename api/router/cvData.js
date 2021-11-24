@@ -1,6 +1,7 @@
 const fs = require('fs')
 const express = require('express')
 const CvFileData = require ('../data/cv/cv-data.json')
+const connection = require ('../models/connection')
 
 const app = express()
 const allFields = [
@@ -33,20 +34,58 @@ const allFieldsEstudios = [
 
 const readFile = '/home/iker/dev/cv-maker/api/data/cv/cv-data.json'
 
-app.get('/cv-data', (req, res) => {
-    var userID = req.query.userID
-    var data = CvFileData
 
-    res.json ( {"data": data.find((element) => element.uuid == userID) } ) 
+app.get('/cv-data-general', (req, res) => {
+
+  var userId = req.query.userID
   
+  connection.query(`SELECT * FROM cv_data_general WHERE id = ${userId}`, (err, result, fields) => {
+    if (err) {
+      console.log( err )
+    }
+    if ( typeof result !== 'undefined' && result.length > 0 ) {
+      res.json( result[0] )
+    }
+  })
+
 })
-app.get('/api/cv-estudios', (req, res) => {
+
+app.get('/cv-data-general/update', (req, res) => {
+
+    const post_data = req.query
+    
+    const sql = `
+      UPDATE cv_data_general
+      SET 
+      ${allFields.map((element) => { 
+        if ( post_data[element] ) {
+          return `${element} = '${post_data[element]}'`
+        } else {
+          return `${element} = ''`
+        }
+      } )  }
+      WHERE id = ${post_data.user_id} 
+    `
+
+    connection.query(sql, (err, result, fields) => {
+      if (err) {
+        console.log( err )
+      } else {
+        res.json('updated')
+      }
+    })
+
+
+})
+
+
+app.get('/cv-estudios', (req, res) => {
   var userID = req.query.userID
   const user_data = CvFileData.find( (element) => element.uuid == userID )
   res.json( user_data.estudios )
 })
 
-app.get('/api/cv-estudios/update', (req, res) => {
+app.get('/cv-estudios/update', (req, res) => {
   console.log( req.query )
   var file = CvFileData,
       uuid = req.query.uuid,
@@ -70,7 +109,7 @@ app.get('/api/cv-estudios/update', (req, res) => {
 
 })
 
-app.get('/update', (req, res) => {
+app.get('/deprecated/update', (req, res) => {
 
   console.log(req.query)
   var file = CvFileData,

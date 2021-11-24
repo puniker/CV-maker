@@ -5,9 +5,6 @@ import { useForm } from "react-hook-form"
 import {Grid, Alert, Button, Snackbar} from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
 
-const get_endpoint = 'http://localhost:3080/cv-data'
-const post_endpoint = 'http://localhost:3080/update'
-
 
 function SectionGeneral ( {user} ) {
     
@@ -17,13 +14,13 @@ function SectionGeneral ( {user} ) {
 
     useEffect( () => {
         
-        axios.get( get_endpoint, {
+        axios.get( 'http://localhost:3080/api/cv-data-general', {
             params: {
                 userID: user
             }
         })
         .then( (response) => {
-            setData( response.data.data )
+            setData( response.data )
             setIsLoading(false)
         })
         .catch(function (error) {
@@ -34,11 +31,11 @@ function SectionGeneral ( {user} ) {
     
     const onSubmit = ( evt ) => {
         evt.preventDefault
-        console.log( evt )
+        //console.log( evt )
 
-        axios.get(post_endpoint, {
+        axios.get('http://localhost:3080/api/cv-data-general/update', {
             params: {
-                uuid: user,
+                user_id: user,
                 nombre: evt.nombre,
                 apellido: evt.apellido,
                 telefono: evt.telefono,
@@ -58,9 +55,11 @@ function SectionGeneral ( {user} ) {
         })
         .then(function (response) {
             console.log(response);
-            setData(evt)
-            setShowMsg(true)
-            setTimeout(()=>{ setShowMsg(false) }, 3000)
+            if ( response.status = 200 ) {
+                setData(evt)
+                setShowMsg(true)
+                setTimeout(()=>{ setShowMsg(false) }, 3000)
+            }
         })
         .catch(function (error) {
             console.log(error);
@@ -160,6 +159,7 @@ function SectionGeneral ( {user} ) {
                                 register={register}
                                 label="Código postal"  
                                 name='c_postal'
+                                required="required"
                                 defaultValue={data.c_postal}
                             />
                         </Grid>
