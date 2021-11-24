@@ -25,11 +25,11 @@ const allFieldsEstudios = [
   'id',
   'order',
   'centro',
-  'ciudad',
-  'titulo',
+  'lugar',
   'fecha_inicio',
   'fecha_fin',
   'descripcion',
+  'orden',
 ]
 
 const readFile = '/home/iker/dev/cv-maker/api/data/cv/cv-data.json'
@@ -78,55 +78,27 @@ app.get('/cv-data-general/update', (req, res) => {
 
 })
 
-
 app.get('/cv-estudios', (req, res) => {
-  var userID = req.query.userID
-  const user_data = CvFileData.find( (element) => element.uuid == userID )
-  res.json( user_data.estudios )
+
+  const userId = req.query.userID
+
+  const sql = `SELECT * FROM cv_data_estudios WHERE target_id = ${userId} ORDER BY orden ASC`
+
+  connection.query(sql, (err, result, fields) => {
+    if ( err ) {
+      console.log( err )
+    } else {
+      res.json(result)
+    }
+
+  })
+
 })
 
 app.get('/cv-estudios/update', (req, res) => {
-  console.log( req.query )
-  var file = CvFileData,
-      uuid = req.query.uuid,
-      data = req.query.data
-
-  //console.log( JSON.parse(data[0]) )
-  data.forEach( (element, index) => {
-    
-    data[index] = JSON.parse(data[index])
-
-  })
-  console.log( data )
-
-  const indexData = file.findIndex( (element) => element.uuid == uuid )
-
-  file[indexData]['estudios'] = data
-
-  fs.writeFileSync( readFile, JSON.stringify(file) )
-  res.json('updated')
 
 
 })
 
-app.get('/deprecated/update', (req, res) => {
-
-  console.log(req.query)
-  var file = CvFileData,
-      uuid = req.query.uuid
-
-  const indexData = file.findIndex( (element) => element.uuid == uuid )
-
-  allFields.forEach(element => {
-    //console.log( element )
-    //if ( req.query[element] ) {
-      file[indexData][element] = req.query[element]
-    //}
-  })
-console.log( file )
-  fs.writeFileSync( readFile, JSON.stringify(file) )
-  res.json('updated')
-
-})
   
 module.exports = app
