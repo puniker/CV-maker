@@ -22,7 +22,7 @@ function VisualizacionPlantilla ( {id} ) {
         axios.get( plantillas_endpoint, {
             params: {
                 template_id: id,
-                user_id: user
+                user_id: user.id
             }
         })
         .then( (response) => {

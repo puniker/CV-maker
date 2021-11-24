@@ -1,3 +1,4 @@
+const cvDataModel = require('../models/cv-data')
 const fs = require('fs')
 const express = require('express')
 const twig = require('twig')
@@ -29,32 +30,21 @@ app.get('/render-plantilla', (req, res) => {
     //console.log( template )
     const twigPath = path.resolve(`templates/${template.twig}`)
     
-    getData(user_id, ( cvdata ) => {
-        console.log( cvdata, twigPath )
+    cvDataModel.full_data(user_id, (r) => {
+        console.log( r )
+        //console.log( cvdata, twigPath )
         twig.renderFile(
             twigPath, 
             {
-                data: cvdata
+                data: r.general
             }, 
             (err, html) => {
                 //console.log( html )
                 res.json( {"html": html} ) 
             } 
-            )
-            
-        })
+        )
     })
+})
 
-    
-
-const readFile = '/home/iker/dev/cv-maker/api/data/cv/cv-data.json'
-function getData (id, callback) {
-
-    var data = JSON.parse ( fs.readFileSync( readFile ) )
-
-    callback ( data.find((element) => element.uuid == id) ) 
-
-
-}
 
 module.exports = app

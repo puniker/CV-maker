@@ -65,7 +65,7 @@ function CvForm ( props ) {
                       <SectionEstudios user={user.id} />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                  <Prueba />
+                  Experiencia laboral
               </TabPanel>
               <TabPanel value={value} index={3}>
                   Son los puntos fuertes del usuario
