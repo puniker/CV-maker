@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SectionGeneral from './SectionGeneral'
 import SectionEstudios from './SectionEstudios'
+import SectionExperiencia from './SectionExperiencia'
 import Prueba from './Prueba'
 import { Box, Container, Tabs, Tab, Typography} from '@mui/material'
 import PropTypes from 'prop-types';
@@ -65,7 +66,7 @@ function CvForm ( props ) {
                       <SectionEstudios user={user.id} />
               </TabPanel>
               <TabPanel value={value} index={2}>
-                  Experiencia laboral
+                  <SectionExperiencia user={user.id} />
               </TabPanel>
               <TabPanel value={value} index={3}>
                   Son los puntos fuertes del usuario
