@@ -29,6 +29,9 @@ function App() {
             <Route path="/plantilla/:id">
               <Pages.PlantillaPage />
             </Route>
+            <Route path="/user">
+              <Pages.Perfil />
+            </Route>
             <Route path="/" component={Pages.Home}></Route>
           </Switch>
           </BrowserRouter>
