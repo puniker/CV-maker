@@ -18,7 +18,8 @@ const allFields = [
   'estado_civil',
   'sitio_web',
   'linkedin',
-  'twitter'
+  'twitter',
+  'texto_descriptivo'
 ]
 
 
@@ -73,8 +74,6 @@ app.get('/cv-estudios/update', (req, res) => {
   const user_id = req.query.user_id
 
   const parse_data = req_data.map(element => { return JSON.parse(element) })
-  console.log( parse_data )
-  console.log( Object.values(parse_data[0]) )
 
   parse_data.forEach(element => {
 
@@ -116,6 +115,47 @@ app.get('/cv-experiencia', async (req, res) => {
   const userID = req.query.userId
   const data = await CvDataExperiencia(2)
   res.json( data )
+
+})
+
+app.get('/cv-experiencia/update', (req, res) => {
+  const req_data = req.query.data
+  const user_id = req.query.user_id
+
+  const parse_data = req_data.map(element => { return JSON.parse(element) })
+
+  parse_data.forEach(element => {
+
+    const sql = `
+      INSERT INTO cv_data_experiencia (target_id, ${Object.keys(element).toString()}) 
+      VALUES (${user_id}, "${Object.values(element).join('","')}")
+      ON DUPLICATE KEY 
+      UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
+    `
+    connection.query(sql, (err) => {
+      if ( err ) {
+        console.log( err )
+      } else {
+        //res.json('updated')
+      }
+    })
+  })
+
+})
+
+app.get('/cv-experiencia/delete', (req, res) => {
+
+  const row_id = req.query.id
+
+  sql = `DELETE FROM cv_data_experiencia WHERE id = "${row_id}"`
+  connection.query(sql, (err) => {
+    if ( err ) {
+      console.log( err )
+    } else {
+      console.log('registro borrado')
+      res.json('updated')
+    }
+  })
 
 })
 

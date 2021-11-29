@@ -6,7 +6,7 @@ async function CvFullData (id, callback) {
 
     response.general = await CvDataGeneral(id)
     response.estudios = await CvDataEstudios(id)
-
+    response.experiencia = await CvDataExperiencia(id)
     callback( response )
     
 }

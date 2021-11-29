@@ -38,6 +38,24 @@ function SectionExperiencia (  ) {
     const onSubmit = ( evt ) => {
         console.log ( evt.experiencia )
 
+        axios.get('http://localhost:3080/api/cv-experiencia/update', {
+            params: {
+                user_id: userId,
+                data: evt.experiencia
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+            //setData(evt)
+            setShowMsg(true)
+            setTimeout(()=>{ setShowMsg(false) }, 3000)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed    code ...
+        })
         
     }
     const { control, register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -74,6 +92,27 @@ function SectionExperiencia (  ) {
     
     const removeItem = (id) => {
         
+        axios.get('http://localhost:3080/api/cv-experiencia/delete', {
+            params: {
+                id: id,
+            }
+        })
+        .then(function (response) {
+            console.log(response);
+            //setData(evt)
+            setFormItemCounter( formItemCounter - 1 )
+            const values  = [...data];
+            values.splice(values.findIndex(value => value.id === id), 1);
+            setData(values);
+            setShowMsg(true)
+            setTimeout(()=>{ setShowMsg(false) }, 3000)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function () {
+            // always executed    code ...
+        })
         
     }
     

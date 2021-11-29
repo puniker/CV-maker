@@ -51,7 +51,8 @@ function SectionGeneral (  ) {
                 estado_civil: evt.estado_civil,
                 sitio_web: evt.sitio_web,
                 linkedin: evt.linkedin,
-                twitter: evt.twitter 
+                twitter: evt.twitter,
+                texto_descriptivo: evt.texto_descriptivo 
             }
         })
         .then(function (response) {
@@ -229,6 +230,16 @@ function SectionGeneral (  ) {
                                 defaultValue={data.twitter}
                             />
                         </Grid>
+                        <Grid item xs={12}>
+                            <FormElements.Input 
+                                type='text'
+                                register={register}
+                                label="Texto Descriptivo"  
+                                name='texto_descriptivo'
+                                defaultValue={data.texto_descriptivo}
+                            />
+                        </Grid>
+                        
                         <Grid item xs={12}>
                             <Button variant="contained" color="success" type="submit" startIcon={<SaveIcon />}>Guardar datos</Button>
                         </Grid>
