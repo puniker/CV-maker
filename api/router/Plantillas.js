@@ -1,4 +1,4 @@
-const cvDataModel = require('../models/cv-data')
+const {CvFullData} = require('../models/cv-data')
 const fs = require('fs')
 const express = require('express')
 const twig = require('twig')
@@ -30,13 +30,13 @@ app.get('/render-plantilla', (req, res) => {
     //console.log( template )
     const twigPath = path.resolve(`templates/${template.twig}`)
     
-    cvDataModel.full_data(user_id, (r) => {
+    CvFullData(user_id, (r) => {
         console.log( r )
         //console.log( cvdata, twigPath )
         twig.renderFile(
             twigPath, 
             {
-                data: r.general
+                data: r
             }, 
             (err, html) => {
                 //console.log( html )

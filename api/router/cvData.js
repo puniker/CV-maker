@@ -1,5 +1,6 @@
 const express = require('express')
 const connection = require ('../models/connection')
+const {CvDataGeneral, CvDataEstudios, CvDataExperiencia} = require('../models/cv-data')
 
 const app = express()
 const allFields = [
@@ -22,18 +23,11 @@ const allFields = [
 
 
 
-app.get('/cv-data-general', (req, res) => {
+app.get('/cv-data-general', async (req, res) => {
 
-  var userId = req.query.userID
-  
-  connection.query(`SELECT * FROM cv_data_general WHERE id = ${userId}`, (err, result, fields) => {
-    if (err) {
-      console.log( err )
-    }
-    if ( typeof result !== 'undefined' && result.length > 0 ) {
-      res.json( result[0] )
-    }
-  })
+  const userId = req.query.userID
+  const data = await CvDataGeneral(req.query.userID)
+  res.json( data )
 
 })
 
@@ -65,20 +59,12 @@ app.get('/cv-data-general/update', (req, res) => {
 
 })
 
-app.get('/cv-estudios', (req, res) => {
+app.get('/cv-estudios', async (req, res) => {
 
   const userId = req.query.userID
+  const data = await CvDataEstudios(userId)
 
-  const sql = `SELECT * FROM cv_data_estudios WHERE target_id = ${userId} ORDER BY orden ASC`
-
-  connection.query(sql, (err, result, fields) => {
-    if ( err ) {
-      console.log( err )
-    } else {
-      res.json(result)
-    }
-
-  })
+  res.json(data)
 
 })
 
@@ -122,6 +108,14 @@ app.get('/cv-estudios/delete', (req, res) => {
       res.json('updated')
     }
   })
+
+})
+
+app.get('/cv-experiencia', async (req, res) => {
+
+  const userID = req.query.userId
+  const data = await CvDataExperiencia(2)
+  res.json( data )
 
 })
 

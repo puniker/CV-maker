@@ -1,27 +1,62 @@
 const connection = require('./connection')
 
-async function full_data (id, callback) {
+async function CvFullData (id, callback) {
 
     const response = {}
-    general(id, (res) => {
-        response.general = res
-        callback (response)
+
+    response.general = await CvDataGeneral(id)
+    response.estudios = await CvDataEstudios(id)
+
+    callback( response )
+    
+}
+
+const CvDataGeneral = ( id ) => {
+
+    const sql = `SELECT * FROM cv_data_general WHERE id = ${id}`
+    return new Promise(resolve => {
+        connection.query(sql, (err, result, fields) => {
+            if (err) console.log( err )
+            if ( typeof result !== 'undefined' && result.length > 0 ) {
+                resolve(result[0])
+            }
+        })
     })
 
 }
 
-function general (id, callback) {
+const CvDataEstudios = ( id ) => {
 
-    connection.query(`SELECT * FROM cv_data_general WHERE id = ${id}`, (err, result, fields) => {
-        if (err) {
-        }
-        //console.log( result[0] )
-        if ( typeof result !== 'undefined' && result.length > 0 ) {
-            //response.general = result[0]
-            callback( result[0] )
-        }
+    const sql = `SELECT * FROM cv_data_estudios WHERE target_id = ${id} ORDER BY orden ASC`
+    return new Promise(resolve => {
+
+        connection.query(sql, (err, result, fields) => {
+            if ( err ) {
+            console.log( err )
+            } else {
+            resolve(result)
+            }
+        })
+
     })
 
 }
 
-module.exports = { full_data }
+const CvDataExperiencia = ( id ) => {
+   
+    const sql = `SELECT * FROM cv_data_experiencia WHERE target_id = ${id} ORDER BY orden ASC`
+    return new Promise(resolve => {
+
+        connection.query(sql, (err, result, fields) => {
+            if ( err ) {
+            console.log( err )
+            } else {
+            resolve(result)
+            }
+        })
+
+    }) 
+}
+
+
+module.exports = { CvFullData, CvDataGeneral, CvDataEstudios, CvDataExperiencia }
