@@ -33,7 +33,7 @@ export default ( {setIsLogged} ) => {
           .then(function (response) {
             //console.log(response);
             var loginResponse = response.data
-            console.log(loginResponse)
+            //console.log(loginResponse)
             if( loginResponse.access == true ) {
                 console.log('Acceso permitido. Bienvenido a la App.')
                 setLoginError(loginResponse.error)

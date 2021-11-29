@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import FormElements from '../FormElements'
 import { useForm, useFieldArray } from "react-hook-form"
 import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Snackbar, Link} from '@mui/material'
 import {Delete as DeleteIcon, Save as SaveIcon, ExpandMore as ExpandMoreIcon, KeyboardArrowUp as KeyboardArrowUpIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material'
 import { v4 as uuidv4 } from 'uuid';
+import UserContext from '../../Context/UserContext'
 
-function SectionExperiencia ( {user} ) {
+function SectionExperiencia (  ) {
     
+    const userId = useContext(UserContext).id
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
@@ -18,7 +20,7 @@ function SectionExperiencia ( {user} ) {
         
         axios.get( 'http://localhost:3080/api/cv-experiencia', {
             params: {
-                userID: user
+                userID: userId
             }
         })
         .then( (response) => {

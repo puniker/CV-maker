@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from './components/header/index.jsx'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Pages from './pages'
+import UserContext from './Context/UserContext'
 
 function App() {
 
@@ -11,25 +12,27 @@ function App() {
   }
   
   const [isLogged, setIsLogged] = useState( session.logged_in )
-
+  
   if ( isLogged ) {
     return (
       <div className="App">
-        <BrowserRouter>
-          <Header />
-         <Switch>
-           <Route path="/crea-tu-cv">
-             <Pages.CreaTuCv />
-           </Route>
-           <Route path="/plantillas">
-             <Pages.Plantillas />
-           </Route>
-           <Route path="/plantilla/:id">
-             <Pages.PlantillaPage />
-           </Route>
-           <Route path="/" component={Pages.Home}></Route>
-         </Switch>
-        </BrowserRouter>
+        <UserContext.Provider value={{'id': 2, 'is_admin': 1}}>
+          <BrowserRouter>
+            <Header />
+          <Switch>
+            <Route path="/crea-tu-cv">
+              <Pages.CreaTuCv />
+            </Route>
+            <Route path="/plantillas">
+              <Pages.Plantillas />
+            </Route>
+            <Route path="/plantilla/:id">
+              <Pages.PlantillaPage />
+            </Route>
+            <Route path="/" component={Pages.Home}></Route>
+          </Switch>
+          </BrowserRouter>
+        </UserContext.Provider>
   
       </div>
     )

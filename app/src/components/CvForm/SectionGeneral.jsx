@@ -1,13 +1,14 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
 import {Grid, Alert, Button, Snackbar} from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
+import UserContext from '../../Context/UserContext'
 
-
-function SectionGeneral ( {user} ) {
+function SectionGeneral (  ) {
     
+    const userId = useContext(UserContext).id
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
@@ -16,7 +17,7 @@ function SectionGeneral ( {user} ) {
         
         axios.get( 'http://localhost:3080/api/cv-data-general', {
             params: {
-                userID: user
+                userID: userId
             }
         })
         .then( (response) => {
@@ -35,7 +36,7 @@ function SectionGeneral ( {user} ) {
 
         axios.get('http://localhost:3080/api/cv-data-general/update', {
             params: {
-                user_id: user,
+                user_id: userId,
                 nombre: evt.nombre,
                 apellido: evt.apellido,
                 telefono: evt.telefono,

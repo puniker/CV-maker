@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react"
+import { useContext, useState, useEffect } from "react"
 import axios from 'axios'
 import { Alert } from "@mui/material"
 import styled from 'styled-components'
+import UserContext from '../../Context/UserContext'
 
 const plantillas_endpoint = 'http://localhost:3080/render-plantilla'
 
@@ -15,7 +16,7 @@ function VisualizacionPlantilla ( {id} ) {
 
     const [template, setTemplate] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const {user} = JSON.parse(window.localStorage.getItem('session'))
+    const user = useContext(UserContext)
 
     useEffect( () => {
         
@@ -27,7 +28,7 @@ function VisualizacionPlantilla ( {id} ) {
         })
         .then( (response) => {
             setTemplate( response.data.html )
-            console.log(response)
+            //console.log(response)
             setIsLoading( false )
         })
         .catch(function (error) {
