@@ -1,10 +1,6 @@
-const {CvFullData} = require('../models/cv-data')
-const fs = require('fs')
 const express = require('express')
-const twig = require('twig')
-var path = require("path")
-
-const file = require('../data/plantillas.json')
+const {TemplatesList, GetTemplate} = require('../models/template')
+const {RenderTemplate} = require('../controller/Template')
 
 const app = express()
 
@@ -15,35 +11,29 @@ app.set("twig options", {
     strict_variables: false
 });
 
-app.get('/plantillas', (req, res) => {
+app.get('/plantillas', async (req, res) => {
     
-    res.json ( file ) 
+    const results = await TemplatesList()
+
+    res.json ( results ) 
     
 })
 
-app.get('/render-plantilla', (req, res) => {
+app.get('/render-plantilla', async (req, res) => {
     
     const user_id = req.query.user_id
     const template_id = req.query.template_id
     
-    const template = file.find( (element) => element.id == template_id )
-    //console.log( template )
-    const twigPath = path.resolve(`templates/${template.twig}`)
+    const template = await GetTemplate(template_id)
+
+    if ( template ) {
+        const html = await RenderTemplate(template.twig_url, user_id)
+        res.json( {"html": html} ) 
+
+    } else {
+        res.json( {"error": "No se ha encontrado la plantilla", "html": ""} ) 
+    }
     
-    CvFullData(user_id, (r) => {
-        console.log( r )
-        //console.log( cvdata, twigPath )
-        twig.renderFile(
-            twigPath, 
-            {
-                data: r
-            }, 
-            (err, html) => {
-                //console.log( html )
-                res.json( {"html": html} ) 
-            } 
-        )
-    })
 })
 
 

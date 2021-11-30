@@ -4,7 +4,7 @@ import { Alert } from "@mui/material"
 import styled from 'styled-components'
 import UserContext from '../../Context/UserContext'
 
-const plantillas_endpoint = 'http://localhost:3080/render-plantilla'
+const plantillas_endpoint = 'http://localhost:3080/api/render-plantilla'
 
 const CvContainer = styled.article`
     max-width: 1000px;

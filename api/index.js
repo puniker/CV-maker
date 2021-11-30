@@ -15,6 +15,6 @@ connection.connect(function(err) {
 
 app.use('/api', Router.user)
 app.use('/api', Router.cvData)
-app.use(Router.Plantillas)
+app.use('/api', Router.Plantillas)
 
 app.listen(3080, () => { console.log('API levantada en el puerto 3080') })

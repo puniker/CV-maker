@@ -12,7 +12,7 @@ export default () => {
 
     useEffect( () => {
         
-        axios.get('http://localhost:3080/plantillas')
+        axios.get('http://localhost:3080/api/plantillas')
         .then( ( response ) => {
             setTemplates( response.data )
             setIsLoading(false)
@@ -37,8 +37,8 @@ export default () => {
                                 <CardMedia
                                     component="img"
                                     height="140"
-                                    image={template.screenshot}
-                                    alt="green iguana"
+                                    image={template.thumbnail}
+                                    alt={template.name}
                                 />
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div">
