@@ -109,7 +109,12 @@ export default () => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                     >
-                    <MenuItem onClick={ () => {window.location.href = "/user"}}>Perfil</MenuItem>
+
+                    <MenuItem onClick={handleClose}>
+                        <NavLink to="/user" style={{color: "inherit", textDecoration: "none"}}>
+                            Perfil
+                        </NavLink>
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>Ajustes</MenuItem>
                     <MenuItem onClick={log_out}>Cerrar sesión</MenuItem>
                     </Menu>

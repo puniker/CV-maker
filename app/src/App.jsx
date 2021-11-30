@@ -26,7 +26,7 @@ function App() {
             <Route path="/plantillas">
               <Pages.Plantillas />
             </Route>
-            <Route path="/plantilla/:id">
+            <Route path="/plantilla/:template_id">
               <Pages.PlantillaPage />
             </Route>
             <Route path="/user">
