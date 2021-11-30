@@ -1,5 +1,28 @@
 <section class="seccion-cv prueba">
-    <h1>Esta es la plantilla default</h1>
-    <h2>{{ data.nombre }}</h2>
-    <h3>{{ data.apellido }}</h3>
+    <h1>Plantilla default para visualizar todos los elementos disponibles</h1>
+    <h4>General</h4>    
+    <ul>
+        {% for key,value in data.general %}
+        <li>{{key}}: {{value}}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <h4>Estudios</h4>    
+    <ul>
+        {% for item in data.estudios %}
+            {% for key, value in item %}
+                <li>{{key}}: {{value}}</li>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+    </ul>
+    <h4>Experiencia</h4>
+    <ul>
+        {% for item in data.experiencia %}
+            {% for key, value in item %}
+                <li>{{key}}: {{value}}</li>
+            {% endfor %}
+            <hr>
+        {% endfor %}
+    </ul>
 </section>
