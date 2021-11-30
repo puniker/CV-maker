@@ -27,7 +27,7 @@ app.get('/render-plantilla', async (req, res) => {
     const template = await GetTemplate(template_id)
 
     if ( template ) {
-        const html = await RenderTemplate(template.twig_url, user_id)
+        const html = await RenderTemplate(template.id, user_id)
         res.json( {"html": html} ) 
 
     } else {
