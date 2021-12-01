@@ -17,4 +17,4 @@ app.use('/api', Router.user)
 app.use('/api', Router.cvData)
 app.use('/api', Router.Plantillas)
 
-app.listen(3080, () => { console.log('API levantada en el puerto 3080') })
+app.listen(process.env.PORT || 3000, () => { console.log(`API levantada en el puerto ${process.env.PORT || 3000}`) })
