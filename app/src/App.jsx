@@ -8,7 +8,7 @@ function App() {
 
   const [session, setSession] = useState({'logged_in': false })
   
-  console.log(session)
+  //console.log(session)
   
   if ( session.logged_in ) {
     return (
@@ -30,7 +30,7 @@ function App() {
               <Pages.Perfil />
             </Route>
             <Route path="/administrator">
-              { (session.user.is_admin) ? <Pages.Perfil /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
+              { (session.user.is_admin) ? <Pages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
               
             </Route>
             <Route path="/" component={Pages.Home}></Route>

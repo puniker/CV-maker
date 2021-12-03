@@ -20,7 +20,7 @@ export default ( {setIsLogged, setSession} ) => {
     const [showMsg, setShowMsg] = useState(false)
 
     const submit = ( evt ) =>{
-      console.log( evt )
+      //console.log( evt )
         evt.preventDefault
         setIsLoading( true )
 
