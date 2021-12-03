@@ -12,7 +12,7 @@ const FormWrapper = styled.section`
   padding: 20px 40px;
   border: 1px solid lightgrey;
 `
-export default ( {setIsLogged} ) => {
+export default ( {setIsLogged, setSession} ) => {
 
     const endpoint = 'http://localhost:3080/api/login'
     const [isLoading, setIsLoading] = useState(false)
@@ -37,13 +37,13 @@ export default ( {setIsLogged} ) => {
             if( loginResponse.access == true ) {
                 console.log('Acceso permitido. Bienvenido a la App.')
                 setLoginError(loginResponse.error)
-                setIsLogged( true )
-                window.localStorage.setItem('session', JSON.stringify( {"logged_in" : true, "user":loginResponse.userData} ) )
+                //setIsLogged( true )
+                setSession( {"logged_in" : true, "user":loginResponse.userData} )
             } else {
                 console.log('Error de acceso a la App.')
                 setLoginError(loginResponse.error)
-                setIsLogged( false )
-                localStorage.setItem('session', JSON.stringify( {"logged_in" : false} ) )
+                //setIsLogged( false )
+                setSession( {"logged_in" : false} )
                 setShowMsg(true)
                 setTimeout(()=>{ setShowMsg(false) }, 3000)
             }

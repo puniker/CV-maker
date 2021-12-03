@@ -6,17 +6,14 @@ import UserContext from './Context/UserContext'
 
 function App() {
 
-  var session = {'logged_in': false }
-  if ( localStorage.getItem('session') ) {
-    var session = JSON.parse( localStorage.getItem('session') )
-  }
+  const [session, setSession] = useState({'logged_in': false })
   
-  const [isLogged, setIsLogged] = useState( session.logged_in )
+  console.log(session)
   
-  if ( isLogged ) {
+  if ( session.logged_in ) {
     return (
       <div className="App">
-        <UserContext.Provider value={{'id': 2, 'is_admin': 1}}>
+        <UserContext.Provider value={{'id': session.user.id, 'is_admin': session.user.is_admin}}>
           <BrowserRouter>
             <Header />
           <Switch>
@@ -32,6 +29,10 @@ function App() {
             <Route path="/user">
               <Pages.Perfil />
             </Route>
+            <Route path="/administrator">
+              { (session.user.is_admin) ? <Pages.Perfil /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
+              
+            </Route>
             <Route path="/" component={Pages.Home}></Route>
           </Switch>
           </BrowserRouter>
@@ -42,7 +43,7 @@ function App() {
   } else {
     return (
       <div className="App">
-        <Pages.Login setIsLogged={setIsLogged} />
+        <Pages.Login setSession={setSession} />
       </div>
     )
   }

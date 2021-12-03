@@ -42,7 +42,6 @@ function TabPanel(props) {
 function CvForm ( props ) {
     
     const [value, setValue] = useState(0)
-    const {user} = JSON.parse(window.localStorage.getItem('session'))
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }

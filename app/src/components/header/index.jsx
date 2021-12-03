@@ -20,7 +20,7 @@ const StyledNavLinkActive = {
 export default () => {
     
     const log_out = () => {
-        localStorage.removeItem('session')
+        //localStorage.removeItem('session')
         location.reload()
     }
 
@@ -113,6 +113,11 @@ export default () => {
                     <MenuItem onClick={handleClose}>
                         <NavLink to="/user" style={{color: "inherit", textDecoration: "none"}}>
                             Perfil
+                        </NavLink>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                        <NavLink to="/administrator" style={{color: "inherit", textDecoration: "none"}}>
+                            Administrador
                         </NavLink>
                     </MenuItem>
                     <MenuItem onClick={handleClose}>Ajustes</MenuItem>
