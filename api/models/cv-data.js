@@ -13,7 +13,7 @@ async function CvFullData (id, callback) {
 
 const CvDataGeneral = ( id ) => {
 
-    const sql = `SELECT * FROM cv_data_general WHERE id = ${id}`
+    const sql = `SELECT * FROM cv_data_general WHERE id = "${id}"`
     return new Promise(resolve => {
         connection.query(sql, (err, result, fields) => {
             if (err) console.log( err )
@@ -27,7 +27,7 @@ const CvDataGeneral = ( id ) => {
 
 const CvDataEstudios = ( id ) => {
 
-    const sql = `SELECT * FROM cv_data_estudios WHERE target_id = ${id} ORDER BY orden ASC`
+    const sql = `SELECT * FROM cv_data_estudios WHERE target_id = "${id}" ORDER BY orden ASC`
     return new Promise(resolve => {
 
         connection.query(sql, (err, result, fields) => {
@@ -44,7 +44,7 @@ const CvDataEstudios = ( id ) => {
 
 const CvDataExperiencia = ( id ) => {
    
-    const sql = `SELECT * FROM cv_data_experiencia WHERE target_id = ${id} ORDER BY orden ASC`
+    const sql = `SELECT * FROM cv_data_experiencia WHERE target_id = "${id}" ORDER BY orden ASC`
     return new Promise(resolve => {
 
         connection.query(sql, (err, result, fields) => {

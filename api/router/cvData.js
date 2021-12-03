@@ -46,7 +46,7 @@ app.get('/cv-data-general/update', (req, res) => {
           return `${element} = ''`
         }
       } )  }
-      WHERE id = ${post_data.user_id} 
+      WHERE id = "${post_data.user_id}" 
     `
 
     connection.query(sql, (err, result, fields) => {
@@ -79,7 +79,7 @@ app.get('/cv-estudios/update', (req, res) => {
 
     const sql = `
       INSERT INTO cv_data_estudios (target_id, ${Object.keys(element).toString()}) 
-      VALUES (${user_id}, "${Object.values(element).join('","')}")
+      VALUES ("${user_id}", "${Object.values(element).join('","')}")
       ON DUPLICATE KEY 
       UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
     `
@@ -113,7 +113,7 @@ app.get('/cv-estudios/delete', (req, res) => {
 app.get('/cv-experiencia', async (req, res) => {
 
   const userID = req.query.userId
-  const data = await CvDataExperiencia(2)
+  const data = await CvDataExperiencia(userID)
   res.json( data )
 
 })
@@ -128,7 +128,7 @@ app.get('/cv-experiencia/update', (req, res) => {
 
     const sql = `
       INSERT INTO cv_data_experiencia (target_id, ${Object.keys(element).toString()}) 
-      VALUES (${user_id}, "${Object.values(element).join('","')}")
+      VALUES ("${user_id}", "${Object.values(element).join('","')}")
       ON DUPLICATE KEY 
       UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
     `

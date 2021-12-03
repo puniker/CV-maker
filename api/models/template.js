@@ -15,7 +15,7 @@ const TemplatesList = () => {
 
 const GetTemplate = (id) => {
 
-    const sql = `SELECT * FROM cv_plantillas WHERE id = ${id}`
+    const sql = `SELECT * FROM cv_plantillas WHERE id = "${id}"`
     return new Promise( resolve => {
         connection.query(sql, (err, results, fields) => {
             if ( err ) console.log(err)

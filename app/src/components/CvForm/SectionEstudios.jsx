@@ -72,7 +72,11 @@ function SectionGeneral (  ) {
     
     const addItem = () => {
         
-        const order = parseInt(data[ data.length - 1 ].orden)
+        var order = 0
+        if ( data.length > 0 ) {
+            order = parseInt(data[ data.length - 1 ].orden)
+        }
+
         setData([
             ...data, 
             {
@@ -172,7 +176,7 @@ function SectionGeneral (  ) {
 
                 { fieldsNumberToArray().map((i) => (
                 
-                    <Accordion>
+                    <Accordion key={`accordion_key_${data[i].id}`}>
                         <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
