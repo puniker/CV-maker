@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
 import {Tabs, Tab, Box, Typography} from '@mui/material'
 import UserContext from '../../Context/UserContext'
+import UserList from '../components/UserList'
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -62,7 +63,7 @@ export default () => {
             Configuración general de la aplicación
         </TabPanel>
         <TabPanel value={value} index={1}>
-            Listado de usuarios
+            <UserList />
         </TabPanel>
         <TabPanel value={value} index={2}>
             Listado de plantillas

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Header from './components/header/index.jsx'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Pages from './pages'
+import AdminPages from './admin/pages'
 import UserContext from './Context/UserContext'
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
               <Pages.Perfil />
             </Route>
             <Route path="/administrator">
-              { (session.user.is_admin) ? <Pages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
+              { (session.user.is_admin) ? <AdminPages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
               
             </Route>
             <Route path="/" component={Pages.Home}></Route>
