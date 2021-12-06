@@ -10,6 +10,7 @@
     "npm": "7.9.0"
   },
   "scripts": {
+    "init_db": "node scripts/init_db.js",
     "killport": "npx kill-port 3080",
     "start:api": "npm start --workspace=api",
     "start": "npm run build:app && npm start --workspace=api",
