@@ -18,7 +18,7 @@ function SectionExperiencia (  ) {
 
     useEffect( () => {
         
-        axios.get( 'http://localhost:3080/api/cv-experiencia', {
+        axios.get( '/api/cv-experiencia', {
             params: {
                 userID: userId
             }
@@ -38,7 +38,7 @@ function SectionExperiencia (  ) {
     const onSubmit = ( evt ) => {
         console.log ( evt.experiencia )
 
-        axios.get('http://localhost:3080/api/cv-experiencia/update', {
+        axios.get('/api/cv-experiencia/update', {
             params: {
                 user_id: userId,
                 data: evt.experiencia
@@ -96,7 +96,7 @@ function SectionExperiencia (  ) {
     
     const removeItem = (id) => {
         
-        axios.get('http://localhost:3080/api/cv-experiencia/delete', {
+        axios.get('/api/cv-experiencia/delete', {
             params: {
                 id: id,
             }

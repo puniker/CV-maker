@@ -15,7 +15,7 @@ function SectionGeneral (  ) {
 
     useEffect( () => {
         
-        axios.get( 'http://localhost:3080/api/cv-data-general', {
+        axios.get( '/api/cv-data-general', {
             params: {
                 userID: userId
             }
@@ -34,7 +34,7 @@ function SectionGeneral (  ) {
         evt.preventDefault
         //console.log( evt )
 
-        axios.get('http://localhost:3080/api/cv-data-general/update', {
+        axios.get('/api/cv-data-general/update', {
             params: {
                 user_id: userId,
                 nombre: evt.nombre,

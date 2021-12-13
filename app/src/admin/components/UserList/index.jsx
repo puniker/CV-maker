@@ -11,7 +11,7 @@ export default () => {
 
     useEffect( async () => {
 
-        axios.get('http://localhost:3080/api/admin/users/list')
+        axios.get('/api/admin/users/list')
         .then(function (response) {
             setUsers(response.data)
             setLoaded(true)

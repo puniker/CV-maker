@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const endpoint = 'http://localhost:3080/cv-data'
+const endpoint = '/cv-data'
 
 function GetData ( userID ) {
     

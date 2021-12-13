@@ -12,7 +12,7 @@ export default () => {
 
     useEffect( () => {
         
-        axios.get('http://localhost:3080/api/plantillas')
+        axios.get('/api/plantillas')
         .then( ( response ) => {
             setTemplates( response.data )
             setIsLoading(false)

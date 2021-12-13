@@ -43,7 +43,7 @@ function Prueba ( {user = 2} ) {
 
     useEffect( () => {
         
-        axios.get( 'http://localhost:3080/api/cv-estudios', {
+        axios.get( '/api/cv-estudios', {
             params: {
                 userID: user
             }

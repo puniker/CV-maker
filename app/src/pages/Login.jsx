@@ -14,7 +14,7 @@ const FormWrapper = styled.section`
 `
 export default ( {setIsLogged, setSession} ) => {
 
-    const endpoint = 'http://localhost:3080/api/login'
+    const endpoint = '/api/login'
     const [isLoading, setIsLoading] = useState(false)
     const [loginError, setLoginError] = useState()
     const [showMsg, setShowMsg] = useState(false)

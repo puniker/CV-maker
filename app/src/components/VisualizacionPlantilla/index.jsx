@@ -7,7 +7,7 @@ import { useScreenshot } from 'use-react-screenshot'
 import { jsPDF } from "jspdf"
 import FileController from '../../controller/FileController'
 
-const plantillas_endpoint = 'http://localhost:3080/api/render-plantilla'
+const plantillas_endpoint = '/api/render-plantilla'
 
 function VisualizacionPlantilla ( {template_id, referencia} ) {
 
