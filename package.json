@@ -12,10 +12,10 @@
   "scripts": {
     "init_db": "node scripts/init_db.js",
     "killport": "npx kill-port 3080",
-    "start:api": "node api/index.js",
-    "start": "vite build && node api/index.js",
-    "dev": "vite build && nodemon api/index.js",
-    "dev:api": "npm run killport && nodemon api/index.js",
+    "start:api": "npm start --workspace=api",
+    "start": "npm run build:app && npm start --workspace=api",
+    "dev": "npm run build:app && npm run dev --workspace=api",
+    "dev:api": "npm run killport && npm run dev --workspace=api",
     "dev:app": "vite",
     "build:app": "vite build",
     "test": "echo \"Error: no test specified\" && exit 1"

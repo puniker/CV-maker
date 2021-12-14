@@ -7,7 +7,7 @@ const connection = require('./models/connection')
 const app = express()
 
 app.use(cors())
-app.use(express.static('./app/dist'))
+app.use(express.static('../app/dist'))
 
 connection.connect(function(err) {
     if (err) throw err
