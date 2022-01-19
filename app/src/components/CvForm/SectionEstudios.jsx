@@ -18,7 +18,7 @@ function SectionGeneral (  ) {
 
     useEffect( () => {
         
-        axios.get( '/api/cv-estudios', {
+        axios.get( `${import.meta.env.VITE_API_URL}/api/cv-estudios`, {
             params: {
                 userID: userId
             }
@@ -38,7 +38,7 @@ function SectionGeneral (  ) {
     const onSubmit = ( evt ) => {
         console.log ( evt.estudios )
 
-        axios.get('/api/cv-estudios/update', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/cv-estudios/update`, {
             params: {
                 user_id: userId,
                 data: evt.estudios
@@ -96,7 +96,7 @@ function SectionGeneral (  ) {
     
     const removeItem = (id) => {
         
-        axios.get('/api/cv-estudios/delete', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/cv-estudios/delete`, {
             params: {
                 id: id,
             }

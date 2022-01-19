@@ -14,7 +14,7 @@ const FormWrapper = styled.section`
 `
 export default ( {setIsLogged, setSession} ) => {
 
-    const endpoint = '/api/login'
+    const endpoint = `${import.meta.env.VITE_API_URL}/api/login`
     const [isLoading, setIsLoading] = useState(false)
     const [loginError, setLoginError] = useState()
     const [showMsg, setShowMsg] = useState(false)

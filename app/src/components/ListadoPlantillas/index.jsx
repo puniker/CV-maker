@@ -12,7 +12,7 @@ export default () => {
 
     useEffect( () => {
         
-        axios.get('/api/plantillas')
+        axios.get(`${import.meta.env.VITE_API_URL}/api/plantillas`)
         .then( ( response ) => {
             setTemplates( response.data )
             setIsLoading(false)

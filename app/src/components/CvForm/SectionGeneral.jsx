@@ -15,7 +15,7 @@ function SectionGeneral (  ) {
 
     useEffect( () => {
         
-        axios.get( '/api/cv-data-general', {
+        axios.get( `${import.meta.env.VITE_API_URL}/api/cv-data-general`, {
             params: {
                 userID: userId
             }
@@ -34,7 +34,7 @@ function SectionGeneral (  ) {
         evt.preventDefault
         //console.log( evt )
 
-        axios.get('/api/cv-data-general/update', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/cv-data-general/update`, {
             params: {
                 user_id: userId,
                 nombre: evt.nombre,
