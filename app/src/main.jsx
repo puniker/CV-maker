@@ -1,15 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './css/index.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App'
-import UserContext, {UserProvider} from './Context/UserContext'
+import {UserProvider} from './Context/UserContext'
+import {ThemeProvider} from './Context/ThemeContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <App />
-    </UserProvider>
+    <ThemeProvider>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 )

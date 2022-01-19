@@ -6,6 +6,7 @@ import {Grid, TextField, Button, Container, Alert, FormControl} from '@mui/mater
 import {Send} from '@mui/icons-material';
 import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
+import ThemeSwitcher from '../components/ThemeSwitcher'
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -99,12 +100,16 @@ export default ( {setIsLogged, setSession} ) => {
                         <Send />
                       </Button>
                     </Grid>
+
                     <Grid item xs={12}>
                       { ( showMsg ) ? <Alert key="error-msg" severity="error" show={showMsg.toString()}>{loginError}</Alert> : '' }
                     </Grid>
                   </Grid>
                   
                 </form>
+                <Grid item xs={12}>
+                  <ThemeSwitcher />
+                </Grid>
               </FormWrapper>
             </Container>
         </>

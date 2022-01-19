@@ -1,24 +1,3 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  background-color: #282c34;
-  color: #fff;
-}
-
-:root {
-  --cv-maker-blue : #09f;
-}
-
-.p_button{
-  background-color: var(--cv-maker-blue);
-  border: none;
-  padding: 5px 15px;
-  border-radius: 4px;
-  color: white;
-  font-size: 15px;
+body{
+  margin: 0px;
 }
