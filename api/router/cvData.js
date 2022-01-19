@@ -1,6 +1,7 @@
 const express = require('express')
 const connection = require ('../models/connection')
 const {CvDataGeneral, CvDataEstudios, CvDataExperiencia} = require('../models/cv-data')
+const {BasicSql} = require('../controller/SqlController')
 
 const app = express()
 const allFields = [
@@ -69,12 +70,13 @@ app.get('/cv-estudios', async (req, res) => {
 
 })
 
-app.get('/cv-estudios/update', (req, res) => {
+app.get('/cv-estudios/update', async (req, res) => {
   const req_data = req.query.data
   const user_id = req.query.user_id
 
   const parse_data = req_data.map(element => { return JSON.parse(element) })
 
+  let queryResult = 'Error'
   parse_data.forEach(element => {
 
     const sql = `
@@ -83,14 +85,9 @@ app.get('/cv-estudios/update', (req, res) => {
       ON DUPLICATE KEY 
       UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
     `
-    connection.query(sql, (err) => {
-      if ( err ) {
-        console.log( err )
-      } else {
-        //res.json('updated')
-      }
-    })
+    BasicSql(sql, (resultado) => { queryResult = resultado })
   })
+  res.json({queryResult})
 
 })
 
@@ -124,6 +121,7 @@ app.get('/cv-experiencia/update', (req, res) => {
 
   const parse_data = req_data.map(element => { return JSON.parse(element) })
 
+  let queryResult = 'Error'
   parse_data.forEach(element => {
 
     const sql = `
@@ -132,14 +130,9 @@ app.get('/cv-experiencia/update', (req, res) => {
       ON DUPLICATE KEY 
       UPDATE ${Object.keys(element).map(item => { return `${item}="${element[item]}"` })}
     `
-    connection.query(sql, (err) => {
-      if ( err ) {
-        console.log( err )
-      } else {
-        //res.json('updated')
-      }
-    })
+    BasicSql(sql, (resultado) => { queryResult = resultado })
   })
+  res.json({queryResult})
 
 })
 

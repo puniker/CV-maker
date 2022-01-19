@@ -9,7 +9,7 @@ import UserContext from '../../Context/UserContext'
 
 function SectionExperiencia (  ) {
     
-    const userId = useContext(UserContext).id
+    const {userId} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
@@ -20,7 +20,7 @@ function SectionExperiencia (  ) {
         
         axios.get( `${import.meta.env.VITE_API_URL}/api/cv-experiencia`, {
             params: {
-                userID: userId
+                userId: userId
             }
         })
         .then( (response) => {

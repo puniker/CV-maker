@@ -9,7 +9,7 @@ import UserContext from '../../Context/UserContext'
 
 function SectionGeneral (  ) {
     
-    const userId = useContext(UserContext).id
+    const {userId} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
@@ -36,7 +36,7 @@ function SectionGeneral (  ) {
 
 
     const onSubmit = ( evt ) => {
-        console.log ( evt.estudios )
+        //console.log ( evt.estudios )
 
         axios.get(`${import.meta.env.VITE_API_URL}/api/cv-estudios/update`, {
             params: {

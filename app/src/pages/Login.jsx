@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import axios from "axios"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import {Grid, TextField, Button, Container, Alert, FormControl} from '@mui/material'
 import {Send} from '@mui/icons-material';
 import FormElements from "../components/FormElements"
+import UserContext from '../Context/UserContext'
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -18,6 +19,8 @@ export default ( {setIsLogged, setSession} ) => {
     const [isLoading, setIsLoading] = useState(false)
     const [loginError, setLoginError] = useState()
     const [showMsg, setShowMsg] = useState(false)
+
+    const {setUserId, setUserName} = useContext(UserContext)
 
     const submit = ( evt ) =>{
       //console.log( evt )
@@ -36,14 +39,16 @@ export default ( {setIsLogged, setSession} ) => {
             //console.log(loginResponse)
             if( loginResponse.access == true ) {
                 console.log('Acceso permitido. Bienvenido a la App.')
+                setUserId(loginResponse.userData.id)
+                setUserName(loginResponse.userData.username)
                 setLoginError(loginResponse.error)
                 //setIsLogged( true )
-                setSession( {"logged_in" : true, "user":loginResponse.userData} )
+                //setSession( {"logged_in" : true, "user":loginResponse.userData} )
             } else {
                 console.log('Error de acceso a la App.')
                 setLoginError(loginResponse.error)
                 //setIsLogged( false )
-                setSession( {"logged_in" : false} )
+                //setSession( {"logged_in" : false} )
                 setShowMsg(true)
                 setTimeout(()=>{ setShowMsg(false) }, 3000)
             }

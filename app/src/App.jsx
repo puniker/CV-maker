@@ -1,22 +1,21 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import Header from './components/header/index.jsx'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Pages from './pages'
 import AdminPages from './admin/pages'
-import UserContext from './Context/UserContext'
+import UserContext, {UserProvider} from './Context/UserContext'
 
 function App() {
 
-  const [session, setSession] = useState({'logged_in': false })
   
-  //console.log(session)
+  const {userId, userName, isAdmin} = useContext(UserContext)
+  console.log(userId)
   
-  if ( session.logged_in ) {
+  if ( userId ) {
     return (
       <div className="App">
-        <UserContext.Provider value={{'id': session.user.id, 'is_admin': session.user.is_admin}}>
-          <BrowserRouter>
-            <Header />
+        <BrowserRouter>
+          <Header />
           <Switch>
             <Route path="/crea-tu-cv">
               <Pages.CreaTuCv />
@@ -31,20 +30,19 @@ function App() {
               <Pages.Perfil />
             </Route>
             <Route path="/administrator">
-              { (session.user.is_admin) ? <AdminPages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
+              { (isAdmin) ? <AdminPages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
               
             </Route>
             <Route path="/" component={Pages.Home}></Route>
           </Switch>
-          </BrowserRouter>
-        </UserContext.Provider>
+        </BrowserRouter>
   
       </div>
     )
   } else {
     return (
       <div className="App">
-        <Pages.Login setSession={setSession} />
+        <Pages.Login />
       </div>
     )
   }

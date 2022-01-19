@@ -15,14 +15,14 @@ function VisualizacionPlantilla ( {template_id, referencia} ) {
     const [iframeHeight, setIframeHeight] = useState('2000px')
     const [template, setTemplate] = useState()
     const [isLoading, setIsLoading] = useState(true)
-    const user = useContext(UserContext)
+    const {userId} = useContext(UserContext)
 
     useEffect( () => {
         
         axios.get( plantillas_endpoint, {
             params: {
                 template_id: template_id,
-                user_id: user.id
+                user_id: userId
             }
         })
         .then( (response) => {

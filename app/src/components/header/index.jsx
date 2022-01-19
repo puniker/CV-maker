@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import {NavLink} from 'react-router-dom'
 import {AppBar, Box, Toolbar, Typography, IconButton, Switch, FormControlLabel, FormGroup, MenuItem, Menu} from '@mui/material'
 import {Menu as MenuIcon, AccountCircle as AccountCircle} from '@mui/icons-material'
-
+import UserContext from '../../Context/UserContext'
 
 const StyledNavLink = {
     color: 'white',
@@ -23,6 +23,7 @@ export default () => {
         //localStorage.removeItem('session')
         location.reload()
     }
+    const {userName} = useContext(UserContext)
 
     const [auth, setAuth] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -47,15 +48,6 @@ export default () => {
 
         <AppBar position="static">
             <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                <MenuIcon />
-                </IconButton>
                 <Typography  sx={{ flexGrow: 1 }}>
                     CV Maker
                 </Typography>
@@ -92,6 +84,7 @@ export default () => {
                         onClick={handleMenu}
                         color="inherit"
                     >
+                    <Typography  sx={{ flexGrow: 1 }}>{userName}</Typography>
                     <AccountCircle />
                     </IconButton>
                     <Menu

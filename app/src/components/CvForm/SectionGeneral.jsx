@@ -8,7 +8,7 @@ import UserContext from '../../Context/UserContext'
 
 function SectionGeneral (  ) {
     
-    const userId = useContext(UserContext).id
+    const {userId} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState()
     const [showMsg, setShowMsg] = useState(false)
