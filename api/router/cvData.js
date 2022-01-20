@@ -10,6 +10,7 @@ const allFields = [
   'telefono',
   'email',
   'fecha_nacimiento',
+  'imagen_perfil',
   'direccion',
   'lugar_nacimiento',
   'c_postal',

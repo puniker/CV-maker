@@ -91,6 +91,13 @@ function SectionGeneral (  ) {
             <form onSubmit={handleSubmit(onSubmit)} >
                 <section className="form-general">
                     <Grid container spacing={2} >
+                        <Grid item xs={12}>
+                            <FormElements.File 
+                                register={register}
+                                label="Imagen de perfil"  
+                                name='imagen_perfil'
+                            />
+                        </Grid>
                         <Grid item xs={6}>
                                 <FormElements.Input 
                                     type='text'
