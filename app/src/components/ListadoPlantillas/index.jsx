@@ -1,7 +1,7 @@
-import axios from "axios"
 import { NavLink } from "react-router-dom"
 import React, { useEffect, useState } from 'react'
 import { Alert, Grid, Button, Card, CardMedia, CardContent, CardActions, Typography} from '@mui/material'
+import {GetAllTemplatesService} from '../../services/PlantillasService'
 
 export default () => {
 
@@ -12,7 +12,7 @@ export default () => {
 
     useEffect( () => {
         
-        axios.get(`${import.meta.env.VITE_API_URL}/api/plantillas`)
+        GetAllTemplatesService()
         .then( ( response ) => {
             setTemplates( response.data )
             setIsLoading(false)

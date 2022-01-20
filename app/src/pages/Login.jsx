@@ -1,5 +1,4 @@
 import { useState, useContext } from "react"
-import axios from "axios"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
 import {Grid, TextField, Button, Container, Alert, FormControl} from '@mui/material'
@@ -7,6 +6,7 @@ import {Send} from '@mui/icons-material';
 import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
+import {UserLoginService} from '../services/UserService'
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -16,7 +16,6 @@ const FormWrapper = styled.section`
 `
 export default ( {setIsLogged, setSession} ) => {
 
-    const endpoint = `${import.meta.env.VITE_API_URL}/api/login`
     const [isLoading, setIsLoading] = useState(false)
     const [loginError, setLoginError] = useState()
     const [showMsg, setShowMsg] = useState(false)
@@ -28,12 +27,7 @@ export default ( {setIsLogged, setSession} ) => {
         evt.preventDefault
         setIsLoading( true )
 
-        axios.get(endpoint, {
-            params: {
-              username: evt.username,
-              password: evt.password
-            }
-          })
+          UserLoginService(evt.username, evt.password)
           .then(function (response) {
             //console.log(response);
             var loginResponse = response.data

@@ -1,10 +1,10 @@
-import axios from 'axios'
 import React, { useEffect, useState, useContext } from 'react'
 import FormElements from '../FormElements'
 import { useForm } from "react-hook-form"
 import {Grid, Alert, Button, Snackbar} from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
 import UserContext from '../../Context/UserContext'
+import CvService from '../../services/CvService'
 
 function SectionGeneral (  ) {
     
@@ -15,11 +15,7 @@ function SectionGeneral (  ) {
 
     useEffect( () => {
         
-        axios.get( `${import.meta.env.VITE_API_URL}/api/cv-data-general`, {
-            params: {
-                userID: userId
-            }
-        })
+        CvService.GetGeneralData(userId)
         .then( (response) => {
             setData( response.data )
             setIsLoading(false)
@@ -34,27 +30,7 @@ function SectionGeneral (  ) {
         evt.preventDefault
         //console.log( evt )
 
-        axios.get(`${import.meta.env.VITE_API_URL}/api/cv-data-general/update`, {
-            params: {
-                user_id: userId,
-                nombre: evt.nombre,
-                apellido: evt.apellido,
-                telefono: evt.telefono,
-                email: evt.email,
-                fecha_nacimiento: evt.fecha_nacimiento,
-                direccion: evt.direccion,
-                lugar_nacimiento: evt.lugar_nacimiento,
-                c_postal: evt.c_postal,
-                ciudad_pueblo: evt.ciudad_pueblo,
-                genero: evt.genero,
-                nacionalidad: evt.nacionalidad,
-                estado_civil: evt.estado_civil,
-                sitio_web: evt.sitio_web,
-                linkedin: evt.linkedin,
-                twitter: evt.twitter,
-                texto_descriptivo: evt.texto_descriptivo 
-            }
-        })
+        CvService.SaveGeneralData(evt, userId)
         .then(function (response) {
             console.log(response);
             if ( response.status = 200 ) {

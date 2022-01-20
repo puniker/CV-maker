@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react'
-import axios from 'axios'
 import FormElements from '../FormElements'
 import { useForm, useFieldArray } from "react-hook-form"
 import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Snackbar, Link} from '@mui/material'
 import {Delete as DeleteIcon, Save as SaveIcon, ExpandMore as ExpandMoreIcon, KeyboardArrowUp as KeyboardArrowUpIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material'
 import { v4 as uuidv4 } from 'uuid';
 import UserContext from '../../Context/UserContext'
+import CvService from '../../services/CvService'
 
 function SectionGeneral (  ) {
     
@@ -18,11 +18,7 @@ function SectionGeneral (  ) {
 
     useEffect( () => {
         
-        axios.get( `${import.meta.env.VITE_API_URL}/api/cv-estudios`, {
-            params: {
-                userID: userId
-            }
-        })
+        CvService.GetEstudiosData(userId)
         .then( (response) => {
             setFormItemCounter(response.data.length)
             setData( response.data )
@@ -38,12 +34,7 @@ function SectionGeneral (  ) {
     const onSubmit = ( evt ) => {
         //console.log ( evt.estudios )
 
-        axios.get(`${import.meta.env.VITE_API_URL}/api/cv-estudios/update`, {
-            params: {
-                user_id: userId,
-                data: evt.estudios
-            }
-        })
+        CvService.SaveEstudiosData(evt.estudios, userId)
         .then(function (response) {
             console.log(response);
             //setData(evt)
@@ -96,11 +87,7 @@ function SectionGeneral (  ) {
     
     const removeItem = (id) => {
         
-        axios.get(`${import.meta.env.VITE_API_URL}/api/cv-estudios/delete`, {
-            params: {
-                id: id,
-            }
-        })
+        CvService.RemoveEstudiosData(id)
         .then(function (response) {
             console.log(response);
             //setData(evt)

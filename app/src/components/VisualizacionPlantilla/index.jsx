@@ -3,8 +3,6 @@ import axios from 'axios'
 import { Alert, Container, Button } from "@mui/material"
 import UserContext from '../../Context/UserContext'
 import {PictureAsPdf as PictureAsPdfIcon} from '@mui/icons-material'
-import { jsPDF } from "jspdf"
-import FileController from '../../controller/FileController'
 
 const plantillas_endpoint = `${import.meta.env.VITE_API_URL}/api/render-plantilla`
 
