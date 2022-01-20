@@ -15,6 +15,7 @@ import {
 } from '@mui/material'
 import {Brightness7 as Brightness7Icon, Brightness4 as Brightness4Icon, Menu as MenuIcon, AccountCircle as AccountCircle} from '@mui/icons-material'
 import UserContext from '../../Context/UserContext'
+import SiteLogo from '../../assets/images/site-logo.png'
 
 const menuLinks = [
   {
@@ -86,7 +87,7 @@ return (
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            LOGO
+            <img src={SiteLogo} alt="Generador de CV online" style={{maxWidth: '150px'}} />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
