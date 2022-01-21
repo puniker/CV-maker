@@ -20,30 +20,28 @@ export default ( {setIsLogged, setSession} ) => {
     const [loginError, setLoginError] = useState()
     const [showMsg, setShowMsg] = useState(false)
 
-    const {setUserId, setUserName} = useContext(UserContext)
+    const {setUserId, setUserName, setIsAdmin} = useContext(UserContext)
 
     const submit = ( evt ) =>{
-      //console.log( evt )
+
         evt.preventDefault
         setIsLoading( true )
 
           UserLoginService(evt.username, evt.password)
           .then(function (response) {
-            //console.log(response);
-            var loginResponse = response.data
-            //console.log(loginResponse)
-            if( loginResponse.access == true ) {
+
+            const loginResponse = response.data
+            if( loginResponse.success == true ) {
                 console.log('Acceso permitido. Bienvenido a la App.')
-                setUserId(loginResponse.userData.id)
-                setUserName(loginResponse.userData.username)
-                setLoginError(loginResponse.error)
-                //setIsLogged( true )
-                //setSession( {"logged_in" : true, "user":loginResponse.userData} )
+                setUserId(loginResponse.data.id)
+                setUserName(loginResponse.data.username)
+                setIsAdmin(true)
+                setLoginError(loginResponse.message)
+                console.log(loginResponse)                
+                window.localStorage.setItem('user', JSON.stringify( {"id": loginResponse.data.id, "username": loginResponse.data.username, "is_admin": loginResponse.data.is_admin} ))
             } else {
                 console.log('Error de acceso a la App.')
-                setLoginError(loginResponse.error)
-                //setIsLogged( false )
-                //setSession( {"logged_in" : false} )
+                setLoginError(loginResponse.message)
                 setShowMsg(true)
                 setTimeout(()=>{ setShowMsg(false) }, 3000)
             }
@@ -52,9 +50,7 @@ export default ( {setIsLogged, setSession} ) => {
           .catch(function (error) {
             console.log(error);
           })
-          .then(function () {
-            // always executed
-          });  
+
     }
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();

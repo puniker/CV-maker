@@ -16,6 +16,7 @@ import {
 import {Brightness7 as Brightness7Icon, Brightness4 as Brightness4Icon, Menu as MenuIcon, AccountCircle as AccountCircle} from '@mui/icons-material'
 import UserContext from '../../Context/UserContext'
 import SiteLogo from '../../assets/images/site-logo.png'
+import {Logout} from '../../controller/UserController'
 
 const menuLinks = [
   {
@@ -31,37 +32,22 @@ const menuLinks = [
     url: "/descarga-cv"
   },
 ]
-const userMenuLinks = [
-  {
-    title: "Perfil",
-    url: "/user"
-  },
-  {
-    title: "Administrador",
-    url: "/administrator"
-  },
-  {
-    title: "Ajustes",
-    url: "/user"
-  },
-  {
-    title: "Cerrar sesión",
-    url: "/user"
-  }
-]
 
 export default () => {
     
-  const log_out = () => {
-      //localStorage.removeItem('session')
-      location.reload()
-  }
+
   const {userName} = useContext(UserContext)
 
 
   const [anchorElNav, setAnchorElNav] = useState(null)
   const [anchorElUser, setAnchorElUser] = useState(null)
 
+  const handleLogOut = () => {
+    Logout()
+    handleCloseUserMenu()
+    location.reload()
+  }
+  
   const handleOpenNavMenu = (event) => {
       setAnchorElNav(event.currentTarget)
   }
@@ -169,13 +155,24 @@ return (
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userMenuLinks.map((link) => (
-                <MenuItem key={link.url} onClick={handleCloseNavMenu}>
-                  <NavLink to={link.url}>
-                    <Typography textAlign="center">{link.title}</Typography>
-                  </NavLink>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink to="/user">
+                  <Typography textAlign="center">Perfil</Typography>
+                </NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink to="/administrator">
+                  <Typography textAlign="center">Administrador</Typography>
+                </NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <NavLink to="/user">
+                  <Typography textAlign="center">Ajustes</Typography>
+                </NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleLogOut}>
+                <Typography textAlign="center">Cerrar sesión</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

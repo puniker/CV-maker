@@ -4,11 +4,14 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Pages from './pages'
 import AdminPages from './admin/pages'
 import UserContext, {UserProvider} from './Context/UserContext'
+import {SetInitialContext} from './controller/AppInitController'
 
 function App() {
 
   const {userId, isAdmin} = useContext(UserContext)
   
+  SetInitialContext()
+
   return (
     <div className="App">
       <BrowserRouter>
