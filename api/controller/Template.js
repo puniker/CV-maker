@@ -31,8 +31,8 @@ const TemplateRoutes = async ( template_id ) => {
         "id": template_id
     }
     const template_data = await GetTemplate(template_id)
-    output.twig = path.resolve(`templates/${template_data.machine_name}/${template_data.machine_name}.twig`)
-    output.css  = path.resolve(`templates/${template_data.machine_name}/${template_data.machine_name}.css`)
+    output.html = path.resolve(`templates/${template_data.machine_name}/${template_data.machine_name}.html`)
+    //output.css  = path.resolve(`templates/${template_data.machine_name}/${template_data.machine_name}.css`)
 
     return new Promise((resolve) => {
         resolve(output)
@@ -73,4 +73,4 @@ const TemplateHtmlBuild = ( rutas, body ) => {
 
 }
 
-module.exports = {RenderTemplate}
+module.exports = {RenderTemplate, TemplateRoutes}
