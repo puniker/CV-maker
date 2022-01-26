@@ -3,6 +3,7 @@ const pdf = require("pdf-creator-node")
 const fs = require("fs")
 const {TemplateRoutes} = require('../controller/Template')
 const { CvFullData } = require('../models/cv-data')
+const Mustache = require('mustache')
 
 const app = express()
 
@@ -13,7 +14,7 @@ var pdfFormat = {
     border: "10mm"
 }
 
-app.use('/', async (req, res) => {
+app.use('/2/preview', async (req, res) => {
     
     const html_route = await TemplateRoutes(1)
 

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom"
 import React, { useEffect, useState } from 'react'
 import { Alert, Grid, Button, Card, CardMedia, CardContent, CardActions, Typography} from '@mui/material'
 import {GetAllTemplatesService} from '../../services/PlantillasService'
+import PlantillaImage from '../../assets/images/logotipo.jpg'
 
 export default () => {
 
@@ -37,7 +38,7 @@ export default () => {
                                 <CardMedia
                                     component="img"
                                     height="140"
-                                    image={template.thumbnail}
+                                    image={PlantillaImage}
                                     alt={template.name}
                                 />
                                 <CardContent>
@@ -49,9 +50,7 @@ export default () => {
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Share</Button>
-                                    <Button size="small">Usar plantilla</Button>
-                                    <NavLink to={`/plantilla/${template.id}`}>Seleccionar</NavLink>
+                                    <NavLink to={`/plantilla/${template.id}`}><Button size="small">Usar plantilla</Button></NavLink>
                                 </CardActions>
                             </Card>
                         )

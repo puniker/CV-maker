@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import SectionGeneral from './SectionGeneral'
 import SectionEstudios from './SectionEstudios'
 import SectionExperiencia from './SectionExperiencia'
-import Prueba from './Prueba'
 import { Box, Container, Tabs, Tab, Typography} from '@mui/material'
 import PropTypes from 'prop-types';
 

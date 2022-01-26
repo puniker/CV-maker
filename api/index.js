@@ -18,6 +18,6 @@ app.use('/api', Router.user)
 app.use('/api', Router.cvData)
 app.use('/api', Router.Plantillas)
 
-app.use('/plantilla/2/preview', Router.PlantillaPreview )
+app.use('/api/template', Router.PlantillaPreview)
 
 app.listen(process.env.PORT, () => { console.log(`API levantada en el puerto ${process.env.PORT}`) })

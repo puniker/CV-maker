@@ -40,24 +40,15 @@ function VisualizacionPlantilla ( {template_id, referencia} ) {
 
     
 
-    if ( isLoading ) {
-        return <Alert key="loading-data" severity="info">Cargando tu plantilla...</Alert>
-    }
+    //if ( isLoading ) {
+    //    return <Alert key="loading-data" severity="info">Cargando tu plantilla...</Alert>
+    //}
     
     return (
         <>
-            <Container>
-            <Button color="secondary">Generar PDF <PictureAsPdfIcon /></Button>
-            </Container>
-            <div ref={ref} id="iker">
-                <iframe 
-                    ref={iframeRef}
-                    srcDoc={template}
-                    //style={{ width: '1px', minWidth: '100%'}}
-                    width="1000px"
-                    height="1600px"
-                    onLoad={ onLoad }
-                />
+            <Button color="secondary">Descargar PDF <PictureAsPdfIcon /></Button>
+            <div >
+                <h4>Aquí iría la plantilla</h4>
 
             </div>
         </>
