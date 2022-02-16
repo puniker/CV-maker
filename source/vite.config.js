@@ -6,6 +6,6 @@ export default defineConfig({
   root: 'app',
   plugins: [react()],
   build:{
-    outDir: 'dist'
+    outDir: '../api/dist'
   }
 })
