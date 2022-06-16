@@ -7,6 +7,7 @@ import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
 import {UserLoginService} from '../services/UserService'
+import { createFirebaseUser, loginFirebase } from '../services/firebaseService'
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -27,28 +28,21 @@ export default ( {setIsLogged, setSession} ) => {
         evt.preventDefault
         setIsLoading( true )
 
-          UserLoginService(evt.username, evt.password)
+        loginFirebase(evt.username, evt.password)
           .then(function (response) {
-
-            const loginResponse = response.data
-            if( loginResponse.success == true ) {
-                console.log('Acceso permitido. Bienvenido a la App.')
-                setUserId(loginResponse.data.id)
-                setUserName(loginResponse.data.username)
-                setIsAdmin(true)
-                setLoginError(loginResponse.message)
-                console.log(loginResponse)                
-                window.localStorage.setItem('user', JSON.stringify( {"id": loginResponse.data.id, "username": loginResponse.data.username, "is_admin": loginResponse.data.is_admin} ))
-            } else {
-                console.log('Error de acceso a la App.')
-                setLoginError(loginResponse.message)
-                setShowMsg(true)
-                setTimeout(()=>{ setShowMsg(false) }, 3000)
-            }
-
+            console.log('Acceso permitido. Bienvenido a la App.')
+            setUserId(1)
+            setUserName(response.email)
+            setIsAdmin(true)
+            console.log(response)                
+            window.localStorage.setItem('user', JSON.stringify( {"id": 1, "username": puniker, "is_admin": true} ))
           })
           .catch(function (error) {
             console.log(error);
+            console.log('Error de acceso a la App.')
+            setLoginError(error)
+            setShowMsg(true)
+            setTimeout(()=>{ setShowMsg(false) }, 3000)
           })
 
     }
