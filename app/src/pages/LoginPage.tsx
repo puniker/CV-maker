@@ -1,10 +1,11 @@
 import { useState, useContext } from "react"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
-import {Grid, TextField, Button, Container, Alert, FormControl} from '@mui/material'
+import {Grid, TextField, Button, Container, Alert, FormControl, useTheme} from '@mui/material'
 import {Send} from '@mui/icons-material';
 import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
+import ThemeContext from '../Context/ThemeContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
 import {UserLoginService} from '../services/UserService'
 import { createFirebaseUser, loginFirebase } from '../services/firebaseService'
@@ -47,6 +48,8 @@ export default ( ) => {
 
     }
 
+    // const theme = useTheme();
+    // const colorMode = useContext(ThemeContext);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     return (

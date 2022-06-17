@@ -7,6 +7,7 @@ import UserContext, {UserProvider} from './Context/UserContext'
 import {SetInitialContext} from './controller/AppInitController'
 import CreaTuCv from './pages/CreaTuCvPage.js'
 import LoginPage from './pages/LoginPage.js'
+import { Grid } from '@mui/material'
 
 function App() {
 
@@ -15,8 +16,13 @@ function App() {
   SetInitialContext()
 
   return (
-    <div className="App">
-      <BrowserRouter>
+    <Grid className="App" 
+    sx={{
+      minHeight: '100vh', 
+      bgcolor: 'background.default',
+      color: 'text.primary',
+    }}>
+      <BrowserRouter >
           {(userId) && <Header /> }
           {(userId) ? <Redirect to="/crea-tu-cv" /> : <Redirect to="/login" /> }
           <Switch>
@@ -41,7 +47,7 @@ function App() {
             <Route path="/" component={Pages.Home}> </Route>
           </Switch>
       </BrowserRouter>
-    </div>
+    </Grid>
   )
 
 }
