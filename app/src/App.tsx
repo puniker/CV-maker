@@ -8,6 +8,7 @@ import {SetInitialContext} from './controller/AppInitController'
 import CreaTuCv from './pages/CreaTuCvPage.js'
 import LoginPage from './pages/LoginPage.js'
 import { Grid } from '@mui/material'
+import SignUpPage from './pages/SignUpPage.js'
 
 function App() {
 
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path="/login">
               <LoginPage />
+            </Route>
+            <Route path="/registro">
+              <SignUpPage />
             </Route>
             <Route path="/" component={Pages.Home}> </Route>
           </Switch>

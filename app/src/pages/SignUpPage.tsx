@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { useForm } from "react-hook-form"
 import styled from "styled-components"
-import {Grid, TextField, Button, Container, Alert, FormControl, useTheme, Link, Typography} from '@mui/material'
+import {Grid, TextField, Button, Container, Alert, FormControl, Typography} from '@mui/material'
 import {Send} from '@mui/icons-material';
 import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
@@ -19,26 +19,28 @@ const FormWrapper = styled.section`
 export default ( ) => {
 
     const [isLoading, setIsLoading] = useState(false)
-    const [loginError, setLoginError] = useState<string>()
-    const [showMsg, setShowMsg] = useState<boolean>(false)
+    const [loginError, setLoginError] = useState()
+    const [showMsg, setShowMsg] = useState(false)
 
     const {setUserId, setUserName, setIsAdmin} = useContext<any>(UserContext)
 
-    const submit = ( evt ) =>{
+    const submit = ( evt: any ) =>{
 
         evt.preventDefault
         setIsLoading( true )
 
-        loginFirebase(evt.username, evt.password)
-          .then(function (response: any ) {
-            console.log('Acceso permitido. Bienvenido a la App.')
+        createFirebaseUser(evt.username, evt.password)
+          .then(function (response: any) {
+            console.log('Acceso permitido. Bienvenido a la App.', response)
             setUserId(response.user.uid)
             setUserName(response.user.email)
             setIsAdmin(true)
-            console.log(response)              
+            console.log(response)                
             window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": true} ))
           })
           .catch(function (error) {
+            console.log(error);
+            console.log('Error de acceso a la App.')
             setLoginError(error)
             setShowMsg(true)
             setTimeout(()=>{ setShowMsg(false) }, 3000)
@@ -54,8 +56,25 @@ export default ( ) => {
         <>
             <Container>
               <FormWrapper>
+                <Typography variant='h5' textAlign={'center'}>Resgitrate y empieza a crear tu CV!</Typography>
                 <form onSubmit={handleSubmit(submit)} >
                   <Grid container spacing={1}>
+                    <Grid item xs={12}>
+                      <FormElements.Input 
+                          type='text'
+                          register={register}
+                          label="Nombre"  
+                          name='name'
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormElements.Input 
+                          type='text'
+                          register={register}
+                          label="Apellidos"  
+                          name='surname'
+                      />
+                    </Grid>
                     <Grid item xs={12}>
                       <FormElements.Input 
                           type='text'
@@ -87,13 +106,13 @@ export default ( ) => {
                     </Grid>
 
                     <Grid item xs={12}>
-                      { ( showMsg ) ? <Alert key="error-msg" severity="error">{loginError}</Alert> : '' }
+                      { ( showMsg ) ? <Alert key="error-msg" severity="error" show={showMsg.toString()}>{loginError}</Alert> : '' }
                     </Grid>
                   </Grid>
                   
                 </form>
-                <NavLink to="/registro">
-                  <Typography textAlign="center">Registrarte</Typography>
+                <NavLink to="/login">
+                  <Typography textAlign="center">Inicia sesión con tu cuenta</Typography>
                 </NavLink>
                 <Grid item xs={12}>
                   <ThemeSwitcher />

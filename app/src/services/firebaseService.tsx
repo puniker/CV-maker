@@ -5,22 +5,26 @@ const auth = getAuth(firebaseInit);
 
 export const createFirebaseUser = (email: string, password: string) => {
 
-    return createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            debugger;
-            // Signed in
-            const user = userCredential.user;
-            // ...
+    return new Promise((resolve, reject) => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((response) => {
+            resolve(response);
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.error(errorCode, errorMessage);
-        });
-
+            reject('Email o contraseña no válidos.');
+        })
+    });
 }
 
 export const loginFirebase = (username: string, password: string) => {
-    return signInWithEmailAndPassword(auth, username, password)
+    return new Promise((resolve, reject) => {
+        signInWithEmailAndPassword(auth, username, password)
+            .then((response) => {
+                resolve(response);
+            })
+            .catch((error) => {
+                reject('Acceso denegado');
+            })
+    })
 }
 
