@@ -1,9 +1,1 @@
-node_modules
-.DS_Store
-public
-dist
-dist-ssr
-*.local
-.env
-package-lock.json
-api/*.pdf
+/node_modules
