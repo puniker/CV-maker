@@ -31,11 +31,11 @@ export default ( {setIsLogged, setSession} ) => {
         loginFirebase(evt.username, evt.password)
           .then(function (response) {
             console.log('Acceso permitido. Bienvenido a la App.')
-            setUserId(1)
-            setUserName(response.email)
+            setUserId(response.user.uid)
+            setUserName(response.user.email)
             setIsAdmin(true)
             console.log(response)                
-            window.localStorage.setItem('user', JSON.stringify( {"id": 1, "username": puniker, "is_admin": true} ))
+            window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": true} ))
           })
           .catch(function (error) {
             console.log(error);
