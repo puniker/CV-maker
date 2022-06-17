@@ -5,6 +5,7 @@ import {Grid, Alert, Button, Snackbar} from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
 import UserContext from '../../Context/UserContext'
 import CvService from '../../services/CvService'
+import { getGeneral } from '../../services/firestoreDatabaseService';
 
 function SectionGeneral (  ) {
     
@@ -14,7 +15,10 @@ function SectionGeneral (  ) {
     const [showMsg, setShowMsg] = useState(false)
 
     useEffect( () => {
-        
+        // getGeneral(userId).then((response) => {
+        //     console.log('resolve', response);
+        // });
+        // debugger;
         CvService.GetGeneralData(userId)
         .then( (response) => {
             setData( response.data )
