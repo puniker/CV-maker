@@ -24,9 +24,9 @@ export default ({label, name, register, required, defaultValue, options, descrip
             >
             {options.map( e => {
                 if ( e == defaultValue ) {
-                    return <MenuItem value={e}>{e}</MenuItem>
+                    return <MenuItem key={`form_input_k_${e}`} value={e}>{e}</MenuItem>
                 } else {
-                    return <MenuItem value={e}>{e}</MenuItem>
+                    return <MenuItem key={`form_input_k_${e}`} value={e}>{e}</MenuItem>
                 }
             } )}
             </Select>

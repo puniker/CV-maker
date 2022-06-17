@@ -8,7 +8,6 @@ export const getGeneral = async (userId: string) => {
     const document = await getDoc(doc(firestoreDb, "general", userId));
     return new Promise<UserGeneralDataModel>((resolve, reject) => {   
         if(document.exists()) {
-            console.log(document.data());
             resolve(new UserGeneralDataModel(document.data()));
         } else {
             reject("Document does not exist");

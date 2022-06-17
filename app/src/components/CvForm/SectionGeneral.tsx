@@ -17,7 +17,6 @@ function SectionGeneral (  ) {
 
     useEffect( () => {
         getGeneral(userId).then((response: UserGeneralDataModel) => {
-            console.log('resolve', response);
             setData( response )
             setIsLoading(false)
         });

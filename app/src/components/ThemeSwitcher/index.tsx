@@ -3,7 +3,7 @@ import {LightMode, DarkMode} from '@mui/icons-material'
 import ThemeContext from '../../Context/ThemeContext'
 
 export default () => {
-    const {themeColor, setThemeColor } = useContext(ThemeContext)
+    const {themeColor, setThemeColor } = useContext<any>(ThemeContext)
     
     const switchTheme = () => {
         if ( themeColor === 'light' ) {
