@@ -4,51 +4,35 @@ import { useForm } from "react-hook-form"
 import {Grid, Alert, Button, Snackbar} from '@mui/material'
 import SaveIcon from '@mui/icons-material/Save';
 import UserContext from '../../Context/UserContext'
-import CvService from '../../services/CvService'
-import { getGeneral } from '../../services/firestoreDatabaseService';
+// import CvService from '../../services/CvService'
+import { getGeneral, updateGeneralData } from '../../services/firestoreDatabaseService';
+import { UserGeneralDataModel } from '../../models/UserGeneralDataModel'
 
 function SectionGeneral (  ) {
     
     const {userId} = useContext(UserContext)
     const [isLoading, setIsLoading] = useState(true)
-    const [data, setData] = useState()
+    const [data, setData] = useState<UserGeneralDataModel>()
     const [showMsg, setShowMsg] = useState(false)
 
     useEffect( () => {
-        // getGeneral(userId).then((response) => {
-        //     console.log('resolve', response);
-        // });
-        // debugger;
-        CvService.GetGeneralData(userId)
-        .then( (response) => {
-            setData( response.data )
+        getGeneral(userId).then((response: UserGeneralDataModel) => {
+            console.log('resolve', response);
+            setData( response )
             setIsLoading(false)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        
+        });
     }, [])
     
-    const onSubmit = ( evt ) => {
+    const onSubmit = ( evt: any ) => {
         evt.preventDefault
-        //console.log( evt )
-
-        CvService.SaveGeneralData(evt, userId)
-        .then(function (response) {
-            console.log(response);
-            if ( response.status = 200 ) {
+        console.log( evt )
+        updateGeneralData(userId, evt)
+            .then(response => {
+                console.log(response);
                 setData(evt)
                 setShowMsg(true)
                 setTimeout(()=>{ setShowMsg(false) }, 3000)
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed    code ...
-        })
+            });
     }
     
     const handleCloseAlert = () => {
@@ -71,20 +55,20 @@ function SectionGeneral (  ) {
             <form onSubmit={handleSubmit(onSubmit)} >
                 <section className="form-general">
                     <Grid container spacing={2} >
-                        <Grid item xs={12}>
+                        {/* <Grid item xs={12}>
                             <FormElements.File 
                                 register={register}
                                 label="Imagen de perfil"  
                                 name='imagen_perfil'
                             />
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={6}>
                                 <FormElements.Input 
                                     type='text'
                                     register={register}
                                     label="Nombre"  
-                                    name='nombre'
-                                    defaultValue={ data.nombre }
+                                    name='name'
+                                    defaultValue={ data?.name }
                                 />
                         </Grid>
                         <Grid item xs={6}>
@@ -92,8 +76,8 @@ function SectionGeneral (  ) {
                                     type='text'
                                     register={register}
                                     label="Apellidos"
-                                    name='apellido'
-                                    defaultValue={data.apellido}
+                                    name='surname'
+                                    defaultValue={data?.surname}
                                 />
                         </Grid>
                         <Grid item xs={6}>
@@ -102,7 +86,7 @@ function SectionGeneral (  ) {
                                 register={register}
                                 label="Email de contacto"  
                                 name='email'
-                                defaultValue={data.email}
+                                defaultValue={data?.email}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -111,7 +95,7 @@ function SectionGeneral (  ) {
                                 register={register}
                                 label="Teléfono"  
                                 name='telefono'
-                                defaultValue={data.telefono}
+                                defaultValue={data?.telefono}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -120,7 +104,7 @@ function SectionGeneral (  ) {
                                 register={register}
                                 label="Direccion"  
                                 name='direccion'
-                                defaultValue={data.direccion}
+                                defaultValue={data?.direccion}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -128,8 +112,8 @@ function SectionGeneral (  ) {
                                 type='date'
                                 register={register}
                                 label="Fecha de nacimiento"  
-                                name='fecha_nacimiento'
-                                defaultValue={data.fecha_nacimiento}
+                                name='birth_date'
+                                defaultValue={data?.birth_date}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -137,8 +121,8 @@ function SectionGeneral (  ) {
                                 type='text'
                                 register={register}
                                 label="Lugar de nacimiento"  
-                                name='lugar_nacimiento'
-                                defaultValue={data.lugar_nacimiento}
+                                name='place_of_birth'
+                                defaultValue={data?.place_of_birth}
                             />
                         </Grid>
                         
@@ -149,7 +133,7 @@ function SectionGeneral (  ) {
                                 label="Código postal"  
                                 name='c_postal'
                                 required="required"
-                                defaultValue={data.c_postal}
+                                defaultValue={data?.c_postal}
                             />
                         </Grid>
                         <Grid item xs={6}>
@@ -157,8 +141,8 @@ function SectionGeneral (  ) {
                                 type='text'
                                 register={register}
                                 label="Ciudad/Pueblo"  
-                                name='ciudad_pueblo'
-                                defaultValue={data.ciudad_pueblo}
+                                name='city'
+                                defaultValue={data?.city}
                             />
                         </Grid>
                         
@@ -166,8 +150,8 @@ function SectionGeneral (  ) {
                             <FormElements.Select
                                 register={register}
                                 label="Género"  
-                                name='genero'
-                                defaultValue={data.genero}
+                                name='gender'
+                                defaultValue={data?.gender}
                                 options={['Masculino', 'Femenino']}
                             />
                         </Grid>
@@ -176,8 +160,8 @@ function SectionGeneral (  ) {
                                 type='text'
                                 register={register}
                                 label="Nacionalidad"  
-                                name='nacionalidad'
-                                defaultValue={data.nacionalidad}
+                                name='nationality'
+                                defaultValue={data?.nationality}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -186,7 +170,7 @@ function SectionGeneral (  ) {
                                 register={register}
                                 label="Estado civil"  
                                 name='estado_civil'
-                                defaultValue={data.estado_civil}
+                                defaultValue={data?.estado_civil}
                             />
                         </Grid>
                         
@@ -195,8 +179,8 @@ function SectionGeneral (  ) {
                                 type='text'
                                 register={register}
                                 label="Sitio Web"  
-                                name='sitio_web'
-                                defaultValue={data.sitio_web}
+                                name='website'
+                                defaultValue={data?.website}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -204,8 +188,8 @@ function SectionGeneral (  ) {
                                 type='text'
                                 register={register}
                                 label="LinkedIn"  
-                                name='linkedin'
-                                defaultValue={data.linkedin}
+                                name='linkedIn'
+                                defaultValue={data?.linkedIn}
                             />
                         </Grid>
                         <Grid item xs={4}>
@@ -214,7 +198,7 @@ function SectionGeneral (  ) {
                                 register={register}
                                 label="Twitter"  
                                 name='twitter'
-                                defaultValue={data.twitter}
+                                defaultValue={data?.twitter}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -222,8 +206,8 @@ function SectionGeneral (  ) {
                                 type='text'
                                 register={register}
                                 label="Texto Descriptivo"  
-                                name='texto_descriptivo'
-                                defaultValue={data.texto_descriptivo}
+                                name='description'
+                                defaultValue={data?.description}
                             />
                         </Grid>
                         

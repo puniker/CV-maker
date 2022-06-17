@@ -3,9 +3,9 @@ import {ThemeProvider as MuiThemeProvider, createTheme } from '@mui/material/sty
 
 const Context = createContext({})
 
-export function ThemeProvider ( {children} ) {
+export function ThemeProvider ( {children}: any ) {
 
-    const [themeColor, setThemeColor] = useState('light') // varia entre light y dark
+    const [themeColor, setThemeColor] = useState<'light' | 'dark'>('light') // varia entre light y dark
 
     const theme = createTheme({
         palette: {

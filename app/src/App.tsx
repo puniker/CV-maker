@@ -5,10 +5,12 @@ import Pages from './pages'
 import AdminPages from './admin/pages'
 import UserContext, {UserProvider} from './Context/UserContext'
 import {SetInitialContext} from './controller/AppInitController'
+import CreaTuCv from './pages/CreaTuCvPage.js'
+import LoginPage from './pages/LoginPage.js'
 
 function App() {
 
-  const {userId, isAdmin} = useContext(UserContext)
+  const {userId, isAdmin} = useContext<any>(UserContext)
   
   SetInitialContext()
 
@@ -19,7 +21,7 @@ function App() {
           {(userId) ? <Redirect to="/crea-tu-cv" /> : <Redirect to="/login" /> }
           <Switch>
             <Route path="/crea-tu-cv">
-              <Pages.CreaTuCv />
+              <CreaTuCv />
             </Route>
             <Route path="/plantillas">
               <Pages.Plantillas />
@@ -34,7 +36,7 @@ function App() {
               { (isAdmin) ? <AdminPages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
             </Route>
             <Route path="/login">
-              <Pages.Login />
+              <LoginPage />
             </Route>
             <Route path="/" component={Pages.Home}> </Route>
           </Switch>

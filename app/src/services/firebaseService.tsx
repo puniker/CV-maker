@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 
 const auth = getAuth(firebaseInit);
 
-export const createFirebaseUser = (email, password) => {
+export const createFirebaseUser = (email: string, password: string) => {
 
     return createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -20,7 +20,7 @@ export const createFirebaseUser = (email, password) => {
 
 }
 
-export const loginFirebase = (username, password) => {
+export const loginFirebase = (username: string, password: string) => {
     return signInWithEmailAndPassword(auth, username, password)
 }
 

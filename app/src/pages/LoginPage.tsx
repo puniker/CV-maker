@@ -15,13 +15,13 @@ const FormWrapper = styled.section`
   padding: 20px 40px;
   border: 1px solid lightgrey;
 `
-export default ( {setIsLogged, setSession} ) => {
+export default ( ) => {
 
     const [isLoading, setIsLoading] = useState(false)
     const [loginError, setLoginError] = useState()
     const [showMsg, setShowMsg] = useState(false)
 
-    const {setUserId, setUserName, setIsAdmin} = useContext(UserContext)
+    const {setUserId, setUserName, setIsAdmin} = useContext<any>(UserContext)
 
     const submit = ( evt ) =>{
 

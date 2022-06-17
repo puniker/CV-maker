@@ -1,7 +1,14 @@
 import { FormControlLabel, FormGroup, Checkbox } from "@mui/material"
 import React from "react"
 
-export default ({label, name, register, required, defaultChecked=false}) => {
+interface Props {
+    label: string;
+    name: string;
+    register: any;
+    required?: boolean;
+    defaultChecked?: boolean;
+}
+export default ({label, name, register, required, defaultChecked=false}: Props) => {
 
     return (
         <FormGroup>
