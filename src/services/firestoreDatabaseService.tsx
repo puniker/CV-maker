@@ -10,6 +10,7 @@ export const getGeneral = async (userId: string) => {
         if(document.exists()) {
             resolve(new UserGeneralDataModel(document.data()));
         } else {
+            console.error('Este usuario de momento no tiene datos.');
             reject("Document does not exist");
         }
     })

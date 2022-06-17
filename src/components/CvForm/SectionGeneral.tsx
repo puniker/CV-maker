@@ -16,10 +16,13 @@ function SectionGeneral (  ) {
     const [showMsg, setShowMsg] = useState(false)
 
     useEffect( () => {
-        getGeneral(userId).then((response: UserGeneralDataModel) => {
+        getGeneral(userId)
+        .then((response: UserGeneralDataModel) => {
             setData( response )
-            setIsLoading(false)
-        });
+        })
+        .finally(() => {
+            setIsLoading(false);
+        })
     }, [])
     
     const onSubmit = ( evt: any ) => {
