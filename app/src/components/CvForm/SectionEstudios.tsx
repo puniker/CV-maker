@@ -6,46 +6,33 @@ import {Delete as DeleteIcon, Save as SaveIcon, ExpandMore as ExpandMoreIcon, Ke
 import { v4 as uuidv4 } from 'uuid';
 import UserContext from '../../Context/UserContext'
 import CvService from '../../services/CvService'
+import { getStudies, removeStudie, updateStudies } from '../../services/firestoreDatabaseService'
+import { UserStudiesDataModel } from '../../models/UserStudiesDataModel'
 
 function SectionGeneral (  ) {
     
-    const {userId} = useContext(UserContext)
+    const {userId} = useContext<any>(UserContext)
     const [isLoading, setIsLoading] = useState(true)
-    const [data, setData] = useState()
+    const [data, setData] = useState<UserStudiesDataModel[]>([])
     const [showMsg, setShowMsg] = useState(false)
 
-    const [formItemCounter, setFormItemCounter] = useState( )
+    const [formItemCounter, setFormItemCounter] = useState<any>( )
 
     useEffect( () => {
-        
-        CvService.GetEstudiosData(userId)
-        .then( (response) => {
-            setFormItemCounter(response.data.length)
-            setData( response.data )
+        getStudies(userId).then((response: UserEstudiesDataModel[]) => {
+            setFormItemCounter(response.length)
+            setData( response )
             setIsLoading(false)
         })
-        .catch(function (error) {
-            console.log(error);
-        })
-        
     }, [])
 
 
-    const onSubmit = ( evt ) => {
-        //console.log ( evt.estudios )
-
-        CvService.SaveEstudiosData(evt.estudios, userId)
-        .then(function (response) {
-            console.log(response);
-            //setData(evt)
+    const onSubmit = ( evt: any ) => {
+        console.log ( evt.estudios )
+        updateStudies(userId, evt.estudios).then(response => {
+            console.log(response)
             setShowMsg(true)
             setTimeout(()=>{ setShowMsg(false) }, 3000)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed    code ...
         })
         
     }
@@ -85,25 +72,16 @@ function SectionGeneral (  ) {
         
     }
     
-    const removeItem = (id) => {
+    const removeItem = (id: string) => {
         
-        CvService.RemoveEstudiosData(id)
-        .then(function (response) {
-            console.log(response);
-            //setData(evt)
+        removeStudie(userId, id).then(response => {
             setFormItemCounter( formItemCounter - 1 )
             const values  = [...data];
             values.splice(values.findIndex(value => value.id === id), 1);
             setData(values);
             setShowMsg(true)
             setTimeout(()=>{ setShowMsg(false) }, 3000)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed    code ...
-        })
+        });
         
     }
     
@@ -160,8 +138,7 @@ function SectionGeneral (  ) {
                 </Alert>
             </Snackbar>
             <form className="" onSubmit={handleSubmit(onSubmit)} >
-
-                { fieldsNumberToArray().map((i) => (
+                { data && data.length > 0 && fieldsNumberToArray().map((i) => (
                 
                     <Accordion key={`accordion_key_${data[i].id}`}>
                         <AccordionSummary
@@ -169,16 +146,16 @@ function SectionGeneral (  ) {
                         aria-controls="panel1a-content"
                         id={`panel${i}a-header`}
                         >
-                            <Link onClick={() => upElement(data[i].id)}><KeyboardArrowUpIcon /></Link>
-                            <Link onClick={() => downElement(data[i].id)}><KeyboardArrowDownIcon /></Link>
-                            <Typography>{data[i].titulo}</Typography>
+                            {/* <Link onClick={() => upElement(data[i]?.id)}><KeyboardArrowUpIcon /></Link>
+                            <Link onClick={() => downElement(data[i]?.id)}><KeyboardArrowDownIcon /></Link> */}
+                            <Typography>{data[i]?.title}</Typography>
 
                         </AccordionSummary>
                         <AccordionDetails>
                             
-                            <div key={`academyc_form_${i}`} id={data[i].id}>
+                            <div key={`academyc_form_${i}`} id={data[i]?.id}>
                                 <Grid container spacing={2} >
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} style={{display:'none'}}>
                                         <FormElements.Input 
                                             type='text'
                                             register={register}
@@ -187,13 +164,13 @@ function SectionGeneral (  ) {
                                             defaultValue={data[i].id}
                                         />
                                     </Grid>
-                                    <Grid item xs={6}>
+                                    <Grid item xs={6} style={{display:'none'}}>
                                         <FormElements.Input 
                                             type='text'
                                             register={register}
                                             label="orden"  
-                                            name={`estudios.${i}.orden`}
-                                            defaultValue={data[i].orden}
+                                            name={`estudios.${i}.order`}
+                                            defaultValue={data[i].order}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -201,8 +178,8 @@ function SectionGeneral (  ) {
                                             type='text'
                                             register={register}
                                             label="Carrera"  
-                                            name={`estudios.${i}.titulo`}
-                                            defaultValue={data[i].titulo}
+                                            name={`estudios.${i}.title`}
+                                            defaultValue={data[i].title}
                                             />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -210,8 +187,8 @@ function SectionGeneral (  ) {
                                             type='text'
                                             register={register}
                                             label="Centro"
-                                            name={`estudios.${i}.centro`}
-                                            defaultValue={data[i].centro}
+                                            name={`estudios.${i}.study_center`}
+                                            defaultValue={data[i].study_center}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -219,8 +196,8 @@ function SectionGeneral (  ) {
                                             type='text'
                                             register={register}
                                             label="Lugar"
-                                            name={`estudios.${i}.lugar`}
-                                            defaultValue={data[i].lugar}
+                                            name={`estudios.${i}.place`}
+                                            defaultValue={data[i].place}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -228,8 +205,8 @@ function SectionGeneral (  ) {
                                             type='date'
                                             register={register}
                                             label="Fecha inicio"
-                                            name={`estudios.${i}.fecha_inicio`}
-                                            defaultValue={data[i].fecha_inicio}
+                                            name={`estudios.${i}.start_date`}
+                                            defaultValue={data[i].start_date}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -237,8 +214,8 @@ function SectionGeneral (  ) {
                                             type='date'
                                             register={register}
                                             label="Fecha fin"
-                                            name={`estudios.${i}.fecha_fin`}
-                                            defaultValue={data[i].fecha_fin}
+                                            name={`estudios.${i}.end_date`}
+                                            defaultValue={data[i].end_date}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -246,8 +223,8 @@ function SectionGeneral (  ) {
                                             type='textarea'
                                             register={register}
                                             label="Descipcion"
-                                            name={`estudios.${i}.descripcion`}
-                                            defaultValue={data[i].descripcion}
+                                            name={`estudios.${i}.description`}
+                                            defaultValue={data[i].description}
                                         />
                                     </Grid>
 
@@ -260,7 +237,7 @@ function SectionGeneral (  ) {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Link onClick={() => removeItem(data[i].id)} color="error">Eliminar elemento</Link>
+                                        <Button onClick={() => removeItem(data[i].id)} color="error">Eliminar elemento</Button>
                                     </Grid>
                                 </Grid>
                                 
