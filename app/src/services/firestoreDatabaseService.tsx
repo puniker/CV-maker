@@ -2,7 +2,7 @@ import { firestoreDb } from './firebaseInit';
 import { collection, getDocs } from "firebase/firestore";
 
 
-export const getGeneral = async (userId) => {
+export const getGeneral = async (userId: string) => {
 
     const querySnapshot = await getDocs(collection(firestoreDb, "general"));
 
