@@ -10,7 +10,7 @@ import { UserGeneralDataModel } from '../../models/UserGeneralDataModel'
 
 function SectionGeneral (  ) {
     
-    const {userId} = useContext(UserContext)
+    const {userId} = useContext<any>(UserContext)
     const [isLoading, setIsLoading] = useState(true)
     const [data, setData] = useState<UserGeneralDataModel>()
     const [showMsg, setShowMsg] = useState(false)

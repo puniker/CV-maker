@@ -5,7 +5,6 @@ import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails
 import {Delete as DeleteIcon, Save as SaveIcon, ExpandMore as ExpandMoreIcon, KeyboardArrowUp as KeyboardArrowUpIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material'
 import { v4 as uuidv4 } from 'uuid';
 import UserContext from '../../Context/UserContext'
-import CvService from '../../services/CvService'
 import { getStudies, removeStudie, updateStudies } from '../../services/firestoreDatabaseService'
 import { UserStudiesDataModel } from '../../models/UserStudiesDataModel'
 

@@ -39,6 +39,8 @@ export const getStudies = async(userId: string) => {
 }
 export const updateStudies = async(userId: string, data: UserStudiesDataModel[]) => {
     return new Promise(async (resolve, reject) => {
+        console.log(data);
+        debugger;
         await data.map(async (item: UserStudiesDataModel) => {
             await setDoc(doc(firestoreDb, `/user_cv_data/${userId}/studies/${item.id}`), item);
         })

@@ -29,7 +29,7 @@ export class UserGeneralDataModel {
         this.surname = data.surname;
         this.telefono = data.telefono;
         this.email = data.email;
-        this.birth_date =  '8 de agosto';
+        this.birth_date =  data.birth_date;
         this.gender = data.gender;
         this.description = data.description;
         this.c_postal = data.c_postal;

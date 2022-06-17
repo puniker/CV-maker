@@ -1,7 +1,16 @@
 import React, { useState } from 'react'
 import {InputLabel, Select, FormControl, MenuItem} from '@mui/material'
 
-export default ({label, name, register, required, defaultValue, options, description}) => {
+interface Props {
+    label: string;
+    name: string;
+    required?: boolean;
+    register: any;
+    defaultValue?: string;
+    options: string[];
+    description?: string;
+}
+export default ({label, name, register, required, defaultValue, options, description}: Props) => {
 
     return (
         <FormControl fullWidth>

@@ -5,7 +5,7 @@ import SectionExperiencia from './SectionExperiencia'
 import { Box, Container, Tabs, Tab, Typography} from '@mui/material'
 import PropTypes from 'prop-types';
 
-function TabPanel(props) {
+function TabPanel(props: any) {
     const { children, value, index, ...other } = props;
   
     return (
@@ -31,14 +31,14 @@ function TabPanel(props) {
     value: PropTypes.number.isRequired,
   };
   
-  function a11yProps(index) {
+  function a11yProps(index: number) {
     return {
       id: `simple-tab-${index}`,
       'aria-controls': `simple-tabpanel-${index}`,
     };
   }
 
-function CvForm ( props ) {
+function CvForm ( props: any ) {
     
     const [value, setValue] = useState(0)
     const handleChange = (event, newValue) => {

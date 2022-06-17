@@ -6,8 +6,8 @@ interface Props {
     label?: string;
     name: string;
     register: any;
-    required?: boolean;
-    defaultValue?: string;
+    required?: 'required';
+    defaultValue?: string | number;
     description?: string;
 }
 export default ( {type= "text", label, name, register, required, defaultValue, description}: Props ) => {
