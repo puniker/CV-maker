@@ -23,14 +23,14 @@ const menuLinks = [
     title: "Crea tu CV",
     url: "/crea-tu-cv"
   },
-  {
-    title: "Encuentra tu plantilla",
-    url: "/plantillas"
-  },
-  {
-    title: "Descarga tu CV",
-    url: "/descarga-cv"
-  },
+  // {
+  //   title: "Encuentra tu plantilla",
+  //   url: "/plantillas"
+  // },
+  // {
+  //   title: "Descarga tu CV",
+  //   url: "/descarga-cv"
+  // },
 ]
 
 export default () => {
