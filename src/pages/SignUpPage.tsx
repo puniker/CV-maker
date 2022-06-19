@@ -7,7 +7,7 @@ import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
 import ThemeContext from '../Context/ThemeContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
-import { createFirebaseUser, loginFirebase } from '../services/firebaseService'
+import { createFirebaseUser, loginFirebase } from '../services/firebaseAuthService'
 import {NavLink} from 'react-router-dom'
 
 const FormWrapper = styled.section`
