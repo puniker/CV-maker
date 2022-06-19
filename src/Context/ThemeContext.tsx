@@ -9,7 +9,8 @@ export function ThemeProvider ( {children}: any ) {
     const [themeColor, setThemeColor] = useState<'light' | 'dark'>('light') // varia entre light y dark
     
     useEffect(() => {
-      setThemeColor(getItem('theme').mode);
+      const storagedTheme = getItem('theme');
+      ( storagedTheme ) && setThemeColor(getItem('theme').mode);
     }, [])
 
     const theme = createTheme({
