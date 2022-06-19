@@ -9,6 +9,7 @@ import CreaTuCv from './pages/CreaTuCvPage.js'
 import LoginPage from './pages/LoginPage.js'
 import { Grid } from '@mui/material'
 import SignUpPage from './pages/SignUpPage.js'
+import TemplatesListPage from './pages/TemplatesListPage.js'
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
               <CreaTuCv />
             </Route>
             <Route path="/plantillas">
-              <Pages.Plantillas />
+              <TemplatesListPage />
             </Route>
             <Route path="/plantilla/:template_id">
               <Pages.PlantillaPage />
