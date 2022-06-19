@@ -54,7 +54,7 @@ function CvForm ( props: any ) {
                     <Tab label="Datos generales" {...a11yProps(0)} />
                     <Tab label="Estudios" {...a11yProps(1)} />
                     <Tab label="Experiencia laboral" {...a11yProps(2)} />
-                    <Tab label="Puntos fuertes" {...a11yProps(3)} />
+                    {/* <Tab label="Puntos fuertes" {...a11yProps(3)} /> */}
                   </Tabs>
               </Box>
               <TabPanel value={value} index={0}>

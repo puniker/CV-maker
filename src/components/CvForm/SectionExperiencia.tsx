@@ -5,48 +5,40 @@ import {IconButton, Button, Alert, Accordion, AccordionSummary, AccordionDetails
 import {Delete as DeleteIcon, Save as SaveIcon, ExpandMore as ExpandMoreIcon, KeyboardArrowUp as KeyboardArrowUpIcon, KeyboardArrowDown as KeyboardArrowDownIcon } from '@mui/icons-material'
 import { v4 as uuidv4 } from 'uuid';
 import UserContext from '../../Context/UserContext'
-import CvService from '../../services/CvService'
+import { getWorkExperience, removeWorkExperience, updateWorkExperience } from '../../services/firestoreDatabaseService'
+import { UserWorkExperienceDataModel } from '../../models/UserWorkExperienceDataModel'
 
 function SectionExperiencia (  ) {
     
-    const {userId} = useContext(UserContext)
+    const {userId} = useContext<any>(UserContext)
     const [isLoading, setIsLoading] = useState(true)
-    const [data, setData] = useState()
+    const [data, setData] = useState<UserWorkExperienceDataModel[]>([])
     const [showMsg, setShowMsg] = useState(false)
 
-    const [formItemCounter, setFormItemCounter] = useState( )
+    const [formItemCounter, setFormItemCounter] = useState<any>( )
 
     useEffect( () => {
         
-        CvService.GetExperienciaData(userId)
-        .then( (response) => {
-            setFormItemCounter(response.data.length)
-            setData( response.data )
-            setIsLoading(false)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+        getWorkExperience(userId)
+            .then((response: UserWorkExperienceDataModel[]) => {
+                console.log('response', response);
+                setFormItemCounter(response.length)
+                setData( response )
+                setIsLoading(false)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         
     }, [])
 
 
-    const onSubmit = ( evt ) => {
-        console.log ( evt.experiencia )
-
-        CvService.SaveExperienciaData(evt.experiencia, userId)
-        .then(function (response) {
-            console.log(response);
-            //setData(evt)
+    const onSubmit = ( evt: any ) => {
+        updateWorkExperience(userId, evt.experiencia).then(response => {
+            console.log(response)
             setShowMsg(true)
             setTimeout(()=>{ setShowMsg(false) }, 3000)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed    code ...
-        })
+        });
         
     }
     const { control, register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -85,25 +77,16 @@ function SectionExperiencia (  ) {
         
     }
     
-    const removeItem = (id) => {
+    const removeItem = (id: string) => {
         
-        CvService.RemoveExperienciaData(id)
-        .then(function (response) {
-            console.log(response);
-            //setData(evt)
+        removeWorkExperience(userId, id).then(response => {
             setFormItemCounter( formItemCounter - 1 )
             const values  = [...data];
             values.splice(values.findIndex(value => value.id === id), 1);
             setData(values);
             setShowMsg(true)
             setTimeout(()=>{ setShowMsg(false) }, 3000)
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function () {
-            // always executed    code ...
-        })
+        });
         
     }
     
@@ -169,9 +152,9 @@ function SectionExperiencia (  ) {
                         aria-controls="panel1a-content"
                         id={`panel${i}a-header`}
                         >
-                            <Link onClick={() => upElement(data[i].id)}><KeyboardArrowUpIcon /></Link>
-                            <Link onClick={() => downElement(data[i].id)}><KeyboardArrowDownIcon /></Link>
-                            <Typography>{data[i].puesto}</Typography>
+                            {/* <Link onClick={() => upElement(data[i].id)}><KeyboardArrowUpIcon /></Link>
+                            <Link onClick={() => downElement(data[i].id)}><KeyboardArrowDownIcon /></Link> */}
+                            <Typography>{data[i].position}</Typography>
 
                         </AccordionSummary>
                         <AccordionDetails>
@@ -192,8 +175,8 @@ function SectionExperiencia (  ) {
                                             type='text'
                                             register={register}
                                             label="orden"  
-                                            name={`experiencia.${i}.orden`}
-                                            defaultValue={data[i].orden}
+                                            name={`experiencia.${i}.order`}
+                                            defaultValue={data[i].order}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -201,8 +184,8 @@ function SectionExperiencia (  ) {
                                             type='text'
                                             register={register}
                                             label="Puesto"  
-                                            name={`experiencia.${i}.puesto`}
-                                            defaultValue={data[i].puesto}
+                                            name={`experiencia.${i}.position`}
+                                            defaultValue={data[i].position}
                                             />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -210,8 +193,8 @@ function SectionExperiencia (  ) {
                                             type='text'
                                             register={register}
                                             label="Empresa"
-                                            name={`experiencia.${i}.empresa`}
-                                            defaultValue={data[i].empresa}
+                                            name={`experiencia.${i}.business`}
+                                            defaultValue={data[i].business}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -219,8 +202,8 @@ function SectionExperiencia (  ) {
                                             type='text'
                                             register={register}
                                             label="Lugar"
-                                            name={`experiencia.${i}.lugar`}
-                                            defaultValue={data[i].lugar}
+                                            name={`experiencia.${i}.place`}
+                                            defaultValue={data[i].place}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -228,8 +211,8 @@ function SectionExperiencia (  ) {
                                             type='date'
                                             register={register}
                                             label="Fecha inicio"
-                                            name={`experiencia.${i}.fecha_inicio`}
-                                            defaultValue={data[i].fecha_inicio}
+                                            name={`experiencia.${i}.start_date`}
+                                            defaultValue={data[i].start_date}
                                         />
                                     </Grid>
                                     <Grid item xs={6}>
@@ -237,8 +220,8 @@ function SectionExperiencia (  ) {
                                             type='date'
                                             register={register}
                                             label="Fecha fin"
-                                            name={`experiencia.${i}.fecha_fin`}
-                                            defaultValue={data[i].fecha_fin}
+                                            name={`experiencia.${i}.end_date`}
+                                            defaultValue={data[i].end_date}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -246,8 +229,8 @@ function SectionExperiencia (  ) {
                                             type='textarea'
                                             register={register}
                                             label="Descipcion"
-                                            name={`experiencia.${i}.descripcion`}
-                                            defaultValue={data[i].descripcion}
+                                            name={`experiencia.${i}.description`}
+                                            defaultValue={data[i].description}
                                         />
                                     </Grid>
 
@@ -260,7 +243,7 @@ function SectionExperiencia (  ) {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Link onClick={() => removeItem(data[i].id)} color="error">Eliminar elemento</Link>
+                                        <Button onClick={() => removeItem(data[i].id)} color="error">Eliminar elemento</Button>
                                     </Grid>
                                 </Grid>
                                 
