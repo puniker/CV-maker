@@ -17,6 +17,7 @@ import {Brightness7 as Brightness7Icon, Brightness4 as Brightness4Icon, Menu as 
 import UserContext from '../../Context/UserContext'
 import SiteLogo from '../../assets/images/site-logo.png'
 import {Logout} from '../../controller/UserController'
+import ThemeSwitcher from '../ThemeSwitcher'
 
 const menuLinks = [
   {
@@ -157,22 +158,23 @@ return (
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/user">
-                  <Typography textAlign="center">Perfil</Typography>
+                  <Button textAlign="center">Perfil</Button>
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/administrator">
-                  <Typography textAlign="center">Administrador</Typography>
+                  <Button textAlign="center">Administrador</Button>
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/user">
-                  <Typography textAlign="center">Ajustes</Typography>
+                  <Button textAlign="center">Ajustes</Button>
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleLogOut}>
-                <Typography textAlign="center">Cerrar sesión</Typography>
+                <Button textAlign="center">Cerrar sesión</Button>
               </MenuItem>
+              <ThemeSwitcher />
             </Menu>
           </Box>
         </Toolbar>
