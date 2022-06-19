@@ -36,7 +36,7 @@ export default () => {
                                 {template.name}
                                 </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                {template.author}
+                                Autor: {template.author}
                                 </Typography>
                             </CardContent>
                             <CardActions>

@@ -11,7 +11,8 @@ export class TemplateDataModel {
         this.id = data.id;
         this.name = data.name;
         this.author = data.author;
-        this.preview_image = data.preview_image;
+        this.preview_image = '/src/assets/images/site-logo.png';
+        // this.preview_image = data.preview_image;
         this.creation_date = data.creation_date;
     }
 
