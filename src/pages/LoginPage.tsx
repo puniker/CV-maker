@@ -10,6 +10,7 @@ import ThemeSwitcher from '../components/ThemeSwitcher'
 import { authWithGoogle, loginFirebase } from '../services/firebaseAuthService'
 import {NavLink} from 'react-router-dom'
 import { UserCredential } from "firebase/auth";
+import { SocialButton } from "../components/SocialButtons";
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -115,7 +116,7 @@ export default ( ) => {
                 <Typography textAlign='center' paddingY='20px'>
                   ¿No tienes cuenta? <NavLink to="/registro"><Link>Resgístrate aquí.</Link></NavLink>
                 </Typography>
-                <Button onClick={googleSignIn} >Registro con Google</Button>
+                <SocialButton type="Google" onClick={googleSignIn}></SocialButton>
               </FormWrapper>
             </Container>
         </PageWrapper>
