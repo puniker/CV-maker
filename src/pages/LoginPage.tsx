@@ -12,10 +12,15 @@ import {NavLink} from 'react-router-dom'
 
 const FormWrapper = styled.section`
   max-width: 500px;
-  margin:  50px auto;
+  margin: auto;
   padding: 20px 40px;
   border: 1px solid lightgrey;
 `
+
+const PageWrapper = styled.div`
+  padding-top: 100px;
+`
+
 export default ( ) => {
 
     const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +29,7 @@ export default ( ) => {
 
     const {setUserId, setUserName, setIsAdmin} = useContext<any>(UserContext)
 
-    const submit = ( evt ) =>{
+    const submit = ( evt: any ) =>{
 
         evt.preventDefault
         setIsLoading( true )
@@ -51,7 +56,7 @@ export default ( ) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
     return (
-        <>
+        <PageWrapper>
             <Container>
               <FormWrapper>
                 <form onSubmit={handleSubmit(submit)} >
@@ -92,14 +97,15 @@ export default ( ) => {
                   </Grid>
                   
                 </form>
-                <NavLink to="/registro">
-                  <Typography textAlign="center">Registrarte</Typography>
-                </NavLink>
+                <Typography textAlign='center' paddingY='20px'>
+                  ¿No tienes cuenta? <NavLink to="/registro"><Link>Resgístrate aquí.</Link></NavLink>
+                </Typography>
+                
                 <Grid item xs={12}>
                   <ThemeSwitcher />
                 </Grid>
               </FormWrapper>
             </Container>
-        </>
+        </PageWrapper>
     )
 }
