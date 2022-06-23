@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Pages from './pages'
 import AdminPages from './admin/pages'
 import UserContext, {UserProvider} from './Context/UserContext'
-import {SetInitialContext} from './controller/AppInitController'
 import CreaTuCv from './pages/CreaTuCvPage.js'
 import LoginPage from './pages/LoginPage.js'
 import { Grid } from '@mui/material'
@@ -13,9 +12,9 @@ import TemplatesListPage from './pages/TemplatesListPage.js'
 
 function App() {
 
-  const {userId, isAdmin} = useContext<any>(UserContext)
+  const {isLogged, isAdmin} = useContext<any>(UserContext)
   
-  SetInitialContext()
+  // SetInitialContext()
 
   return (
     <Grid className="App" 
@@ -25,8 +24,8 @@ function App() {
       color: 'text.primary',
     }}>
       <BrowserRouter >
-          {(userId) && <Header /> }
-          {(userId) ? <Redirect to="/crea-tu-cv" /> : <Redirect to="/login" /> }
+          {(isLogged) && <Header /> }
+          {(isLogged) ? <Redirect to="/crea-tu-cv" /> : <Redirect to="/login" /> }
           <Switch>
             <Route path="/crea-tu-cv">
               <CreaTuCv />

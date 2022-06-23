@@ -26,7 +26,6 @@ export default ( ) => {
     const [loginError, setLoginError] = useState<any>()
     const [showMsg, setShowMsg] = useState(false)
 
-    const {setUserId, setUserName, setIsAdmin} = useContext<any>(UserContext)
 
     const submit = ( evt: any ) =>{
 
@@ -36,11 +35,6 @@ export default ( ) => {
           createFirebaseUser(evt.username, evt.password)
             .then(function (response: any) {
               console.log('Acceso permitido. Bienvenido a la App.', response)
-              setUserId(response.user.uid)
-              setUserName(response.user.email)
-              setIsAdmin(true)
-              console.log(response)                
-              window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": true} ))
             })
             .catch(function (error) {
               console.error(error);

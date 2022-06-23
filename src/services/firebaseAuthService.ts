@@ -1,13 +1,28 @@
-import { firebaseInit } from "./firebaseInit";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential, signInWithPopup } from "firebase/auth";
+import { firebaseAuth } from "./firebaseInit";
+import { 
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    UserCredential,
+    signInWithPopup,
+    User,
+    signOut
+} from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
-const auth = getAuth(firebaseInit);
+
+// export const getCurrentUser = () => {
+//     const user = firebaseAuth.currentUser
+//     if (user) {
+//         return user;
+//     } else {
+//         console.error('not user loggeg')
+//     }
+// }
 
 export const createFirebaseUser = (email: string, password: string): Promise<UserCredential> => {
 
     return new Promise((resolve, reject) => {
-        createUserWithEmailAndPassword(auth, email, password)
+        createUserWithEmailAndPassword(firebaseAuth, email, password)
         .then((response: UserCredential) => {
             resolve(response);
         })
@@ -19,7 +34,7 @@ export const createFirebaseUser = (email: string, password: string): Promise<Use
 
 export const loginFirebase = (username: string, password: string): Promise<UserCredential> => {
     return new Promise((resolve, reject) => {
-        signInWithEmailAndPassword(auth, username, password)
+        signInWithEmailAndPassword(firebaseAuth, username, password)
             .then((response: UserCredential) => {
                 resolve(response);
             })
@@ -32,7 +47,7 @@ export const loginFirebase = (username: string, password: string): Promise<UserC
 export const authWithGoogle = (): Promise<UserCredential> => {
     const provider = new GoogleAuthProvider();
     return new Promise((resolve, reject) => {
-        signInWithPopup(auth, provider)
+        signInWithPopup(firebaseAuth, provider)
             .then((result: UserCredential) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential?.accessToken;
@@ -49,3 +64,14 @@ export const authWithGoogle = (): Promise<UserCredential> => {
     })
 }
 
+export const firebaseAuthSignOut = (): Promise<string> => {
+    
+    return new Promise((resolve, reject) => {
+        signOut(firebaseAuth).then(() => {
+            resolve('signed out succesfully')
+        }).catch((error) => {
+            reject('error on sign out')
+        });
+    })
+
+}

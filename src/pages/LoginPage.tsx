@@ -29,14 +29,13 @@ export default ( ) => {
     const [loginError, setLoginError] = useState<string>()
     const [showMsg, setShowMsg] = useState<boolean>(false)
 
-    const {setUserId, setUserName, setIsAdmin} = useContext<any>(UserContext)
 
     const submit = ( evt: any ) =>{
       evt.preventDefault
       setIsLoading( true )
       loginFirebase(evt.username, evt.password)
         .then((response: UserCredential ) => {
-          setLogin(response, evt.mantener_sesion);
+          console.log('Acceso permitido. Bienvenido a la App.', response)
         })
         .catch((error: string) => {
           setLoginError(error)
@@ -48,23 +47,13 @@ export default ( ) => {
     const googleSignIn = () => {
       authWithGoogle()
         .then((response: UserCredential) => {
-          setLogin(response)
+          console.log('Acceso permitido. Bienvenido a la App.', response);
         })
         .catch((error: string) => {
           setLoginError(error)
           setShowMsg(true)
           setTimeout(()=>{ setShowMsg(false) }, 3000)
         })
-    }
-
-    const setLogin = (userData: UserCredential, mantenerSesion: boolean = true) => {
-      console.log('Acceso permitido. Bienvenido a la App.', userData)
-      setUserId(userData.user.uid)
-      setUserName(userData.user.email)
-      setIsAdmin(false)
-      if(mantenerSesion) {
-        window.localStorage.setItem('user', JSON.stringify( {"id": userData.user.uid, "username": userData.user.email, "is_admin": false} ))
-      }
     }
 
     // const theme = useTheme();
@@ -91,13 +80,6 @@ export default ( ) => {
                           register={register}
                           label="Contraseña"  
                           name='password'
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <FormElements.Checkbox
-                        name="mantener_sesion"
-                        label="Mantener sesión iniciada"
-                        register={register}
                       />
                     </Grid>
                     <Grid item xs={4}>

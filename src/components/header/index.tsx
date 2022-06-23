@@ -16,7 +16,7 @@ import {
 import {Brightness7 as Brightness7Icon, Brightness4 as Brightness4Icon, Menu as MenuIcon, AccountCircle as AccountCircle} from '@mui/icons-material'
 import UserContext from '../../Context/UserContext'
 import SiteLogo from '../../assets/images/site-logo.png'
-import {Logout} from '../../controller/UserController'
+import {logout} from '../../controller/UserController'
 import ThemeSwitcher from '../ThemeSwitcher'
 
 const menuLinks = [
@@ -44,9 +44,9 @@ export default () => {
   const [anchorElUser, setAnchorElUser] = useState(null)
 
   const handleLogOut = () => {
-    Logout()
-    handleCloseUserMenu()
-    location.reload()
+    logout()
+    // handleCloseUserMenu()
+    // location.reload()
   }
   
   const handleOpenNavMenu = (event: any) => {

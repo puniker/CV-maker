@@ -1,10 +1,11 @@
 import UserContext from '../Context/UserContext'
 import {useContext} from 'react'
 import { Redirect } from 'react-router-dom'
+import { firebaseAuthSignOut } from '../services/firebaseAuthService'
 
-export function Logout () {
-    //const {setUserId, setUserName, setIsAdmin} = useContext(UserContext)
-    window.localStorage.removeItem('user')
-    //setUserId('')
+export function logout () {
+    firebaseAuthSignOut().then(response => {
+        console.log(response);
+    })
 }
 
