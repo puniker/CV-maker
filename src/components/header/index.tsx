@@ -158,21 +158,21 @@ return (
             >
               <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/user">
-                  <Button textAlign="center">Perfil</Button>
+                  <Button>Perfil</Button>
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/administrator">
-                  <Button textAlign="center">Administrador</Button>
+                  <Button>Administrador</Button>
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/user">
-                  <Button textAlign="center">Ajustes</Button>
+                  <Button>Ajustes</Button>
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleLogOut}>
-                <Button textAlign="center">Cerrar sesión</Button>
+                <Button>Cerrar sesión</Button>
               </MenuItem>
               <ThemeSwitcher />
             </Menu>

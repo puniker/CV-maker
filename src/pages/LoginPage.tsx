@@ -7,8 +7,9 @@ import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
 import ThemeContext from '../Context/ThemeContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
-import { createFirebaseUser, loginFirebase } from '../services/firebaseAuthService'
+import { loginFirebase } from '../services/firebaseAuthService'
 import {NavLink} from 'react-router-dom'
+import { UserCredential } from "firebase/auth";
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -35,12 +36,11 @@ export default ( ) => {
         setIsLoading( true )
 
         loginFirebase(evt.username, evt.password)
-          .then(function (response: any ) {
-            console.log('Acceso permitido. Bienvenido a la App.')
+          .then(function (response: UserCredential ) {
+            console.log('Acceso permitido. Bienvenido a la App.', response.user.displayName)
             setUserId(response.user.uid)
             setUserName(response.user.email)
             setIsAdmin(true)
-            console.log(response)              
             window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": true} ))
           })
           .catch(function (error) {

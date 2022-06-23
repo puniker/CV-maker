@@ -7,7 +7,7 @@ import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
 import ThemeContext from '../Context/ThemeContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
-import { createFirebaseUser, loginFirebase } from '../services/firebaseAuthService'
+import { createFirebaseUser } from '../services/firebaseAuthService'
 import {NavLink} from 'react-router-dom'
 import { passwordMatch } from "../services/formValidations";
 
@@ -65,7 +65,7 @@ export default ( ) => {
         <PageWrapper>
             <Container>
               <FormWrapper>
-                <Typography variant='h5' textAlign={'center'}>Resgitrate y empieza a crear tu CV!</Typography>
+                <Typography variant='h5' textAlign={'center'}>¡Regístrate y empieza a crear tu CV!</Typography>
                 <form onSubmit={handleSubmit(submit)} >
                   <Grid container spacing={1}>
                     <Grid item xs={12}>
