@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from "firebase/auth"
 import React, {useState} from "react"
-import { firebaseAuth } from "../services/firebaseInit"
+import { authStateObserver, firebaseAuth, firebaseObserver } from "../services/firebaseInit"
 
 const Context = React.createContext({})
 
@@ -13,13 +13,14 @@ export function UserProvider ({ children }: any) {
     useState(() => {
         onAuthStateChanged(firebaseAuth, (user) => {
             if (user) {
-                const uid = user.uid;
                 setUserId(user.uid);
                 setIsLogged(true)
             } else {
                 setIsLogged(false);
             }
-        });
+            authStateObserver();
+        })
+        
     })
     return (
         <Context.Provider value={{isLogged, setIsLogged, userId, setUserId, isAdmin, setIsAdmin}} >

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Header from './components/header/index.jsx'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Pages from './pages'
@@ -9,13 +9,21 @@ import LoginPage from './pages/LoginPage.js'
 import { Grid } from '@mui/material'
 import SignUpPage from './pages/SignUpPage.js'
 import TemplatesListPage from './pages/TemplatesListPage.js'
+import { firebaseObserver } from './services/firebaseInit.js'
 
 function App() {
 
+  const [loading, setIsLoading] = useState<boolean>(true)
   const {isLogged, isAdmin} = useContext<any>(UserContext)
-  
-  // SetInitialContext()
 
+  useEffect(() => {
+    firebaseObserver.subscribe('authStateChanged', () => {
+        setIsLoading(false);
+    });
+    return () => { firebaseObserver.unsubscribe('authStateChanged'); }
+  }, []);
+
+  if(loading) return 'loading...'
   return (
     <Grid className="App" 
     sx={{
