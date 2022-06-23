@@ -11,6 +11,7 @@ import { authWithGoogle, loginFirebase } from '../services/firebaseAuthService'
 import {NavLink} from 'react-router-dom'
 import { UserCredential } from "firebase/auth";
 import { SocialButton } from "../components/SocialButtons";
+import { firebaseLogEvent } from "../services/analyticsService";
 
 const FormWrapper = styled.section`
   max-width: 500px;
@@ -41,6 +42,7 @@ export default ( ) => {
           setLoginError(error)
           setShowMsg(true)
           setTimeout(()=>{ setShowMsg(false) }, 3000)
+          firebaseLogEvent('error_on_login');
         })
     }
 
@@ -53,6 +55,7 @@ export default ( ) => {
           setLoginError(error)
           setShowMsg(true)
           setTimeout(()=>{ setShowMsg(false) }, 3000)
+          firebaseLogEvent('error_on_login_with_google');
         })
     }
 

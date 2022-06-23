@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 
 import ReactObserver from 'react-event-observer';
 
@@ -23,3 +24,6 @@ export const firebaseObserver = ReactObserver();
 export const authStateObserver = () => {
     firebaseObserver.publish("authStateChanged", ()=> {})
 };
+
+export const firebaseAnalytics = getAnalytics(firebaseInit);
+
