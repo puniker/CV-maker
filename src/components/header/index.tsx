@@ -140,6 +140,7 @@ return (
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
+            <ThemeSwitcher />
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -174,7 +175,6 @@ return (
               <MenuItem onClick={handleLogOut}>
                 <Button>Cerrar sesión</Button>
               </MenuItem>
-              <ThemeSwitcher />
             </Menu>
           </Box>
         </Toolbar>

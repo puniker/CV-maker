@@ -92,23 +92,20 @@ export default ( ) => {
                           name='repeat_password'
                       />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={4} paddingY="20px">
                       <Button type="submit" variant="contained" >
-                        Acceder
+                        Registrarse
                         <Send />
                       </Button>
                     </Grid>
 
                     <Grid item xs={12}>
-                      { ( showMsg ) ? <Alert key="error-msg" severity="error" show={showMsg.toString()}>{loginError}</Alert> : '' }
+                      { ( showMsg ) ? <Alert key="error-msg" severity="error">{loginError}</Alert> : '' }
                     </Grid>
                   </Grid>
                   
                 </form>
                 <Typography textAlign="center" paddingY='20px' >¿Ya tienes cuenta? <NavLink to="/login"><Link>Inicia sesión.</Link></NavLink></Typography>
-                <Grid item xs={12}>
-                  <ThemeSwitcher />
-                </Grid>
               </FormWrapper>
             </Container>
         </PageWrapper>

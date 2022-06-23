@@ -40,8 +40,10 @@ export default ( ) => {
             console.log('Acceso permitido. Bienvenido a la App.', response.user.displayName)
             setUserId(response.user.uid)
             setUserName(response.user.email)
-            setIsAdmin(true)
-            window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": true} ))
+            setIsAdmin(false)
+            if(evt.mantener_sesion) {
+              window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": false} ))
+            }
           })
           .catch(function (error) {
             setLoginError(error)
@@ -100,10 +102,6 @@ export default ( ) => {
                 <Typography textAlign='center' paddingY='20px'>
                   ¿No tienes cuenta? <NavLink to="/registro"><Link>Resgístrate aquí.</Link></NavLink>
                 </Typography>
-                
-                <Grid item xs={12}>
-                  <ThemeSwitcher />
-                </Grid>
               </FormWrapper>
             </Container>
         </PageWrapper>
