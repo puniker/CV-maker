@@ -7,7 +7,7 @@ import FormElements from "../components/FormElements"
 import UserContext from '../Context/UserContext'
 import ThemeContext from '../Context/ThemeContext'
 import ThemeSwitcher from '../components/ThemeSwitcher'
-import { loginFirebase } from '../services/firebaseAuthService'
+import { authWithGoogle, loginFirebase } from '../services/firebaseAuthService'
 import {NavLink} from 'react-router-dom'
 import { UserCredential } from "firebase/auth";
 
@@ -31,26 +31,39 @@ export default ( ) => {
     const {setUserId, setUserName, setIsAdmin} = useContext<any>(UserContext)
 
     const submit = ( evt: any ) =>{
+      evt.preventDefault
+      setIsLoading( true )
+      loginFirebase(evt.username, evt.password)
+        .then((response: UserCredential ) => {
+          setLogin(response, evt.mantener_sesion);
+        })
+        .catch((error: string) => {
+          setLoginError(error)
+          setShowMsg(true)
+          setTimeout(()=>{ setShowMsg(false) }, 3000)
+        })
+    }
 
-        evt.preventDefault
-        setIsLoading( true )
+    const googleSignIn = () => {
+      authWithGoogle()
+        .then((response: UserCredential) => {
+          setLogin(response)
+        })
+        .catch((error: string) => {
+          setLoginError(error)
+          setShowMsg(true)
+          setTimeout(()=>{ setShowMsg(false) }, 3000)
+        })
+    }
 
-        loginFirebase(evt.username, evt.password)
-          .then(function (response: UserCredential ) {
-            console.log('Acceso permitido. Bienvenido a la App.', response.user.displayName)
-            setUserId(response.user.uid)
-            setUserName(response.user.email)
-            setIsAdmin(false)
-            if(evt.mantener_sesion) {
-              window.localStorage.setItem('user', JSON.stringify( {"id": response.user.uid, "username": response.user.email, "is_admin": false} ))
-            }
-          })
-          .catch(function (error) {
-            setLoginError(error)
-            setShowMsg(true)
-            setTimeout(()=>{ setShowMsg(false) }, 3000)
-          })
-
+    const setLogin = (userData: UserCredential, mantenerSesion: boolean = true) => {
+      console.log('Acceso permitido. Bienvenido a la App.', userData)
+      setUserId(userData.user.uid)
+      setUserName(userData.user.email)
+      setIsAdmin(false)
+      if(mantenerSesion) {
+        window.localStorage.setItem('user', JSON.stringify( {"id": userData.user.uid, "username": userData.user.email, "is_admin": false} ))
+      }
     }
 
     // const theme = useTheme();
@@ -102,6 +115,7 @@ export default ( ) => {
                 <Typography textAlign='center' paddingY='20px'>
                   ¿No tienes cuenta? <NavLink to="/registro"><Link>Resgístrate aquí.</Link></NavLink>
                 </Typography>
+                <Button onClick={googleSignIn} >Registro con Google</Button>
               </FormWrapper>
             </Container>
         </PageWrapper>
