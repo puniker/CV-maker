@@ -3,6 +3,7 @@ import { collection, deleteDoc, doc, getDoc, getDocs, orderBy, query, setDoc } f
 import { UserGeneralDataModel } from '../models/UserGeneralDataModel';
 import { UserStudiesDataModel } from '../models/UserStudiesDataModel';
 import { UserWorkExperienceDataModel } from '../models/UserWorkExperienceDataModel';
+import { AllUserData } from '../interfaces/UserDataInterface';
 
 
 export const getGeneral = async (userId: string) => {
@@ -79,4 +80,14 @@ export const removeWorkExperience = async(userId: string, studieId: string) => {
         await deleteDoc(doc(firestoreDb, `/user_cv_data/${userId}/work_experience/${studieId}`));
         resolve('ok')
     });
+}
+
+export const getAllData = async(userId: string): Promise<AllUserData> => {
+    return new Promise(async (resolve, reject) => {
+        resolve({
+            general: await getGeneral(userId),
+            studies: await getStudies(userId),
+            experience: await getWorkExperience(userId),
+        })
+    })
 }

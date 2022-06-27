@@ -1,5 +1,6 @@
-import { Alert, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
+import { useHistory } from "react-router-dom";
+import { Alert, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography } from "@mui/material"
 import { TemplateDataModel } from "../models/TemplateDataModel"
 import { getAllTemplates } from "../services/firestoreTemplatesService"
 
@@ -7,12 +8,18 @@ export default () => {
 
     const [templates, setTemplates] = useState<TemplateDataModel[]>()
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    let history = useHistory();
+
     useEffect( () => {
         getAllTemplates().then((response: TemplateDataModel[]) => {
             setTemplates(response)
             setIsLoading(false)
         })
     }, [])
+
+    const navigateToTemplateDetail = (id: string) => {
+        history.push('/plantilla/' + id)
+    }
 
     if ( isLoading ) {
         return <Alert key="loading-data" severity="info">Cargando plantillas...</Alert>
@@ -39,7 +46,7 @@ export default () => {
                                 Autor: {template.author}
                                 </Typography>
                             </CardContent>
-                            <CardActions>
+                            <CardActions onClick={() => navigateToTemplateDetail(template.id)}>
                                 ir a plantilla
                             </CardActions>
                         </Card>

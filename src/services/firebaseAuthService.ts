@@ -10,14 +10,14 @@ import {
 import { GoogleAuthProvider } from "firebase/auth";
 
 
-// export const getCurrentUser = () => {
-//     const user = firebaseAuth.currentUser
-//     if (user) {
-//         return user;
-//     } else {
-//         console.error('not user loggeg')
-//     }
-// }
+export const getCurrentUser = () => {
+    const user = firebaseAuth.currentUser
+    if (user) {
+        return user;
+    } else {
+        console.error('not user loggeg')
+    }
+}
 
 export const createFirebaseUser = (email: string, password: string): Promise<UserCredential> => {
 

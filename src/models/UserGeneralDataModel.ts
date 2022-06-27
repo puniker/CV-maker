@@ -1,5 +1,4 @@
 import { DocumentData } from "firebase/firestore";
-import { FirestoreGeneralDataInterface } from "../interfaces/FirestoreDatabase";
 
 interface timespamp {
     seconds: number;
