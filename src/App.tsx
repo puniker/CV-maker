@@ -1,15 +1,16 @@
 import { useState, useContext, useEffect } from 'react'
 import Header from './components/header/index.jsx'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import Pages from './pages'
 import AdminPages from './admin/pages'
-import UserContext, {UserProvider} from './Context/UserContext'
+import UserContext from './Context/UserContext'
 import CreaTuCv from './pages/CreaTuCvPage.js'
 import LoginPage from './pages/LoginPage.js'
 import { Grid } from '@mui/material'
 import SignUpPage from './pages/SignUpPage.js'
 import TemplatesListPage from './pages/TemplatesListPage.js'
 import { firebaseObserver } from './services/firebaseInit.js'
+import PlantillaPage from './pages/PlantillaPage.js'
+import PerfilPage from './pages/PerfilPage.js'
 
 function App() {
 
@@ -42,10 +43,10 @@ function App() {
               <TemplatesListPage />
             </Route>
             <Route path="/plantilla/:template_id">
-              <Pages.PlantillaPage />
+              <PlantillaPage />
             </Route>
             <Route path="/user">
-              <Pages.Perfil />
+              <PerfilPage />
             </Route>
             <Route path="/administrator">
               { (isAdmin) ? <AdminPages.Administrator /> : 'Necesita permisos de administrador para acceder al gestor de la app.' }
@@ -56,7 +57,6 @@ function App() {
             <Route path="/registro">
               <SignUpPage />
             </Route>
-            <Route path="/" component={Pages.Home}> </Route>
           </Switch>
       </BrowserRouter>
     </Grid>
