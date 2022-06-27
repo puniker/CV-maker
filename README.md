@@ -16,4 +16,4 @@ npm run dev
 
 ## Deploy en entorno de desarrollo
 
-Abrir PR a la rama release/develop y la pipelane se ejecutará automaticamente.
+Abrir PR a la rama main y la pipelane se ejecutará automaticamente.
