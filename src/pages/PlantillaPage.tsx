@@ -28,8 +28,8 @@ function PlantillaPage (  ) {
         setUserId( uId );
         getAllData(uId).then((response: AllUserData) => {
             setUserData(response)
+            setLoading(false);
         })
-        setLoading(false);
     }, []);
 
     if(loading) return <p>loading...</p>
