@@ -162,16 +162,16 @@ return (
                   <Button>Perfil</Button>
                 </NavLink>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
+              {/* <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/administrator">
                   <Button>Administrador</Button>
                 </NavLink>
-              </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
+              </MenuItem> */}
+              {/* <MenuItem onClick={handleCloseNavMenu}>
                 <NavLink to="/user">
                   <Button>Ajustes</Button>
                 </NavLink>
-              </MenuItem>
+              </MenuItem> */}
               <MenuItem onClick={handleLogOut}>
                 <Button>Cerrar sesión</Button>
               </MenuItem>
